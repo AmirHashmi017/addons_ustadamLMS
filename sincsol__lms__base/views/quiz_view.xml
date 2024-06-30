@@ -1,0 +1,49 @@
+<odoo>
+    
+    <record id="view_quiz_form" model="ir.ui.view">
+        <field name="name">ustadam.quiz.form</field>
+        <field name="model">ustadam.quiz</field>
+        <field name="arch" type="xml">
+            <form string="Quiz">
+                <sheet>
+                    <group>
+                        <field name="title"/>
+                        <field name="description"/>
+                        <field name="passingPercentage"/>
+                    </group>
+                    <group>
+                        <field name="question_id">
+                            <tree string="Questions">
+                                <field name="content"/>
+                            </tree>
+                            <form string="Question">
+                                <sheet>
+                                    <group>
+                                        <field name="content"/>
+                                        <field name="option_id">
+                                            <tree string="Options">
+                                                <field name="content"/>
+                                                <field name="is_correct"/>
+                                            </tree>
+                                        </field>
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_quiz_tree" model="ir.ui.view">
+        <field name="name">Quizzes</field>
+        <field name="model">ustadam.quiz</field>
+        <field name="arch" type="xml">
+            <tree string="Quiz">
+                <field name="title"/>
+                <field name="description"/>
+                <field name="passingPercentage"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

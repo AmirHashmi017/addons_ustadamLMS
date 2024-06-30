@@ -23,8 +23,13 @@ Long description of module's purpose
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
+        'views/quiz_view.xml',
+        'views/quiz_actions.xml',
+        'views/quiz_menus.xml',
+
     ],
     # only loaded in demonstration mode
     'demo': [

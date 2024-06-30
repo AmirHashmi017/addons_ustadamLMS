@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_./addons_sincsol/sincsol__lms__base_./addons_sincsol/sincsol__lms__base,./addons_sincsol/sincsol__lms__base../addons_sincsol/sincsol__lms__base,model_./addons_sincsol/sincsol__lms__base_./addons_sincsol/sincsol__lms__base,base.group_user,1,1,1,1
+access_ustadam_quiz,access_ustadam.quiz,model_ustadam_quiz,base.group_user,1,1,1,1
+access_ustadam_question,access_ustadam.question,model_ustadam_question,base.group_user,1,1,1,1
+access_ustadam_option,access_ustadam.option,model_ustadam_option,base.group_user,1,1,1,1
