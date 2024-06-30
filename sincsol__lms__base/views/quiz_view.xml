@@ -25,6 +25,14 @@
                                                 <field name="content"/>
                                                 <field name="is_correct"/>
                                             </tree>
+                                            <form string="Option">
+                                                <sheet>
+                                                    <group>
+                                                        <field name="content"/>
+                                                        <field name="is_correct"/>
+                                                    </group>
+                                                </sheet>
+                                            </form>
                                         </field>
                                     </group>
                                 </sheet>
