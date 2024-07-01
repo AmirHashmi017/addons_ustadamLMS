@@ -4,4 +4,7 @@ class Certificate(models.Model):
     _name = "ustadam.certificate"
     _description = "will hold certificate info"
 
-    title = fields.Char(string='Title', required=True)
+    certificate_name = fields.Char(string='Certificate Name', required=True)
+    img = fields.Image(string='Image')
+    
+    course_id = fields.Many2one('ustadam.course', string='Course')

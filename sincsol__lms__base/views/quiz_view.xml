@@ -7,28 +7,28 @@
             <form string="Quiz">
                 <sheet>
                     <group>
-                        <field name="title"/>
+                        <field name="name"/>
                         <field name="description"/>
-                        <field name="passingPercentage"/>
+                        <field name="passing_percentage"/>
                     </group>
                     <group>
-                        <field name="question_id">
+                        <field name="question_ids">
                             <tree string="Questions">
-                                <field name="content"/>
+                                <field name="name"/>
                             </tree>
                             <form string="Question">
                                 <sheet>
                                     <group>
-                                        <field name="content"/>
-                                        <field name="option_id">
+                                        <field name="name"/>
+                                        <field name="option_ids">
                                             <tree string="Options">
-                                                <field name="content"/>
+                                                <field name="name"/>
                                                 <field name="is_correct"/>
                                             </tree>
                                             <form string="Option">
                                                 <sheet>
                                                     <group>
-                                                        <field name="content"/>
+                                                        <field name="name"/>
                                                         <field name="is_correct"/>
                                                     </group>
                                                 </sheet>
@@ -48,9 +48,9 @@
         <field name="model">ustadam.quiz</field>
         <field name="arch" type="xml">
             <tree string="Quiz">
-                <field name="title"/>
+                <field name="name"/>
                 <field name="description"/>
-                <field name="passingPercentage"/>
+                <field name="passing_percentage"/>
             </tree>
         </field>
     </record>

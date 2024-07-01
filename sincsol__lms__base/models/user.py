@@ -1,6 +1,7 @@
 from odoo import models, fields
 
 class User(models.Model):
+    # _inherit = "res.users"
     _name = "ustadam.user"
     _description = "will hold user info"
 
@@ -9,6 +10,5 @@ class User(models.Model):
     password = fields.Char(string='Password', required=True)
     user_type = fields.Selection([('student', 'Student'), ('teacher', 'Teacher')], string='User Type')
     
-    course_id = fields.One2many('ustadam.course', "course_id" ,string='Courses')  
-    student_certificate_id = fields.One2many('ustadam.student_certificate', "student_certificate_id" ,string='Student Certificate')
-    student_result_id = fields.One2many('ustadam.student_result', "student_result_id",string='Student Result')
+    course_id = fields.One2many('ustadam.course', "user_ids" ,string='Courses')  
+    student_result_id = fields.One2many('ustadam.student_result', "student_id",string='Student Result')

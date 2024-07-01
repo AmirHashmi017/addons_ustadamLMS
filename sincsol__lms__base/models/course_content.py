@@ -8,4 +8,5 @@ class Course_Content(models.Model):
     video = fields.Char(string='Video')
     
     course_id = fields.Many2one('ustadam.course', string='Course')
-    course_content_id = fields.Many2one('ustadam.course', string='Course Content')
+    
+    # course_content_id = fields.Many2one('ustadam.course', string='Course Content')
