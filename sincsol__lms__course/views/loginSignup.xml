@@ -1,0 +1,60 @@
+<odoo>
+    <!-- sign up -->
+    <record id="sign_up_view" model="ir.ui.view">
+        <field name="name">ustadam.user.form</field>
+        <field name="model">ustadam.user</field>
+        <field name="arch" type="xml">
+            <form string="User Sign Up Form">
+                <sheet>
+                    <group>
+                        <field name="name" placeholder="Enter your name"/>
+                        <field name="email" placeholder="Enter your email"/>
+                        <field name="password" placeholder="Enter your password" widget="password"/>
+                        <field name="user_type" placeholder="Select user type" widget="selection"/>
+                    </group>
+                   <footer>
+                        <button type="object" name="action_sign_up" action="ustadam_signin_action" string="Sign Up" class="btn-primary"/>
+                    </footer> 
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="ustadam_action" model="ir.actions.act_window">
+        <field name="name">Sign Up</field>
+        <field name="res_model">ustadam.user</field>
+        <field name="view_id" ref="sign_up_view"/>
+        <field name="target">new</field>
+    </record>
+
+
+    <!-- Sign In -->
+    <record id="sign_in_view" model="ir.ui.view">
+        <field name="name">ustadam.user.signin.form</field>
+        <field name="model">ustadam.user</field>
+        <field name="arch" type="xml">
+            <form string="User Sign In Form" create="false" delete="false" edit="false">
+                <sheet>
+                    <group>
+                        <field name="email" placeholder="Enter your email"/>
+                        <field name="password" placeholder="Enter your password"/>
+                    </group>
+                    <footer>
+                        <button type="object" name="action_sign_in" string="Sign In" class="btn-primary"/>
+                    </footer>
+                </sheet>
+            </form> 
+        </field>
+    </record>
+
+    <record id="ustadam_signin_action" model="ir.actions.act_window">
+        <field name="name">Sign In</field>
+        <field name="res_model">ustadam.user</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="sign_in_view"/>
+        <field name="target">new</field>
+    </record>
+
+ 
+
+</odoo>

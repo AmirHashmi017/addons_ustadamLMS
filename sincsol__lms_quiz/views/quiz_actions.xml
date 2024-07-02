@@ -1,5 +1,5 @@
 <odoo>
-    <record id="action_quiz" model="ir.actions.act_window">
+    <record id="action_quiz1" model="ir.actions.act_window">
         <field name="name">Quizzes</field>
         <field name="res_model">ustadam.quiz</field>
         <field name="view_mode">tree,form</field>

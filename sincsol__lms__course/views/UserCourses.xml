@@ -1,0 +1,36 @@
+<odoo>
+    <!-- Define Kanban View for Course -->
+    <record id="view_course_kanban" model="ir.ui.view">
+        <field name="name">Course Kanban View</field>
+        <field name="model">ustadam.course</field>
+        <field name="arch" type="xml">
+            <kanban >
+            <templates>
+                    <t t-name="kanban-box">
+                        <div class="o_kanban_record_has_image_fill ">
+                            <div class="o_kanban_image">
+                               <field name="img" widget="image"></field>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <div class="o_kanban_title">
+                                    <field name="name"/>
+                                </div>
+                                <div class="o_kanban_description">
+                                    <field name="description"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>   
+            </field>
+    </record>
+
+    <!-- Update existing action or create a new one for course Kanban view -->
+    <record id="action_course_kanban" model="ir.actions.act_window">
+        <field name="name">Courses</field>
+        <field name="res_model">ustadam.course</field>
+        <field name="view_mode">kanban,form</field> <!-- Add Kanban view mode -->
+        <field name="view_id" ref="view_course_kanban"/>
+    </record>
+</odoo>

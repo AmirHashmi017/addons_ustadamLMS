@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+        <record id="view_welcome_form" model="ir.ui.view">
+            <field name="name">welcome.form.view</field>
+            <field name="model">ir.actions.act_window.view</field>
+            <field name="arch" type="xml">
+                <form string="Welcome" create="false" update="false" delete="false">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>Welcome</h1>
+                            <p>Welcome to the Ustadam module!</p>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Define the action -->
+        <record id="action_welcome_page" model="ir.actions.act_window">
+            <field name="name">Welcome Page</field>
+            <field name="res_model">ir.actions.act_window.view</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_welcome_form"/>
+            <field name="target">inline</field>
+        </record>
+    </data>
+</odoo>

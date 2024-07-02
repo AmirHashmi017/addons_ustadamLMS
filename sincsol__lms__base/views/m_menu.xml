@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_quiz" model="ir.actions.act_window">
+        <field name="name">Quiz</field>
+        <field name="res_model">ustadam.quiz</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_quiz_tree1"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                You can start an existing quiz from here.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_quiz_root" name="Quiz" sequence="10"  action="action_quiz"/>
+    <!-- <menuitem id="ustadam_menu_Courses_student" name="Courses" action="action_course_kanban"/> -->
+</odoo>

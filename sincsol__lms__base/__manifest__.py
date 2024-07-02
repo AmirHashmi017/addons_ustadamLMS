@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "./addons_sincsol/Sincsol_LMS_Base",
+    'name': "Ustadam_LMS",
 
     'summary': "Short (1 phrase/line) summary of the module's purpose",
 
@@ -22,14 +22,11 @@ Long description of module's purpose
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
         'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/templates.xml',
-        'views/quiz_view.xml',
-        'views/quiz_actions.xml',
-        'views/quiz_menus.xml',
-
+        'views/m_menu.xml',
+        'views/m_quiz_view.xml',
+        'views/m_question_view.xml',
+        'views/m_option_view.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

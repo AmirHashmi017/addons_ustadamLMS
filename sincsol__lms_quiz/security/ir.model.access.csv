@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+sincsol__lms_quiz_sincsol__lms_quiz,sincsol__lms_quiz.sincsol__lms_quiz,model_sincsol__lms_quiz_sincsol__lms_quiz,base.group_user,1,1,1,1

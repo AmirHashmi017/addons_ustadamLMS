@@ -1,0 +1,16 @@
+<odoo>
+    <record id="action_take_quiz" model="ir.actions.server">
+        <field name="name">Take Quiz</field>
+        <field name="model_id" ref="model_ustadam_quiz"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = {
+                'type': 'ir.actions.act_window',
+                'name': 'Take Quiz',
+                'res_model': 'ustadam.quiz',
+                'view_mode': 'form',
+                'target': 'new',
+            }
+        </field>
+    </record>
+</odoo>

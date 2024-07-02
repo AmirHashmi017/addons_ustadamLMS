@@ -1,0 +1,4 @@
+<odoo>
+    <menuitem id="menu_quiz_root" name="LMS_Quizzes"/>
+    <menuitem id="menu_quiz" name="All Quizzes" parent="menu_quiz_root" action="action_quiz1"/>
+</odoo>

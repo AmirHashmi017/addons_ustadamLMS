@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Tree View for Questions -->
+    <record id="view_question_tree" model="ir.ui.view">
+        <field name="name">ustadam.question.tree</field>
+        <field name="model">ustadam.question</field>
+        <field name="arch" type="xml">
+            
+            <tree string="Questions">
+                <field name="name"/>
+                <button name="open_related_options" type="object" string="Attempt" class="oe_highlight"/>
+            </tree>
+
+        </field>
+    </record>
+    
+</odoo>

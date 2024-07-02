@@ -1,0 +1,4 @@
+<odoo>
+    <menuitem id="ustadam_menu_root" name="Ustadam" action="action_welcome_page" />
+    <menuitem id="ustadam_menu_Courses_student" name="Courses" parent="ustadam_menu_root" action="action_course_kanban"/>
+</odoo>

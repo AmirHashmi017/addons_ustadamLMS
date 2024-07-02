@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    
+    
+    <record id="action_open_questions" model="ir.actions.act_window">
+        <field name="name">Open Questions</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ustadam.question</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('quiz_id', '=', active_id)]</field> <!-- This line might need to be dynamically set in Python -->
+        <field name="context">{'default_quiz_id': active_id}</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Tree View for Quiz -->
+    <record id="view_quiz_tree1" model="ir.ui.view">
+        <field name="name">ustadam.quiz.tree1</field>
+        <field name="model">ustadam.quiz</field>
+        <field name="arch" type="xml">
+            <tree string="Quiz List" create="true">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="passing_percentage"/>
+                <button name="open_related_questions" string="Start Quiz" type="object" class="oe_highlight"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View for Quiz -->
+    <!-- <record id="view_quiz_form" model="ir.ui.view">
+        <field name="name">ustadam.quiz.form</field>
+        <field name="model">ustadam.quiz</field>
+        <field name="arch" type="xml">
+            <form string="Quiz Form" create="true" edit="true">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="passing_percentage"/>
+                    </group>
+                    <notebook>
+                        <page string="Questions">
+                            <field name="question_ids">
+                                <tree string="Questions" create="true" edit="true">
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button string="Submit Quiz" type="object" name="submit_quiz" class="oe_highlight"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record> -->
+</odoo>

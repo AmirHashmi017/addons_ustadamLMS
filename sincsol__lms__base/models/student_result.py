@@ -6,5 +6,5 @@ class Student_Result(models.Model):
 
     marks = fields.Float(string='Marks', required=True)
     
-    student_id = fields.Many2one('ustadam.user', string='Student')
-    quiz_id = fields.One2many('ustadam.quiz', 'student_result_id', string='Quiz')
+    # student_id = fields.Many2one('ustadam.user', string='Student')
+    # quiz_id = fields.One2many('ustadam.quiz', 'student_result_id', string='Quiz')
