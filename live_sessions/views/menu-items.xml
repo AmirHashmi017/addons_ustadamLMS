@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="test_action" model="ir.actions.act_window">
+        <field name="name">Live Session</field>
+        <field name="res_model">live.session.info</field>
+        <field name="view_mode">tree,form</field>
+         <field name="view_id" ref="live_session_tree"/>
+    </record> 
+    <record id="test_action2" model="ir.actions.act_window">
+        <field name="name">Add Live Session</field>
+        <field name="res_model">live.session.info</field>
+        <field name="view_mode">form</field>
+         <field name="view_id" ref="live_session_form"/>
+    </record> 
+
+    <menuitem
+        id="live_session_root_menu"
+        name="Live Session"
+        action="test_action"
+        />
+
+    <menuitem
+        id="live_session_add_menu"
+        name="Add Session"
+        parent="live_session_root_menu"
+        action="test_action2"/>
+    
+</odoo>

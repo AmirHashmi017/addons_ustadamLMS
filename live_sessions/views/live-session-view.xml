@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="live_session_tree" model="ir.ui.view">
+        <field name="name">Live.Session.View</field>
+        <field name="model">live.session.info</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="lesson_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="live_session_form" model="ir.ui.view">
+        <field name="name">Live.Session.Form</field>
+        <field name="model">live.session.info</field>
+        <field name="arch" type="xml">
+            <form string="Session Form">
+                <group>
+                    <field name="meet_url"/>
+                    <field name="img"/>
+                    <field name="lesson_name"/>
+                    <field name="lesson_description"/>
+                    <field name="learning_objectives"/>
+                    <field name="price"/>
+                    <field name="old_price"/>
+                    <field name="number_of_participants"/>
+                    <field name="knowledge_level"/>
+                    <field name="hide_dates"/>
+                    <field name="visibility"/>
+                </group>
+                <group>
+                    <field name="frequency_ids">
+                        <tree>
+                            <field name="day"/>
+                            <field name="start_time"/>
+                            <field name="end_time"/>
+                            <field name="frequency_type"/>
+                        </tree>
+                        <form string="Frequency Form"> 
+                            <group>
+                                <field name="day"/>
+                                <field name="start_time"/>
+                                <field name="end_time"/>
+                                <field name="frequency_type"/>
+                            </group>
+                        <group>
+                            <field name="curriculum_id">
+                                <tree>
+                                    <field name="text"/>
+                                    <field name="video_url"/>
+                                    <field name="attachments"/>
+                                </tree>
+                                <form string="Material Form">
+                                    <group>
+                                        <field name="text"/>
+                                        <field name="video_url"/>
+                                        <field name="attachments"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        </form>
+                    </field>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="live_session_action_add" model="ir.actions.act_window">
+        <field name="name">Live.Session.Action</field>
+        <field name="res_model">live.session.info</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

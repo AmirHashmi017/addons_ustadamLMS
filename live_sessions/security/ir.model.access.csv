@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_live_session_info,access_live_session_info,model_live_session_info,base.group_user,1,1,1,1
+access_live_session_curriculum,access_live_session_curriculum,model_live_session_curriculum,base.group_user,1,1,1,1
+access_live_session_frequency,access_live_session_frequency,model_live_session_frequency,base.group_user,1,1,1,1
