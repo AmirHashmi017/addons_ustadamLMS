@@ -4,11 +4,14 @@ class Live_Session_Info(models.Model):
     _name = 'live.session.info'
     _description = 'Live Sessions Information'
 
+    meeting_type = fields.Selection([('Online', 'Online'), ('In-Person', 'In-Person')], string='Meeting Type')
     meet_url = fields.Char(string='Meet URL')
     img = fields.Image(string='Image')
     lesson_name = fields.Char(string='Lesson Name')
     lesson_description = fields.Text(string='Lesson Description')
     learning_objectives = fields.Text(string='Learning Objectives')
+    
+    isFree = fields.Boolean(string='Is Free')
     price = fields.Float(string='Price')
     old_price = fields.Float(string='Old Price')
     number_of_participants = fields.Integer(string='Number of Participants')
