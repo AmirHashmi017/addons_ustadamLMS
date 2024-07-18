@@ -6,12 +6,19 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="lesson_name"/>
+               <field name="frequency_ids" string="Frequencies">
+                    <tree>
+                        <field name="day"/>
+                        <field name="frequency_type"/>
+                    </tree>
+                </field>
             </tree>
         </field>
     </record>
 
+
     <record id="test_action" model="ir.actions.act_window">
-        <field name="name">Live.Session.Action</field>
+        <field name="name">Add Live Session</field>
         <field name="res_model">live.session.info</field>
         <field name="view_mode">tree,form</field>
     </record> 
@@ -37,36 +44,36 @@
                     <field name="visibility"/>
                 </group>
                 <group>
-                    <field name="frequency_ids">
-                        <tree>
+                    <field name="frequency_ids" string="Frequency">
+                        <tree string="Frequency">
                             <field name="day"/>
                             <field name="start_time"/>
                             <field name="end_time"/>
                             <field name="frequency_type"/>
                         </tree>
-                        <form string="Frequency Form"> 
+                        <form string="Frequency">
                             <group>
                                 <field name="day"/>
                                 <field name="start_time"/>
                                 <field name="end_time"/>
                                 <field name="frequency_type"/>
                             </group>
-                        <group>
-                            <field name="curriculum_id">
-                                <tree>
-                                    <field name="text"/>
-                                    <field name="video_url"/>
-                                    <field name="attachments"/>
-                                </tree>
-                                <form string="Material Form">
-                                    <group>
+                            <group>
+                                <field name="curriculum_id" string="Material">
+                                    <tree string="Material">
                                         <field name="text"/>
                                         <field name="video_url"/>
                                         <field name="attachments"/>
-                                    </group>
-                                </form>
-                            </field>
-                        </group>
+                                    </tree>
+                                    <form string="Material">
+                                        <group>
+                                            <field name="text"/>
+                                            <field name="video_url"/>
+                                            <field name="attachments"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
                         </form>
                     </field>
                 </group>
