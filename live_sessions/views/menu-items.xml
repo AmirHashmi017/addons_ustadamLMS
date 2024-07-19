@@ -5,6 +5,7 @@
         id="live_session_root_menu"
         name="Live Session"
         action="test_action"
+        groups="group_teacher"
         />
 
     <menuitem
@@ -12,5 +13,15 @@
         name="Add Session"
         parent="live_session_root_menu"
         action="live_session_action_add"/>
+
+        
+    <menuitem
+    id="live_session_student_menu"
+    name="Live Session Website"
+    action="test_action1"
+    groups="group_teacher"
+    />
+
+
     
 </odoo>

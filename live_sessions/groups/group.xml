@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Group for Students -->
+        <record id="group_student" model="res.groups">
+            <field name="name">Student</field>
+        </record>
+
+        <!-- Group for Teachers -->
+        <record id="group_teacher" model="res.groups">
+            <field name="name">Teacher</field>
+        </record>
+    </data>
+</odoo>
