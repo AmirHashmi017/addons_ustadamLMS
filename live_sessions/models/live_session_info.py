@@ -1,5 +1,9 @@
 from odoo import models, fields
 
+class Live_Session_Teacher(models.Model):
+    _inherit="res.users"
+    UID=fields.One2many('live.session.info','teacher_id',string="UID")
+
 class Live_Session_Info(models.Model):
     _name = 'live.session.info'
     _description = 'Live Sessions Information'
@@ -21,4 +25,4 @@ class Live_Session_Info(models.Model):
     visibility = fields.Selection([('public', 'public'), ('private', 'private')], string='Visibility')
 
     frequency_ids = fields.One2many('live.session.frequency', 'session_id', string='FrequencyIds')
-    # teacher_id    # for speaker field
+    teacher_id=fields.Many2one('res.users',string='Teacher ID')

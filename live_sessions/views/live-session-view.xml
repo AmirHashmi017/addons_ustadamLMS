@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="lesson_name"/>
+                <field name="teacher_id"/>
                <field name="frequency_ids" string="Frequencies">
                     <tree>
                         <field name="day"/>
@@ -29,6 +30,7 @@
         <field name="arch" type="xml">
             <form string="Session Form">
                 <group>
+                    <field name="teacher_id"/>
                     <field name="meeting_type"/>
                     <field name="meet_url" invisible="meeting_type == 'In-Person'"/>
                     <field name="img"/>
