@@ -6,11 +6,8 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="lesson_name"/>
-                <field name="frequency_ids" string="Frequencies" widget="many2many_tags">
-                    <!-- <tree>
-                        <field name="day" widget="many2many_tags"/>
-                    </tree> -->
-                </field>
+                <field name="lesson_description"/>
+                <field name="learning_objectives"/>
             </tree>
         </field>
     </record>

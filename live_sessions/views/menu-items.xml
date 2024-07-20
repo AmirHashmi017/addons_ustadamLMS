@@ -19,7 +19,7 @@
     id="live_session_student_menu"
     name="Live Session Website"
     action="test_action1"
-    groups="group_teacher"
+    groups="group_student"
     />
 
 
