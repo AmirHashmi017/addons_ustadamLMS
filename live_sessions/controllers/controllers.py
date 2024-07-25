@@ -1,22 +1,11 @@
-# -*- coding: utf-8 -*-
-# from odoo import http
+from odoo import http
+from odoo.http import request
 
+class LiveSessionController(http.Controller):
 
-# class AddonsUteach/liveSessions(http.Controller):
-#     @http.route('/addons_uteach/live_sessions/addons_uteach/live_sessions', auth='public')
-#     def index(self, **kw):
-#         return "Hello, world"
-
-#     @http.route('/addons_uteach/live_sessions/addons_uteach/live_sessions/objects', auth='public')
-#     def list(self, **kw):
-#         return http.request.render('addons_uteach/live_sessions.listing', {
-#             'root': '/addons_uteach/live_sessions/addons_uteach/live_sessions',
-#             'objects': http.request.env['addons_uteach/live_sessions.addons_uteach/live_sessions'].search([]),
-#         })
-
-#     @http.route('/addons_uteach/live_sessions/addons_uteach/live_sessions/objects/<model("addons_uteach/live_sessions.addons_uteach/live_sessions"):obj>', auth='public')
-#     def object(self, obj, **kw):
-#         return http.request.render('addons_uteach/live_sessions.object', {
-#             'object': obj
-#         })
-
+    @http.route('/live_session/info/<int:session_id>', type='http', auth='public', website=True)
+    def session_info(self, session_id, **kwargs):
+        session = request.env['live.session.info'].sudo().browse(session_id)
+        return request.render('live_sessions.live_session_info_template', {
+            'session': session
+        })

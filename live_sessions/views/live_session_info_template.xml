@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="live_session_info_template" name="Live Session Info">
+        <t t-call="website.layout">
+            <div class="container">
+                <h1><t t-esc="session.lesson_name"/></h1>
+                <p><strong>Teacher:</strong> <t t-esc="session.teacher_id.name"/></p>
+                <div>
+                    <h2>Session Dates and Timings</h2>
+                    <ul>
+                        <t t-foreach="session.frequency_ids" t-as="freq">
+                            <li>
+                                <t t-esc="freq.day"/>: 
+                                <t t-esc="freq.start_time"/> - 
+                                <t t-esc="freq.end_time"/>
+                                <button  class="btn btn-primary">Register</button>
+                            </li>
+                        </t>
+                    </ul>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

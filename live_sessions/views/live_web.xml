@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="live_session_page" model="website.page">
+        <field name="name">Live Sessions</field>
+        <field name="type">qweb</field>
+        <field name="url">/live-session</field>
+        <field name="website_indexed" eval="False" />
+        <field name="is_published">True</field>
+        <field name="key">live_sessions.live_session_page</field>
+        <field name="arch" type="xml">
+            <t name="Live Sessions" t-name="live_session_page">
+                <t t-call="website.layout">
+                    <div class="container">
+                        <!-- main page -->
+                        <div class="row s_nb_column_fixed o_grid_mode" data-row-count="11">
+                            <div
+                                class="justify-content-center o_grid_item g-height-8 g-col-lg-5 col-lg-5"
+                                data-name="Box" style="z-index: 10; grid-area: 2 / 1 / 10 / 6;">
+                                <h1 class="display-3">Teach Online <strong>Easily.</strong></h1>
+                                <p class="lead">This is an engaging live session, a dynamic
+                                    interactive component designed to bring extra attention to
+                                    essential learning content or key information.</p>
+                                <div class="s_hr text-start pb32 pt4" data-snippet="s_hr"
+                                    data-name="Separator">
+                                    <hr class="w-100 mx-auto" />
+                                </div>
+                                <p>
+                                    <a id="Coach" t-att-href="cta_btn_href"
+                                        class="btn btn-lg btn-primary">Become a Coach <span
+                                            class="fa fa-angle-right ms-2" /></a>
+                                </p>
+                                <div id="modal_view" class="modal" tabindex="10"
+                                    style="z-index: 99999999; padding-top:100px;">
+                                    <div class="modal-dialog" role="document">
+                                        <form>
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Become a Coach</h5>
+                                                <button id="CloseButton" type="button" class="close"
+                                                    data-dismiss="modal" aria-label="Close">
+                                                    <!-- <span aria-hidden="true">&times;</span> -->
+                                                </button>
+                                            </div>
+                                            <div class="modal-body ">
+                                                    <div class="form-group py-1">
+                                                        <label for="Phone">Phone</label>
+                                                        <input type="text"
+                                                            class="form-control" id="Phone" required="true"/>
+
+                                                    </div>
+                                                    <div class="form-group py-1">
+                                                        <label for="Qualification">Qualification</label>
+                                                        <input type="text" class="form-control"
+                                                            id="Qualification"
+                                                            aria-describedby="emailHelp"
+                                                            placeholder="Enter Qualification" required="true"/>
+
+                                                    </div>
+                                                    <div class="form-group py-1">
+                                                        <label for="Teaching Experience">Teaching
+                                                            Experience</label>
+                                                        <input type="text" class="form-control"
+                                                            id="Teaching Experience"
+                                                            placeholder="Enter Teaching Experience" required="true" />
+                                                    </div>
+                                                    <div class="form-group py-1">
+                                                        <label for="Resume">Resume</label>
+                                                        <input type="file"
+                                                            class="form-control" id="Resume" required="true" />
+
+                                                    </div>
+                                                    <div class="form-group py-1">
+                                                        <label for="Specialization">Specialization</label>
+                                                        <input type="text" class="form-control"
+                                                            id="Specialization"
+                                                            placeholder="Enter specialization " required="true"/>
+                                                    </div>
+                                                    <div class="form-group py-1">
+                                                        <label for="reason">Why you want to teach on our platform</label>
+                                                        <input type="text" class="form-control"
+                                                            id="Specialization"
+                                                            required="true"/>
+                                                    </div>
+                                        
+                        
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                    <button id="btnHandler" type="button"
+                                                    class="btn btn-secondary" data-dismiss="modal">
+                                                    Close</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="o_grid_item o_grid_item_image g-col-lg-4 g-height-10 col-lg-4"
+                                style="z-index: 1; grid-area: 1 / 8 / 11 / 12;">
+                                <img class="img img-fluid mx-auto shadow rounded"
+                                    src="live_sessions/static/img/std.jpg" alt="" />
+                            </div>
+                            <div
+                                class="o_grid_item o_grid_item_image g-col-lg-3 g-height-5 col-lg-3 d-lg-block d-none o_snippet_mobile_invisible"
+                                style="z-index: 1; grid-area: 7 / 7 / 12 / 10;">
+                                <img class="img img-fluid mx-auto shadow rounded"
+                                    src="live_sessions/static/img/girl.avif" alt="" />
+                            </div>
+                        </div>
+                        <!-- session card -->
+                        <div class="row d-flex align-items-stretch" style="margin-top:20px;">
+                            <h1 class="text-center" style="margin-bottom:15px">Sessions</h1>
+                            <t t-foreach="request.env['live.session.info'].sudo().search([])"
+                                t-as="session">
+                                <div class="col-lg-4 s_col_no_bgcolor pt16 pb16">
+                                    <div class="card text-bg-white h-100">
+                                        <img
+                                            t-att-src="'data:image/png;base64,' + session.img.decode('utf-8')"
+                                            class="card-img-top"
+                                            style="height: 250px; object-fit: cover;" />
+                                        <div class="card-body">
+                                            <h3 class="card-title">
+                                                <t t-esc="session.lesson_name" />
+                                            </h3>
+                                            <p class="card-text">
+                                                <t t-esc="session.teacher_id.name" />  <!-- Display
+                                                teacher's name -->
+                                            </p>
+                                        </div>
+                                        <footer>
+                                            <button t-att-data-session-id="session.id"
+                                                t-attf-onclick="window.location.href='/live_session/info/{{ session.id }}'"
+                                                class="btn-primary btn"
+                                                style="margin-left:100px; margin-bottom:30px;">View
+                                                Info</button>
+                                        </footer>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </field>
+    </record>
+
+    <record id="menu_live_session_page" model="website.menu">
+        <field name="name">Live Sessions</field>
+        <field name="url">/live-session</field>
+        <field name="page_id" ref="live_sessions.live_session_page" />
+        <field name="parent_id" ref="website.main_menu" />
+        <field name="sequence" type="int">60</field>
+    </record>
+</odoo>
