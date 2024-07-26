@@ -13,5 +13,7 @@ class Live_Session_Frequency(models.Model):
     student_ids = fields.Many2many('res.users', string='student Id')
     session_id = fields.Many2one('live.session.info', string='Session Id')
     curriculum_id = fields.One2many('live.session.curriculum', 'frequency_id', string='Material Id')
-
+    
+    
+    interval = fields.Integer(string='Interval')
     

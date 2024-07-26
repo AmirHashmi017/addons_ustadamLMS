@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_frontend" name="live_sessions assets" inherit_id="web.assets_frontend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/live_sessions/static/src/js/coach_modal.js"></script>
+        </xpath>
+    </template>
+</odoo>

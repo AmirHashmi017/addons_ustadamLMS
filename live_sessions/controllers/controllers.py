@@ -9,3 +9,26 @@ class LiveSessionController(http.Controller):
         return request.render('live_sessions.live_session_info_template', {
             'session': session
         })
+        
+    @http.route('/create/coach', type='http', auth='public', website=True,csrf=False)
+    def create_coach(self, **kwargs):
+        # Get the current user's partner record
+        user = request.env.user
+        partner = user.partner_id
+
+        if not partner.exists():
+            return request.make_response("Error: Partner record not found", status=404)
+
+        # Prepare the data for update, excluding the resume field
+        update_values = {
+            'phone': kwargs.get('phone'),
+            'qualification': kwargs.get('qualification'),
+            'teaching_experience': kwargs.get('teaching_experience'),
+            'specialization': kwargs.get('specialization'),
+            'comments': kwargs.get('comments'),
+            'status': 'submitted',  # Set status to "submitted"
+        }
+
+        # Update the partner record
+        partner.sudo().write(update_values)
+        return request.make_response("Record updated successfully")

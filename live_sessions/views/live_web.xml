@@ -32,26 +32,26 @@
                                 <div id="modal_view" class="modal" tabindex="10"
                                     style="z-index: 99999999; padding-top:100px;">
                                     <div class="modal-dialog" role="document">
-                                        <form>
+                                        <form action="/create/coach" method="POST">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title">Become a Coach</h5>
                                                 <button id="CloseButton" type="button" class="close"
                                                     data-dismiss="modal" aria-label="Close">
-                                                    <!-- <span aria-hidden="true">&times;</span> -->
                                                 </button>
                                             </div>
                                             <div class="modal-body ">
                                                     <div class="form-group py-1">
                                                         <label for="Phone">Phone</label>
                                                         <input type="text"
-                                                            class="form-control" id="Phone" required="true"/>
+                                                            class="form-control" name="phone" t-att-value="phone" id="phone" required="true"/>
 
                                                     </div>
                                                     <div class="form-group py-1">
                                                         <label for="Qualification">Qualification</label>
                                                         <input type="text" class="form-control"
-                                                            id="Qualification"
+                                                            id="qualification"
+                                                            name="qualification" t-att-value="qualification"
                                                             aria-describedby="emailHelp"
                                                             placeholder="Enter Qualification" required="true"/>
 
@@ -60,25 +60,29 @@
                                                         <label for="Teaching Experience">Teaching
                                                             Experience</label>
                                                         <input type="text" class="form-control"
-                                                            id="Teaching Experience"
+                                                            id="teaching_experience"
+                                                            name="teaching_experience"
+                                                            t-att-value="teaching_experience"
                                                             placeholder="Enter Teaching Experience" required="true" />
                                                     </div>
-                                                    <div class="form-group py-1">
+                                                    <!-- <div class="form-group py-1">
                                                         <label for="Resume">Resume</label>
                                                         <input type="file"
-                                                            class="form-control" id="Resume" required="true" />
+                                                            class="form-control" id="resume" name="resume" t-att-value="resume" required="true" />
 
-                                                    </div>
+                                                    </div> -->
                                                     <div class="form-group py-1">
                                                         <label for="Specialization">Specialization</label>
                                                         <input type="text" class="form-control"
-                                                            id="Specialization"
+                                                            id="specialization"
+                                                            name="specialization" t-att-value="specialization"
                                                             placeholder="Enter specialization " required="true"/>
                                                     </div>
                                                     <div class="form-group py-1">
                                                         <label for="reason">Why you want to teach on our platform</label>
                                                         <input type="text" class="form-control"
-                                                            id="Specialization"
+                                                            id="comments"
+                                                            name="comments" t-att-value="comments"
                                                             required="true"/>
                                                     </div>
                                         
@@ -99,13 +103,13 @@
                                 class="o_grid_item o_grid_item_image g-col-lg-4 g-height-10 col-lg-4"
                                 style="z-index: 1; grid-area: 1 / 8 / 11 / 12;">
                                 <img class="img img-fluid mx-auto shadow rounded"
-                                    src="live_sessions/static/img/std.jpg" alt="" />
+                                    src="live_sessions/static/src/img/std.jpg" alt="" />
                             </div>
                             <div
                                 class="o_grid_item o_grid_item_image g-col-lg-3 g-height-5 col-lg-3 d-lg-block d-none o_snippet_mobile_invisible"
                                 style="z-index: 1; grid-area: 7 / 7 / 12 / 10;">
                                 <img class="img img-fluid mx-auto shadow rounded"
-                                    src="live_sessions/static/img/girl.avif" alt="" />
+                                    src="live_sessions/static/src/img/girl.avif" alt="" />
                             </div>
                         </div>
                         <!-- session card -->
