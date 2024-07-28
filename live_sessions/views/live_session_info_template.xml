@@ -13,7 +13,11 @@
                                 <t t-esc="freq.day"/>: 
                                 <t t-esc="freq.start_time"/> - 
                                 <t t-esc="freq.end_time"/>
-                                <button  class="btn btn-primary">Register</button>
+                                <form action="/live_session/register" method="post" style="display:inline;">
+                                    <input type="hidden" name="session_id" t-att-value="session.id"/>
+                                    <input type="hidden" name="frequency_id" t-att-value="freq.id"/>
+                                    <button type="submit" class="btn btn-primary">Register</button>
+                                </form>
                             </li>
                         </t>
                     </ul>

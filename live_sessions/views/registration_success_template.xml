@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="registration_success_template" name="Registration Success">
+        <t t-call="website.layout">
+            <div class="container">
+                <h1>Registration Successful!</h1>
+                <p>You have successfully registered for the session.</p>
+            </div>
+        </t>
+    </template>
+</odoo>
