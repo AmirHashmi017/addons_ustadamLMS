@@ -128,8 +128,12 @@
                                                 <t t-esc="session.lesson_name" />
                                             </h3>
                                             <p class="card-text">
-                                                <t t-esc="session.teacher_id.name" />  <!-- Display
+                                                Author: 
+                                               <strong><t t-esc="session.teacher_id.name" /></strong>  <!-- Display
                                                 teacher's name -->
+                                            </p>
+                                            <p class="card-text"> 
+                                                <t t-esc="session.truncate_text(session.lesson_description, 20)"/>
                                             </p>
                                         </div>
                                         <footer>

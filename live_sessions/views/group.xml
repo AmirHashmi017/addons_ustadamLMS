@@ -10,5 +10,6 @@
         <record id="group_teacher" model="res.groups">
             <field name="name">Teacher</field>
         </record>
+
     </data>
 </odoo>
