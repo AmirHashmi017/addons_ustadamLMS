@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="tasklyft_services_page" model="website.page">
+        <field name="name">Services</field>
+        <field name="type">qweb</field>
+        <field name="url">/services</field>
+        <field name="website_indexed" eval="False" />
+        <field name="is_published">True</field>
+        <field name="key">task_lyft.services_page</field>
+        <field name="arch" type="xml">
+            <t name="Services" t-name="services_page">
+                <t t-call="website.layout">
+                    <div class="container">
+                        <!-- session card -->
+                        <div class="row d-flex align-items-stretch" style="margin-top:20px;">
+                            <h1 class="text-center" style="margin-bottom:15px">Services</h1>
+                            <t t-foreach="request.env['tasklyft.service'].sudo().search([])"
+                                t-as="service">
+                                <div class="col-lg-4 s_col_no_bgcolor pt16 pb16">
+                                    <div class="card text-bg-white h-100">
+                                        <img
+                                            t-att-src="'data:image/png;base64,' + service.picture.decode('utf-8')"
+                                            class="card-img-top"
+                                            style="height: 250px; object-fit: cover;" />
+                                        <div class="card-body">
+                                            <h3 class="card-title">
+                                                <t t-esc="service.title" />
+                                            </h3>
+                                            <p class="card-text">
+                                                Author: <strong><t t-esc="service.user_id.name" /></strong>
+                                            </p>
+                                            <p class="card-text">
+                                                Skill: <strong><t t-esc="service.category" /></strong>
+                                            </p>
+                                            <p class="card-text">
+                                                Experience Level: <strong><t t-esc="service.experience_level" /></strong>
+                                            </p>
+                                            <p class="card-text">
+                                                Pricing Per Hour(PKR): <strong><t t-esc="service.price_per_hour" /></strong>
+                                            </p>
+                                        </div>
+                                        <footer>
+                                            <button
+                                                class="btn-primary btn"
+                                                style="margin-left:100px; margin-bottom:30px;">View
+                                                Info</button>
+                                        </footer>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </field>
+    </record>
+
+
+    <record id="tasklyft_services_page_menu" model="website.menu">
+        <field name="name">Services</field>
+        <field name="url">/services</field>
+        <field name="page_id" ref="task_lyft.tasklyft_services_page" />
+        <field name="parent_id" ref="website.main_menu" />
+        <field name="sequence" type="int">60</field>
+    </record>
+
+</odoo>

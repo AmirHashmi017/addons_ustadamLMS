@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="tasklyft_menu_action" model="ir.actions.act_window">
+        <field name="name">TaskLyft Menu</field>
+        <field name="res_model">tasklyft.service</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <menuitem
+        id="tasklyft_parent_menu"
+        name="Task Lyft"
+        action="tasklyft_menu_action"
+    />
+
+</odoo>

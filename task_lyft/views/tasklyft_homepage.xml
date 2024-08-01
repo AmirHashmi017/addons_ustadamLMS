@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="live_session_page" model="website.page">
+        <field name="name">Live Sessions</field>
+        <field name="type">qweb</field>
+        <field name="url">/live-session</field>
+        <field name="website_indexed" eval="False" />
+        <field name="is_published">True</field>
+        <field name="key">live_sessions.live_session_page</field>
+        <field name="arch" type="xml">
+            <t name="Live Sessions" t-name="live_session_page">
+                <t t-call="website.layout">
+                  
+                </t>
+            </t>
+        </field>
+    </record>
+    
+    
+    <template id="tasklyft_homepage" inherit_id="website.homepage">
+        <xpath expr="//div[@id='wrap']" position="inside">
+            <div class="container">
+                <!-- main page -->
+                <div class="row s_nb_column_fixed o_grid_mode" data-row-count="11">
+                    <div
+                        class="justify-content-center o_grid_item g-height-8 g-col-lg-5 col-lg-5"
+                        data-name="Box" style="z-index: 10; grid-area: 2 / 1 / 10 / 6;">
+                        <h1 class="display-3">Teach Online <strong>Easily.</strong></h1>
+                        <p class="lead">This is an engaging live session, a dynamic
+                            interactive component designed to bring extra attention to
+                            essential learning content or key information.</p>
+                        <div class="s_hr text-start pb32 pt4" data-snippet="s_hr"
+                            data-name="Separator">
+                            <hr class="w-100 mx-auto" />
+                        </div>
+                        <p>
+                            <a id="Coach" t-att-href="cta_btn_href"
+                                class="btn btn-lg btn-primary">Become a Coach <span
+                                    class="fa fa-angle-right ms-2" /></a>
+                        </p>
+                    </div>
+                    <div
+                        class="o_grid_item o_grid_item_image g-col-lg-4 g-height-10 col-lg-4"
+                        style="z-index: 1; grid-area: 1 / 8 / 11 / 12;">
+                        <img class="img img-fluid mx-auto shadow rounded"
+                            src="live_sessions/static/src/img/std.jpg" alt="" />
+                    </div>
+                    <div
+                        class="o_grid_item o_grid_item_image g-col-lg-3 g-height-5 col-lg-3 d-lg-block d-none o_snippet_mobile_invisible"
+                        style="z-index: 1; grid-area: 7 / 7 / 12 / 10;">
+                        <img class="img img-fluid mx-auto shadow rounded"
+                            src="live_sessions/static/src/img/girl.avif" alt="" />
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+
+    
+</odoo>
