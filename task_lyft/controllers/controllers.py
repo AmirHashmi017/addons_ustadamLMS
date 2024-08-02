@@ -27,7 +27,7 @@ class TasklyftController(http.Controller):
             })
             
 
-        return request.render('task_lyft.gig_page')
+        return request.render('task_lyft.services_page')
 
 class TaskLyft(http.Controller):
 

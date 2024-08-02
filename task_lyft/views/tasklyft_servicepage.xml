@@ -90,11 +90,5 @@
             </t>
         </field>
     </record>
-    <record id="tasklyft_services_page_menu" model="website.menu">
-        <field name="name">Services</field>
-        <field name="url">/services</field>
-        <field name="page_id" ref="task_lyft.tasklyft_services_page" />
-        <field name="parent_id" ref="website.main_menu" />
-        <field name="sequence" type="int">60</field>
-    </record>
+    
 </odoo>

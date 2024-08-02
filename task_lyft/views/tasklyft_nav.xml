@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="tasklyft_navlogo" inherit_id="website.option_header_brand_logo">
+        <xpath expr="//a/span" position="replace">
+            <span>
+                <img src="/task_lyft/static/src/img/logo.jpg" width="95" height="40" role="img" t-att-aria-label="'Logo of %s' % website.name" t-att-title="website.name"/>
+            </span>
+        </xpath>
+    </template>
+
+    <record id="tasklyft_services_page_menu" model="website.menu">
+        <field name="name">Services</field>
+        <field name="url">/services</field>
+        <field name="page_id" ref="task_lyft.tasklyft_services_page" />
+        <field name="parent_id" ref="website.main_menu" />
+        <field name="sequence" type="int">60</field>
+    </record>
+
+
+    <record id="tasklyft_gig_page_menu" model="website.menu">
+        <field name="name">Create Gig</field>
+        <field name="url">/CreateGig</field>
+        <field name="page_id" ref="task_lyft.tasklyft_gig_page" />
+        <field name="parent_id" ref="website.main_menu" />
+        <field name="sequence" type="int">60</field>
+    </record>
+
+</odoo>
