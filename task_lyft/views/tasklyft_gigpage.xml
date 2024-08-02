@@ -1,0 +1,64 @@
+<odoo>
+    <record id="tasklyft_gig_page" model="website.page">
+        <field name="name">Create Gig</field>
+        <field name="type">qweb</field>
+        <field name="url">/CreateGig</field>
+        <field name="website_indexed" eval="False" />
+        <field name="is_published">True</field>
+        <field name="key">task_lyft.gig_page</field>
+        <field name="arch" type="xml">
+            <t name="CreateGig" t-name="creategig_page">
+                <t t-call="website.layout">
+                    <div class="container">
+                        <form action="/create_gig" method="post" enctype="multipart/form-data">
+                            <t t-set="csrf_token" t-value="request.csrf_token()"/>
+                            <input type="hidden" name="csrf_token" t-att-value="csrf_token"/>
+                            <div class="form-row py-3">
+                                <label for="title">Title</label>
+                                <input type="text" class="form-control" name="title" id="title" required="true"/>
+                            </div>
+                            <div class="form-row py-3">
+                                <label for="category">Category</label>
+                                <select class="form-control" name="category" id="category" required="true">
+                                    <option value="Software Developer">Software Developer</option>
+                                    <option value="Web Developer">Web Developer</option>
+                                    <option value="Mobile App Developer">Mobile App Developer</option>
+                                    <option value="Graphic Designer">Graphic Designer</option>
+                                    <option value="UI/UX Designer">UI/UX Designer</option>
+                                    <option value="Data Analyst">Data Analyst</option>
+                                    <option value="Odoo Developer">Odoo Developer</option>
+                                    <option value="Word-Press Developer">Word-Press Developer</option>
+                                </select>
+                            </div>
+                            <div class="form-row py-3">
+                                <label for="experience_level">Experience Level</label>
+                                <select class="form-control" name="experience_level" id="experience_level" required="true">
+                                    <option value="Beginner">Beginner</option>
+                                    <option value="Intermediate">Intermediate</option>
+                                    <option value="Professional">Professional</option>
+                                </select>
+                            </div>
+                            <div class="form-row py-3">
+                                <label for="picture">Gig Image</label>
+                                <input type="file" class="form-control" id="picture" name="picture" required="true"/>
+                            </div>
+                            <div class="form-row py-3">
+                                <label for="price_per_hour">Price Per Hour(PKR)</label>
+                                <input type="number" step="0.01" class="form-control" id="price_per_hour" name="price_per_hour" required="true"/>
+                            </div>
+                            <input type="submit" value="Create Gig" class="btn btn-primary"/>
+                        </form>
+                    </div>
+                </t>
+            </t>
+        </field>
+    </record>
+
+    <record id="tasklyft_gig_page_menu" model="website.menu">
+        <field name="name">Create Gig</field>
+        <field name="url">/CreateGig</field>
+        <field name="page_id" ref="task_lyft.tasklyft_gig_page" />
+        <field name="parent_id" ref="website.main_menu" />
+        <field name="sequence" type="int">60</field>
+    </record>
+</odoo>

@@ -26,6 +26,7 @@
         'views/tasklyft_menuitems.xml',
         'views/tasklyft_homepage.xml',
         'views/tasklyft_servicepage.xml',
+        'views/tasklyft_gigpage.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
