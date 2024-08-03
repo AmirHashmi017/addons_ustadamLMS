@@ -7,16 +7,16 @@
                 <div class="container" style="margin-top: 20px;">
                     <div class="row">
                         <div class="col-md-4">
-                            <img src="/task_lyft/static/src/img/logo.jpg" width="95" height="40" role="img" t-att-aria-label="'Logo of %s' % website.name" t-att-title="website.name"/>
+                            <img src="/task_lyft/static/src/img/logobgless.png" width="95" height="40" role="img" t-att-aria-label="'Logo of %s' % website.name" t-att-title="website.name"/>
                         </div>
                         <div class="col-md-4">
                             <h5>Contact</h5>
-                            <p>Your contact info here.</p>
+                            <p>Sheri Number CEO</p>
                         </div>
                         <div class="col-md-4">
                             <h5>Follow Us</h5>
                             <p>
-                                <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a href="#">Instagram</a>
+                                <a style="text-decoration:none;color:white;" href="#">Facebook</a> | <a style="text-decoration:none;color:white;" href="#">Twitter</a> | <a style="text-decoration:none;color:white;" href="#">Instagram</a>
                             </p>
                         </div>
                     </div>
@@ -24,4 +24,10 @@
             </div>
         </xpath>
     </template>
+    
+    <template id="tasklyft_baseline" inherit_id="website.layout">
+    <xpath expr="//footer//span[hasclass('o_footer_copyright_name')]" position="replace">
+        <span class="o_footer_copyright_name me-2">Copyright &amp;copy; TaskLyft</span>
+    </xpath>
+</template>
 </odoo>

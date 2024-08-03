@@ -79,7 +79,9 @@
                                             </p>
                                         </div>
                                         <footer>
-                                            <button class="btn-primary btn" style="margin-left:100px; margin-bottom:30px;">View Info</button>
+                                            <button class="btn-primary btn" style="margin-left:100px; margin-bottom:30px;">
+                                                <a href="#">Contact</a>
+                                            </button>
                                         </footer>
                                     </div>
                                 </div>

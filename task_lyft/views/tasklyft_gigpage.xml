@@ -1,14 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <record id="tasklyft_gig_page" model="website.page">
-        <field name="name">Create Gig</field>
-        <field name="type">qweb</field>
-        <field name="url">/CreateGig</field>
-        <field name="website_indexed" eval="False" />
-        <field name="is_published">True</field>
-        <field name="key">task_lyft.gig_page</field>
-        <field name="arch" type="xml">
-            <t name="CreateGig" t-name="creategig_page">
-                <t t-call="website.layout">
+    <field name="name">Create Gig</field>
+    <field name="type">qweb</field>
+    <field name="url">/CreateGig</field>
+    <field name="website_indexed" eval="False" />
+    <field name="is_published">True</field>
+    <field name="key">task_lyft.gig_page</field>
+    <field name="arch" type="xml">
+        <t name="CreateGig" t-name="creategig_page">
+            <t t-call="website.layout">
+                <t t-if="request.session.uid">
                     <div class="container">
                         <form action="/create_gig" method="post" enctype="multipart/form-data">
                             <t t-set="csrf_token" t-value="request.csrf_token()"/>
@@ -50,9 +53,15 @@
                         </form>
                     </div>
                 </t>
+                <t t-else="">
+                    <script>
+                        window.location.href = "/web/login";
+                    </script>
+                </t>
             </t>
-        </field>
-    </record>
+        </t>
+    </field>
+</record>
 
-    
+
 </odoo>
