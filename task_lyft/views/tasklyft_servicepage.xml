@@ -10,6 +10,7 @@
             <t name="Services" t-name="services_page">
                 <t t-call="website.layout">
                     <div class="container">
+                        <link rel="stylesheet" type="text/css" href="/task_lyft/static/src/css/services.css"/>
                         <!-- Search Form -->
                         <form action="/services" method="GET" class="row mb-5 mt-5">
                             <!-- Category Combo Box -->
@@ -53,13 +54,42 @@
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </div>
                         </form>
+                    
 
                         <!-- Services Grid -->
                         <div class="row d-flex align-items-stretch">
-                            <h1 class="text-center" style="margin-bottom:15px">Services</h1>
+                            <h1 class="text-center" style="margin-bottom:15px;">Services</h1>
                             <t t-foreach="services" t-as="service">
-                                <div class="col-lg-4 s_col_no_bgcolor pt16 pb16">
-                                    <div class="card text-bg-white h-100">
+                                <div style="width: 340px;" class="s_col_no_bgcolor pb16">
+                                    <div class="section html body">
+                                        <div class="container">
+                                            <div class="style2 ">
+                                                <div class="" style=" position: relative;">
+                                                    <ul class="image-box hotel listing-style1" style="transition-duration: 0.6s;">
+                                                        <li style="width: 270px; margin-bottom:10px; float: left; display: block;">
+                                                            <article class="box">
+                                                                <figure> <a href="#" class="hover-effect popup-gallery"><img width="270" height="160" alt="" t-att-src="'data:image/png;base64,' + service.picture.decode('utf-8')" draggable="false"/></a> </figure>
+                                                                <div class="details"> <span class="price"><small>price per hour</small>PKR <t t-esc="service.price_per_hour" /></span>
+                                                                    <h4 class="box-title"><span t-esc="service.title"></span><small><t t-esc="service.user_id.name" /></small></h4>
+                                                                    <div class="feedback">
+                                                                        <div data-placement="bottom" data-toggle="tooltip" class="fa fa-star" title="" data-original-title="4 stars"><span style="width: 80%;" class="five-stars"><t t-esc="service.category" /></span></div> 
+                                                                        
+                                                                    </div>     
+                                                                        <div class="my-2">
+                                                                            <span class="review">
+                                                                                Experience: <t t-esc="service.experience_level" /></span>
+                                                                        </div>
+                                                                    <div class="action"> <a class="button btn-small" href="#">CONTACT</a> <a class="button btn-small yellow popup-map" href="#" data-box="37.089072, -8.247880">VIEW INFO</a> </div>
+                                                                </div>
+                                                            </article>
+                                                        </li>
+                                                       
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="card text-bg-white h-100">
                                         <img t-att-src="'data:image/png;base64,' + service.picture.decode('utf-8')" class="card-img-top" style="height: 250px; object-fit: cover;" />
                                         <div class="card-body">
                                             <h3 class="card-title">
@@ -83,8 +113,16 @@
                                                 <a href="#">Contact</a>
                                             </button>
                                         </footer>
-                                    </div>
-                                </div>
+                                    </div> -->
+                                </div> 
+
+
+
+
+
+                   
+
+
                             </t>
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "task_lyft",
+    'name': "Task Lyft",
 
     'summary': "Freelance Web Platform for Students",
 
@@ -18,7 +18,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'website'],
+    'depends': ['base', 'website', 'auth_signup'],
 
     # always loaded
     'data': [
@@ -28,11 +28,13 @@
         'views/tasklyft_gigpage.xml',
         'views/tasklyft_nav.xml',
         'views/tasklyft_footer.xml',
+        'views/tasklyft_signup.xml',
         'views/tasklyft_menuitems.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
     ],
+
 }
 

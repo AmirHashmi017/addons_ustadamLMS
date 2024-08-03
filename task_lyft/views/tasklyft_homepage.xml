@@ -9,7 +9,7 @@
                 <section id="hero" class="hero section dark-background">
                     <div class="container">
                         <div class="row gy-4">
-                            <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="zoom-out">
+                            <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center zoom-out" data-animation="zoom-out">
                                 <h1>TaskLyft: Freelancers at Your Fingertips</h1>
                                 <p>Find and hire top freelancers quickly and effortlessly</p>
                                 <t t-if="not request.session.uid">
@@ -18,7 +18,7 @@
                                     </div>
                                 </t>
                             </div>
-                            <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="200">
+                            <div class="col-lg-6 order-1 order-lg-2 hero-img zoom-out" data-animation="zoom-out" data-animation-delay="200">
                                 <img src="task_lyft/static/src/img/hero-img.png" class="img-fluid animated" alt=""/>
                             </div>
                         </div>
@@ -26,27 +26,27 @@
                 </section><!-- /Hero Section -->
                 
                 <!-- About Section -->
-                <section id="about" class="about section">
+                <section id="about" class="about section color">
+                    <img src="task_lyft/static/src/img/cta-bg.jpg" alt=""></img>
                     <!-- Section Title -->
-                    <div class="container section-title" data-aos="fade-up">
+                    <div class="container section-title color  fade-up" data-animation="fade-up">
                         <h2>About Us</h2>
                     </div><!-- End Section Title -->
                 
                     <div class="container">
-                        <div class="row gy-4">
-                            <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
+                        <div class="row gy-4 color">
+                            <div class="col-lg-6 content fade-up " data-animation="fade-up" data-animation-delay="100">
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                    magna aliqua.
+                                    We revolutionize freelancing by linking top talent with game-changing opportunities, creating a platform that fosters impactful collaborations and drives career advancement.
                                 </p>
                                 <ul>
-                                    <li><i class="bi bi-check2-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-                                    <li><i class="bi bi-check2-circle"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-                                    <li><i class="bi bi-check2-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo</span></li>
+                                    <li><i class="bi bi-check2-circle"></i> <span>1- Match with top-tier freelancers who align with your specific project needs and goals.</span></li>
+                                    <li><i class="bi bi-check2-circle"></i> <span>2- Enjoy a seamless experience with our user-friendly tools designed for effortless collaboration.</span></li>
+                                    <li><i class="bi bi-check2-circle"></i> <span>3- Access resources and support that drive career development and project success.</span></li>
                                 </ul>
                             </div>
-                            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                                <p>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+                            <div class="col-lg-6 fade-up " data-animation="fade-up" data-animation-delay="200">
+                                <p>At Tasklyft, we're more than just a freelancing platform—we're a community dedicated to connecting talented freelancers with the opportunities that help them thrive. Founded with the mission to empower both freelancers and clients, Tasklyft provides a dynamic marketplace where expertise meets opportunity. </p>
                                 <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
                             </div>
                         </div>
@@ -58,38 +58,39 @@
                     <div class="container-fluid">
                         <div class="row gy-4">
                             <div class="col-lg-7 d-flex flex-column justify-content-center order-2 order-lg-1">
-                                <div class="content px-xl-5" data-aos="fade-up" data-aos-delay="100">
-                                    <h3><span>Eum ipsam laborum deleniti </span><strong>velit pariatur architecto aut nihil</strong></h3>
+                                <div class="content px-xl-5  fade-up" data-animation="fade-up" data-animation-delay="100">
+                                    <h3><span>Streamline Your Experience On</span>
+                                        <strong> Task Lyft</strong></h3>
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+                                        Effortlessly manage your project from start to finish with clear steps and expert talent.
                                     </p>
                                 </div>
-                                <div class="faq-container px-xl-5" data-aos="fade-up" data-aos-delay="200">
+                                <div class="faq-container px-xl-5  fade-up" data-animation="fade-up" data-animation-delay="200">
                                     <div class="faq-item faq-active">
-                                        <h3><span>01</span> Non consectetur a erat nam at lectus urna duis?</h3>
+                                        <h3><span>01</span> Define Your Needs</h3>
                                         <div class="faq-content">
-                                            <p>Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.</p>
+                                            <p>Clearly outline your project requirements and objectives. This helps in finding the right freelancer who can deliver precisely what you're looking for.</p>
                                         </div>
                                         <i class="faq-toggle bi bi-chevron-right"></i>
                                     </div><!-- End Faq item-->
-                                    <div class="faq-item">
-                                        <h3><span>02</span> Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?</h3>
+                                    <div class="faq-item  faq-active">
+                                        <h3><span>02</span> Choose the Right Talent</h3>
                                         <div class="faq-content">
-                                            <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
+                                            <p>Browse through profiles and portfolios to select a freelancer whose skills and experience align with your project needs. Ensure they have a track record of delivering high-quality results.</p>
                                         </div>
                                         <i class="faq-toggle bi bi-chevron-right"></i>
                                     </div><!-- End Faq item-->
-                                    <div class="faq-item">
-                                        <h3><span>03</span> Dolor sit amet consectetur adipiscing elit pellentesque?</h3>
-                                        <div class="faq-content">
-                                            <p>Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis</p>
+                                    <div class="faq-item  faq-active">
+                                        <h3><span>03</span>Collaborate and Review</h3>
+                                        <div class="faq-content ">
+                                            <p>Communicate effectively with your freelancer to ensure your vision is understood. Regularly review progress and provide feedback to ensure the final deliverable meets your expectations.</p>
                                         </div>
                                         <i class="faq-toggle bi bi-chevron-right"></i>
                                     </div><!-- End Faq item-->
                                 </div>
                             </div>
                             <div class="col-lg-5 order-1 order-lg-2 why-us-img">
-                                <img src="task_lyft/static/src/img/why-us.png" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="100"/>
+                                <img src="task_lyft/static/src/img/why-us.png" class="img-fluid" alt="" data-animation="zoom-in" data-animation-delay="100"/>
                             </div>
                         </div>
                     </div>
@@ -97,4 +98,5 @@
             </div>
         </xpath>
     </template>
+    
 </odoo>

@@ -1,6 +1,9 @@
 from odoo import http
 from odoo.http import request
 import base64
+from odoo.addons.auth_signup.controllers.main import AuthSignupHome
+
+
 class TasklyftController(http.Controller):
 
     @http.route('/create_gig', type='http', auth='user', website=True, csrf=True)
@@ -68,3 +71,15 @@ class TaskLyft(http.Controller):
         return request.render('task_lyft.services_page', {
             'services': services
         })
+
+class AuthSignupCustom(AuthSignupHome):
+
+    def get_auth_signup_qcontext(self):
+        qcontext = super(AuthSignupCustom, self).get_auth_signup_qcontext()
+        qcontext.update({k: v for (k, v) in request.params.items() if k in ['phone']}) 
+        return qcontext
+
+    def _prepare_signup_values(self, qcontext): 
+        values = super(AuthSignupCustom, self)._prepare_signup_values(qcontext)
+        values.update({'phone': qcontext.get('phone')}) 
+        return values
