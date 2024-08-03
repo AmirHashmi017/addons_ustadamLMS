@@ -17,13 +17,14 @@ class TasklyftController(http.Controller):
             picture = base64.b64encode(picture_file.read()) if picture_file else None
 
             
-            request.env['tasklyft.service'].sudo().create({
+            request.env['tasklyft.gigrequest'].sudo().create({
                 'title': title,
                 'category': category,
                 'experience_level': experience_level,
                 'price_per_hour': price_per_hour,
                 'picture': picture,
                 'user_id': request.env.user.partner_id.id,
+                'status': 'submitted',
             })
             
 

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_gig_request_details_tree" model="ir.ui.view">
+        <field name="name">Gig Request Details Tree View</field>
+        <field name="model">tasklyft.gigrequest</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="user_id"/>
+                <field name="title"/>
+                <field name="category"/>
+                <field name="experience_level"/>
+                <field name="picture" widget="image"
+                options="{'size':[164,364]}"/>
+                <field name="price_per_hour"/>
+                <button name="action_accept_request" type="object" string="Accept" class="oe_highlight"/>
+                <button name="action_reject_request" type="object" string="Reject" class="oe_link"/>
+            </tree>
+        </field>
+    </record>
+    
+    
+        
+    
+    <record id="action_gig_request_form" model="ir.actions.act_window">
+        <field name="name">Gig Request Details</field>
+        <field name="res_model">tasklyft.gigrequest</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_gig_request_details_tree"/>
+        <field name="context">{}</field>
+        <field name="domain">[('id', '=', active_id)]</field>
+    </record>
+    
+    
+    
+    
+        <record id="task_lyft_gig_tree" model="ir.ui.view">
+        <field name="name">Gig Requests Tree View</field>
+        <field name="model">tasklyft.gigrequest</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="user_id"/>
+                <field name="title"/>
+                <field name="category"/>
+                <button name="%(action_gig_request_form)d" type="action" string="View"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="task_lyft_action_request" model="ir.actions.act_window">
+        <field name="name">Gig Requests</field>
+        <field name="res_model">tasklyft.gigrequest</field>
+        <field name="view_mode">tree</field>
+            <field name="domain">[('status', '=', 'submitted')]</field>
+        <field name="view_id" ref="task_lyft.task_lyft_gig_tree"></field>
+    </record>
+    <!-- Root menu item with application attribute -->
+    <menuitem id="task_lyft_root_menu" name="TaskLyft"/>
+
+    <!-- Child menu item -->
+    <menuitem id="task_lyft_request_menu" name="Gig Requests" parent="task_lyft_root_menu" action="task_lyft_action_request"/>
+</odoo>
