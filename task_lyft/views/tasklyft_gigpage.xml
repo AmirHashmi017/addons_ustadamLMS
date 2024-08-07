@@ -23,14 +23,19 @@
                             <div class="form-row py-3">
                                 <label for="category">Category</label>
                                 <select class="form-control" name="category" id="category" required="true">
-                                    <option value="Software Developer">Software Developer</option>
-                                    <option value="Web Developer">Web Developer</option>
-                                    <option value="Mobile App Developer">Mobile App Developer</option>
-                                    <option value="Graphic Designer">Graphic Designer</option>
-                                    <option value="UI/UX Designer">UI/UX Designer</option>
-                                    <option value="Data Analyst">Data Analyst</option>
-                                    <option value="Odoo Developer">Odoo Developer</option>
-                                    <option value="Word-Press Developer">Word-Press Developer</option>
+                                    <option value="Matric">Matric</option>
+                                    <option value="FSC(Pre Engineering)">FSC(Pre Engineering)</option>
+                                    <option value="FSC(Pre Medical)">FSC(Pre Medical)</option>
+                                    <option value="ICS">ICS</option>
+                                    <option value="ICOM">ICOM</option>
+                                    <option value="FA">FA</option>
+                                    <option value="Pyhton">Pyhton</option>
+                                    <option value="Web Development">Web Development</option>
+                                    <option value="C++">C++</option>
+                                    <option value="OOP and C#">OOP and C#</option>
+                                    <option value="ODOO Development">ODOO Development</option>
+                                    <option value="Graphic Designing">Graphic Designing</option>
+                                    <option value="Wordpress">Wordpress</option>
                                 </select>
                             </div>
                             <div class="form-row py-3">
@@ -42,12 +47,24 @@
                                 </select>
                             </div>
                             <div class="form-row py-3">
+                                <label for="Location">Location</label>
+                                <select class="form-control" name="Location" id="Location" required="true">
+                                    <option value="UET Lahore">UET Lahore</option>
+                                    <option value="Shalamar Garden">Shalamar Garden</option>
+                                    <option value="Model Town">Model Town</option>
+                                    <option value="Gulberg">Gulberg</option>
+                                    <option value="Town Ship">Town Ship</option>
+                                    <option value="Muslim Town">Muslim Town</option>
+                                    <option value="Wahdat Road">Wahdat Road</option>
+                                </select>
+                            </div>
+                            <div class="form-row py-3">
                                 <label for="picture">Gig Image</label>
                                 <input type="file" class="form-control" id="picture" name="picture" required="true"/>
                             </div>
                             <div class="form-row py-3">
-                                <label for="price_per_hour">Price Per Hour(PKR)</label>
-                                <input type="number" step="0.01" class="form-control" id="price_per_hour" name="price_per_hour" required="true"/>
+                                <label for="price_per_month">Price Per Month(PKR)</label>
+                                <input type="number" step="0.01" class="form-control" id="price_per_month" name="price_per_month" required="true"/>
                             </div>
                             <input type="submit" value="Create Gig" class="btn btn-primary"/>
                         </form>

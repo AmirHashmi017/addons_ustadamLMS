@@ -37,6 +37,14 @@
                                     </t>
                                 </select>
                             </div>
+                            <div class="col-md-2">
+                                <select name="Location" class="form-control">
+                                    <option value="">Select Location</option>
+                                    <t t-foreach="request.env['tasklyft.service']._fields['Location'].selection" t-as="loc">
+                                        <option t-att-value="loc[0]"><t t-esc="loc[1]" /></option>
+                                    </t>
+                                </select>
+                            </div>
 
                             <!-- Price Range Dropdown -->
                             <div class="col-md-2">
@@ -69,7 +77,7 @@
                                                         <li style="width: 270px; margin-bottom:10px; float: left; display: block;">
                                                             <article class="box">
                                                                 <figure> <a href="#" class="hover-effect popup-gallery"><img width="270" height="160" alt="" t-att-src="'data:image/png;base64,' + service.picture.decode('utf-8')" draggable="false"/></a> </figure>
-                                                                <div class="details"> <span class="price"><small>price per hour</small>PKR <t t-esc="service.price_per_hour" /></span>
+                                                                <div class="details"> <span class="price"><small>price per month</small>PKR <t t-esc="service.price_per_month" /></span>
                                                                     <h4 class="box-title"><span t-esc="service.title"></span><small><t t-esc="service.user_id.name" /></small></h4>
                                                                     <div class="feedback">
                                                                         <div data-placement="bottom" data-toggle="tooltip" class="fa fa-star" title="" data-original-title="4 stars"><span style="width: 80%;" class="five-stars"><t t-esc="service.category" /></span></div> 

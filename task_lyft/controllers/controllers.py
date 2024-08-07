@@ -12,7 +12,8 @@ class TasklyftController(http.Controller):
             title = kwargs.get('title')
             category = kwargs.get('category')
             experience_level = kwargs.get('experience_level')
-            price_per_hour = kwargs.get('price_per_hour')
+            Location = kwargs.get('Location')
+            price_per_month = kwargs.get('price_per_month')
             
             picture_file = kwargs.get('picture')
             
@@ -24,7 +25,8 @@ class TasklyftController(http.Controller):
                 'title': title,
                 'category': category,
                 'experience_level': experience_level,
-                'price_per_hour': price_per_hour,
+                'Location': Location,
+                'price_per_month': price_per_month,
                 'picture': picture,
                 'user_id': request.env.user.partner_id.id,
                 'status': 'submitted',
@@ -43,6 +45,7 @@ class TaskLyft(http.Controller):
         category = kwargs.get('category')
         title = kwargs.get('title')
         experience_level = kwargs.get('experience_level')
+        Location= kwargs.get('Location')
         price_range = kwargs.get('price_range')
 
         # Apply category filter
@@ -56,6 +59,9 @@ class TaskLyft(http.Controller):
         # Apply experience level filter
         if experience_level:
             domain.append(('experience_level', '=', experience_level))
+
+        if Location:
+            domain.append(('Location', '=', Location))
 
         # Apply price range filter
         if price_range:

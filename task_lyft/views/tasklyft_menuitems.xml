@@ -9,9 +9,10 @@
                 <field name="title"/>
                 <field name="category"/>
                 <field name="experience_level"/>
+                <field name="Location"/>
                 <field name="picture" widget="image"
                 options="{'size':[164,364]}"/>
-                <field name="price_per_hour"/>
+                <field name="price_per_month"/>
                 <button name="action_accept_request" type="object" string="Accept" class="oe_highlight"/>
                 <button name="action_reject_request" type="object" string="Reject" class="oe_link"/>
             </tree>
