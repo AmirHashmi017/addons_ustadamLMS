@@ -79,9 +79,10 @@
                                                                 <figure> <a href="#" class="hover-effect popup-gallery"><img width="270" height="160" alt="" t-att-src="'data:image/png;base64,' + service.picture.decode('utf-8')" draggable="false"/></a> </figure>
                                                                 <div class="details"> <span class="price"><small>price per month</small>PKR <t t-esc="service.price_per_month" /></span>
                                                                     <h4 class="box-title"><span t-esc="service.title"></span><small><t t-esc="service.user_id.name" /></small></h4>
-                                                                    <div class="feedback">
-                                                                        <div data-placement="bottom" data-toggle="tooltip" class="fa fa-star" title="" data-original-title="4 stars"><span style="width: 80%;" class="five-stars"><t t-esc="service.category" /></span></div> 
-                                                                        
+                                                                    <div class="feedback" style="display:flex; flex-direction:row; justify-content:space-between;">
+                                                                        <div data-placement="bottom" data-toggle="tooltip" class="fa fa-star " title="" data-original-title="4 stars"><span style="width: 80%;" class="five-stars"><t t-esc="service.category" /></span></div> 
+                                                                      
+                                                                        <div data-placement="bottom" data-toggle="tooltip" class="fa fa-map-marker"  title="" data-original-title="Location"><span style="width: 80%;" class="five-stars px-1"><t t-esc="service.Location" /></span></div> 
                                                                     </div>     
                                                                         <div class="my-2">
                                                                             <span class="review">

@@ -10,8 +10,8 @@
                     <div class="container">
                         <div class="row gy-4">
                             <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center zoom-out" data-animation="zoom-out">
-                                <h1>TaskLyft: Freelancers at Your Fingertips</h1>
-                                <p>Find and hire top freelancers quickly and effortlessly</p>
+                                <h1>TaskLyft: Educators at Your Fingertips</h1>
+                                <p>Discover and connect with top educators quickly and effortlessly.</p>
                                 <t t-if="not request.session.uid">
                                     <div class="d-flex">
                                         <a href="/web/login" class="btn-get-started">Get Started</a>
@@ -37,16 +37,16 @@
                         <div class="row gy-4 color">
                             <div class="col-lg-6 content fade-up " data-animation="fade-up" data-animation-delay="100">
                                 <p>
-                                    We revolutionize freelancing by linking top talent with game-changing opportunities, creating a platform that fosters impactful collaborations and drives career advancement.
+                                    We revolutionize education by connecting top educators with transformative opportunities, creating a platform that fosters impactful learning experiences and drives educational advancement.
                                 </p>
                                 <ul>
-                                    <li><i class="bi bi-check2-circle"></i> <span>1- Match with top-tier freelancers who align with your specific project needs and goals.</span></li>
-                                    <li><i class="bi bi-check2-circle"></i> <span>2- Enjoy a seamless experience with our user-friendly tools designed for effortless collaboration.</span></li>
-                                    <li><i class="bi bi-check2-circle"></i> <span>3- Access resources and support that drive career development and project success.</span></li>
+                                    <li><i class="bi bi-check2-circle"></i> <span>1- Connect with top-tier educators who align with your specific learning needs and goals.</span></li>
+                                    <li><i class="bi bi-check2-circle"></i> <span>2- Enjoy a seamless experience with our user-friendly tools designed for effortless teaching and learning.</span></li>
+                                    <li><i class="bi bi-check2-circle"></i> <span>3- Access resources and support that drive educational growth and success.</span></li>
                                 </ul>
                             </div>
                             <div class="col-lg-6 fade-up " data-animation="fade-up" data-animation-delay="200">
-                                <p>At Tasklyft, we're more than just a freelancing platform—we're a community dedicated to connecting talented freelancers with the opportunities that help them thrive. Founded with the mission to empower both freelancers and clients, Tasklyft provides a dynamic marketplace where expertise meets opportunity. </p>
+                                <p>At TaskLyft, we're more than just an educational platform—we're a community dedicated to connecting passionate educators with opportunities that help them thrive. Founded with the mission to empower both educators and learners, TaskLyft provides a dynamic marketplace where knowledge meets opportunity. </p>
                                 <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
                             </div>
                         </div>
@@ -62,28 +62,28 @@
                                     <h3><span>Streamline Your Experience On</span>
                                         <strong> Task Lyft</strong></h3>
                                     <p>
-                                        Effortlessly manage your project from start to finish with clear steps and expert talent.
+                                        Effortlessly manage your learning journey from start to finish with clear steps and expert educators.
                                     </p>
                                 </div>
                                 <div class="faq-container px-xl-5  fade-up" data-animation="fade-up" data-animation-delay="200">
                                     <div class="faq-item faq-active">
-                                        <h3><span>01</span> Define Your Needs</h3>
+                                        <h3><span>01</span> Define Your Learning Goals</h3>
                                         <div class="faq-content">
-                                            <p>Clearly outline your project requirements and objectives. This helps in finding the right freelancer who can deliver precisely what you're looking for.</p>
+                                            <p>Clearly outline your learning objectives and requirements. This helps in finding the right educator who can deliver the knowledge and guidance you’re seeking.</p>
                                         </div>
                                         <i class="faq-toggle bi bi-chevron-right"></i>
                                     </div><!-- End Faq item-->
                                     <div class="faq-item  faq-active">
                                         <h3><span>02</span> Choose the Right Talent</h3>
                                         <div class="faq-content">
-                                            <p>Browse through profiles and portfolios to select a freelancer whose skills and experience align with your project needs. Ensure they have a track record of delivering high-quality results.</p>
+                                            <p>Browse through profiles and portfolios to select an educator whose expertise and teaching style align with your learning needs. Ensure they have a proven track record of delivering effective instruction.</p>
                                         </div>
                                         <i class="faq-toggle bi bi-chevron-right"></i>
                                     </div><!-- End Faq item-->
                                     <div class="faq-item  faq-active">
                                         <h3><span>03</span>Collaborate and Review</h3>
                                         <div class="faq-content ">
-                                            <p>Communicate effectively with your freelancer to ensure your vision is understood. Regularly review progress and provide feedback to ensure the final deliverable meets your expectations.</p>
+                                            <p>Communicate effectively with your educator to ensure your learning goals are understood. Regularly review your progress and provide feedback to ensure the educational experience meets your expectations.</p>
                                         </div>
                                         <i class="faq-toggle bi bi-chevron-right"></i>
                                     </div><!-- End Faq item-->

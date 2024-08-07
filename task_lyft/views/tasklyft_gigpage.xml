@@ -66,7 +66,7 @@
                                 <label for="price_per_month">Price Per Month(PKR)</label>
                                 <input type="number" step="0.01" class="form-control" id="price_per_month" name="price_per_month" required="true"/>
                             </div>
-                            <input type="submit" value="Create Gig" class="btn btn-primary"/>
+                            <input type="submit" value="Create Service" class="btn btn-primary"/>
                         </form>
                     </div>
                 </t>
