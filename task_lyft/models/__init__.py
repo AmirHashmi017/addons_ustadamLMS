@@ -4,4 +4,4 @@ from . import models
 from . import tasklyft_user
 from . import tasklyft_service
 from . import tasklyft_order_history
-from . import tasklyft_gigrequest
+from . import tasklyft_service_request

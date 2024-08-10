@@ -3,7 +3,7 @@
     <template id="tasklyft_footer" inherit_id="website.layout">
         <xpath expr="//div[@id='footer']" position="replace">
             <div id="footer" class="o_footer">
-                <!-- Your custom footer HTML goes here -->
+                
                 <div class="container" style="margin-top: 20px;">
                     <div class="row">
                         <div class="col-md-4">

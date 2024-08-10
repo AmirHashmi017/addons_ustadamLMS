@@ -1,8 +1,8 @@
 from odoo import fields, models
 
-class tasklyft_gigrequest(models.Model):
-    _name = 'tasklyft.gigrequest'
-    _description = 'TaskLyft Gig Request'
+class tasklyft_service_request(models.Model):
+    _name = 'tasklyft.service_request'
+    _description = 'TaskLyft Service Request'
 
     title = fields.Char(string='Title', required=True)
     category = fields.Selection([
