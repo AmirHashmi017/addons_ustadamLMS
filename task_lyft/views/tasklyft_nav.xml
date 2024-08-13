@@ -26,4 +26,17 @@
         <field name="sequence" type="int">60</field>
     </record>
 
+
+
+    <template id="disable_search_in_nav" inherit_id="website.layout">
+        <xpath expr="//ul[contains(@class, 'navbar-nav')]//t[@t-call='website.placeholder_header_search_box']" position="replace">
+        </xpath>
+    </template>
+
+
+    <template id="disable_phone_in_nav" inherit_id="website.layout">
+        <xpath expr="//ul[contains(@class, 'navbar-nav')]//t[@t-call='website.placeholder_header_text_element']" position="replace">
+        </xpath>
+    </template> 
+
 </odoo>

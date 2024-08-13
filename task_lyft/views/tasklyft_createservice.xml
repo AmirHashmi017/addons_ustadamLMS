@@ -12,7 +12,8 @@
                 <t t-call="website.layout">
                     <t t-if="request.session.uid">
                         <div class="container">
-                            <form action="/create_service" method="post" enctype="multipart/form-data">
+                            <link rel="stylesheet" type="text/css" href="/task_lyft/static/src/css/create_service.css"/>
+                            <form action="/create_service" id="create_service_form" method="post" enctype="multipart/form-data">
                                 <t t-set="csrf_token" t-value="request.csrf_token()"/>
                                 <input type="hidden" name="csrf_token" t-att-value="csrf_token"/>
                                 
@@ -55,142 +56,164 @@
                                 <!-- Location Selection with Search -->
 
                             <div class="form-row py-3">
-    <label for="locationSearch">Search Location</label>
-    <div class="dropdown">
-        <button type="button" onclick="toggleDropdown()" class="dropbtn">Select Location</button>
-        <div id="myDropdown" class="dropdown-content">
-            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()"/>
-            <a href="#" data-value="Allama Iqbal Town">Allama Iqbal Town</a>
-            <a href="#" data-value="Anarkali">Anarkali</a>
-            <a href="#" data-value="Bharia Town">Bharia Town</a>
-            <a href="#" data-value="Bund Road">Bund Road</a>
-            <a href="#" data-value="Cantt Lahore">Cantt Lahore</a>
-            <a href="#" data-value="Davis Road">Davis Road</a>
-            <a href="#" data-value="DHA Phase-1">DHA Phase-1</a>
-            <a href="#" data-value="DHA Phase-2">DHA Phase-2</a>
-            <a href="#" data-value="DHA Phase-3">DHA Phase-3</a>
-            <a href="#" data-value="DHA Phase-4">DHA Phase-4</a>
-            <a href="#" data-value="DHA Phase-5">DHA Phase-5</a>
-            <a href="#" data-value="DHA Phase-6">DHA Phase-6</a>
-            <a href="#" data-value="DHA Phase-7">DHA Phase-7</a>
-            <a href="#" data-value="DHA Phase-8">DHA Phase-8</a>
-            <a href="#" data-value="DHA Phase-">DHA Phase-9</a>
-            <a href="#" data-value="Etihad Town">Etihad Town</a>
-            <a href="#" data-value="Faisal Town">Faisal Town</a>
-            <a href="#" data-value="Fateh Garh">Fateh Garh</a>
-            <a href="#" data-value="Ferozpur Road">Ferozpur Road</a>
-            <a href="#" data-value="Gulberg">Gulberg</a>
-            <a href="#" data-value="Gardern Town">Gardern Town</a>
-            <a href="#" data-value="Ghaziabad">Ghaziabad</a>
-            <a href="#" data-value="Harbanspura">Harbanspura</a>
-            <a href="#" data-value="Iqbal Town">Iqbal Town</a>
-            <a href="#" data-value="Johar Town">Johar Town</a>
-            <a href="#" data-value="Jail Road">Jail Road</a>
-            <a href="#" data-value="Khan Colony">Khan Colony</a>
-            <a href="#" data-value="Lal Pul">Lal Pul</a>
-            <a href="#" data-value="Lawrence Road">Lawrence Road</a>
-            <a href="#" data-value="Model Town">Model Town</a>
-            <a href="#" data-value="Muslim Town">Muslim Town</a>
-            <a href="#" data-value="Mall Road">Mall Road</a>
-            <a href="#" data-value="Mughalpura">Mughalpura</a>
-            <a href="#" data-value="NFC Society">NFC Society</a>
-            <a href="#" data-value="Nishat Colony">Nishat Colony</a>
-            <a href="#" data-value="Outfall Road">Outfall Road</a>
-            <a href="#" data-value="Peer Colony">Peer Colony</a>
-            <a href="#" data-value="Qaddafi Stadium">Qaddafi Stadium</a>
-            <a href="#" data-value="Ramgarh">Ramgarh</a>
-            <a href="#" data-value="Rajput Town">Rajput Town</a>
-            <a href="#" data-value="Revenue Society">Revenue Society</a>
-            <a href="#" data-value="Shalamar Garden">Shalamar Garden</a>
-            <a href="#" data-value="Town Ship">Town Ship</a>
-            <a href="#" data-value="UET Lahore">UET Lahore</a>
-            <a href="#" data-value="Valencia">Valencia</a>
-            <a href="#" data-value="Wahdat Road">Wahdat Road</a>
-            <a href="#" data-value="Wapda House">Wapda House</a>
-            <a href="#" data-value="Yasrab Colony">Yasrab Colony</a>
-            <a href="#" data-value="Zaman Park">Zaman Park</a>
-        </div>
-        <!-- Hidden input to store selected location -->
-    </div>
-    <input type="hidden" name="Location" id="Location"/>  <!-- Hidden input to store selected location -->
-    <div id="selected_location_display">Selected Location: None</div>
-</div>
-
-
-
-                                
-                                <!-- Service Image Input -->
-                                <div class="form-row py-3">
-                                    <label for="picture">Service Image</label>
-                                    <input type="file" class="form-control" id="picture" name="picture" required="true"/>
+                                <label for="locationSearch">Search Location</label>
+                                <div class="dropdown">
+                                    <button type="button" onclick="toggleDropdown()" class="dropbtn">Select Location</button>
+                                    <div id="myDropdown" class="dropdown-content">
+                                        <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()"/>
+                                        <a href="#" data-value="Allama Iqbal Town">Allama Iqbal Town</a>
+                                        <a href="#" data-value="Anarkali">Anarkali</a>
+                                        <a href="#" data-value="Bharia Town">Bharia Town</a>
+                                        <a href="#" data-value="Bund Road">Bund Road</a>
+                                        <a href="#" data-value="Cantt Lahore">Cantt Lahore</a>
+                                        <a href="#" data-value="Davis Road">Davis Road</a>
+                                        <a href="#" data-value="DHA Phase-1">DHA Phase-1</a>
+                                        <a href="#" data-value="DHA Phase-2">DHA Phase-2</a>
+                                        <a href="#" data-value="DHA Phase-3">DHA Phase-3</a>
+                                        <a href="#" data-value="DHA Phase-4">DHA Phase-4</a>
+                                        <a href="#" data-value="DHA Phase-5">DHA Phase-5</a>
+                                        <a href="#" data-value="DHA Phase-6">DHA Phase-6</a>
+                                        <a href="#" data-value="DHA Phase-7">DHA Phase-7</a>
+                                        <a href="#" data-value="DHA Phase-8">DHA Phase-8</a>
+                                        <a href="#" data-value="DHA Phase-">DHA Phase-9</a>
+                                        <a href="#" data-value="Etihad Town">Etihad Town</a>
+                                        <a href="#" data-value="Faisal Town">Faisal Town</a>
+                                        <a href="#" data-value="Fateh Garh">Fateh Garh</a>
+                                        <a href="#" data-value="Ferozpur Road">Ferozpur Road</a>
+                                        <a href="#" data-value="Gulberg">Gulberg</a>
+                                        <a href="#" data-value="Gardern Town">Gardern Town</a>
+                                        <a href="#" data-value="Ghaziabad">Ghaziabad</a>
+                                        <a href="#" data-value="Harbanspura">Harbanspura</a>
+                                        <a href="#" data-value="Iqbal Town">Iqbal Town</a>
+                                        <a href="#" data-value="Johar Town">Johar Town</a>
+                                        <a href="#" data-value="Jail Road">Jail Road</a>
+                                        <a href="#" data-value="Khan Colony">Khan Colony</a>
+                                        <a href="#" data-value="Lal Pul">Lal Pul</a>
+                                        <a href="#" data-value="Lawrence Road">Lawrence Road</a>
+                                        <a href="#" data-value="Model Town">Model Town</a>
+                                        <a href="#" data-value="Muslim Town">Muslim Town</a>
+                                        <a href="#" data-value="Mall Road">Mall Road</a>
+                                        <a href="#" data-value="Mughalpura">Mughalpura</a>
+                                        <a href="#" data-value="NFC Society">NFC Society</a>
+                                        <a href="#" data-value="Nishat Colony">Nishat Colony</a>
+                                        <a href="#" data-value="Outfall Road">Outfall Road</a>
+                                        <a href="#" data-value="Peer Colony">Peer Colony</a>
+                                        <a href="#" data-value="Qaddafi Stadium">Qaddafi Stadium</a>
+                                        <a href="#" data-value="Ramgarh">Ramgarh</a>
+                                        <a href="#" data-value="Rajput Town">Rajput Town</a>
+                                        <a href="#" data-value="Revenue Society">Revenue Society</a>
+                                        <a href="#" data-value="Shalamar Garden">Shalamar Garden</a>
+                                        <a href="#" data-value="Town Ship">Town Ship</a>
+                                        <a href="#" data-value="UET Lahore">UET Lahore</a>
+                                        <a href="#" data-value="Valencia">Valencia</a>
+                                        <a href="#" data-value="Wahdat Road">Wahdat Road</a>
+                                        <a href="#" data-value="Wapda House">Wapda House</a>
+                                        <a href="#" data-value="Yasrab Colony">Yasrab Colony</a>
+                                        <a href="#" data-value="Zaman Park">Zaman Park</a>
+                                    </div>
+                                    <!-- Hidden input to store selected location -->
                                 </div>
+                                <input type="hidden" name="Location" id="Location"/>  <!-- Hidden input to store selected location -->
+                                <div id="selected_location_display">Selected Location: None</div>
+                            </div>
                                 
-                                <!-- Price Input -->
-                                <div class="form-row py-3">
-                                    <label for="price_per_month">Price Per Month(PKR)</label>
-                                    <input type="number" step="0.01" class="form-control" id="price_per_month" name="price_per_month" required="true"/>
-                                </div>
+                            <!-- Button to View Locations on Map -->
+                            <button type="button" id="viewMapBtn" onclick="toggleMap()">View Locations on Map</button>
+
+                            <!-- Iframe for Google Maps, initially hidden -->
+                            <div id="mapContainer" style="display:none; margin-top: 20px;">
+                                <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1EY4_MYSAhhRJNEEUTZUuWnEBP7xiDtc&amp;ehbc=2E312F" width="640" height="480"></iframe>
+                                <button type="button" onclick="toggleMap()">Close Map</button>
+                            </div>
+    
+                            <!-- Service Image Input -->
+                            <div class="form-row py-3">
+                                <label for="picture">Service Image</label>
+                                <input type="file" class="form-control" id="picture" name="picture" required="true"/>
+                            </div>
                                 
-                                <!-- Submit Button -->
-                                <input type="submit" value="Create Service" class="btn btn-primary"/>
+                            <!-- Price Input -->
+                            <div class="form-row py-3">
+                                <label for="price_per_month">Price Per Month(PKR)</label>
+                                <input type="number" step="0.01" class="form-control" id="price_per_month" name="price_per_month" required="true"/>
+                            </div>
+                                
+                            <!-- Submit Button -->
+                            <input type="submit" value="Create Service" class="btn btn-primary"/>
                             </form>
                         </div>
                         
-                         <!-- JavaScript for Search Filter Dropdown -->
+                        <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="min-height: 200px; margin-top:100px;">
+                            <div class="toast" id="service-toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000" style="position: absolute; top: 50px; right: 20px;">
+                                <div class="toast-header">
+                                    <div id="progress-bar" class="progress-bar"></div>
+                                </div>
+                                <div class="toast-body">
+                                    Service requested! Redirecting...
+                                </div>
+                            </div>
+                        </div>
+
+                         <!-- JavaScript for Search Filter Dropdown and map -->
                         <script type="text/javascript" src="/task_lyft/static/src/js/search.js"></script>
-
-                        <style>
-                            .dropbtn {
-                                background-color: #04AA6D;
-                                color: white;
-                                padding: 16px;
-                                font-size: 16px;
-                                border: none;
-                                cursor: pointer;
-                            }
-
-                            .dropbtn:hover, .dropbtn:focus {
-                                background-color: #3e8e41;
-                            }
-
-                            #myInput {
-                                box-sizing: border-box;
-                                background-position: 14px 12px;
-                                background-repeat: no-repeat;
-                                font-size: 16px;
-                                padding: 14px 20px 12px 45px;
-                                border: none;
-                                border-bottom: 1px solid #ddd;
-                            }
-
-                            #myInput:focus {outline: 3px solid #ddd;}
-
-                            .dropdown {
-                                position: relative;
-                                display: inline-block;
-                            }
-
-                            .dropdown-content {
-                                display: none;
-                                position: absolute;
-                                background-color: #f6f6f6;
-                                min-width: 230px;
-                                border: 1px solid #ddd;
-                                z-index: 1;
-                            }
-
-                            .dropdown-content a {
-                                color: black;
-                                padding: 12px 16px;
-                                text-decoration: none;
-                                display: block;
-                            }
-
-                            .dropdown-content a:hover {background-color: #f1f1f1}
-
-                            .show {display:block;}
-                        </style>
-
+                        <script type="text/javascript">
+                            document.getElementById('create_service_form').addEventListener('submit', function(event) {
+                                event.preventDefault(); // Prevent the form from submitting immediately
+                                
+                                var form = this;
+                                var progressBar = document.getElementById('progress-bar');
+                                var width = 100;
+                                var interval = 50; // Update every 50ms
+                                var duration = 5000; // Total duration of 5 seconds
+                                var step = interval / duration * 100;
+                        
+                                $('#service-toast').toast('show'); // Show the toast notification immediately
+                        
+                                // Start the progress bar animation
+                                var timer = setInterval(function() {
+                                    width -= step;
+                                    if (width == 0) {
+                                        width = 0;
+                                        clearInterval(timer);
+                                    }
+                                    progressBar.style.width = width + '%';
+                                }, interval);
+                        
+                                // Collect form data
+                                var formData = new FormData(form);
+                        
+                                // Use Fetch API to submit the form
+                                fetch('/create_service', {
+                                    method: 'POST',
+                                    body: formData,
+                                    headers: {
+                                        'X-Requested-With': 'XMLHttpRequest'
+                                    }
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        progressBar.classList.add('success');
+                                        // Show success message
+                                        $('#service-toast').find('.toast-body').text(data.success);
+                                        $('#service-toast').toast('show');
+                                        setTimeout(() => {
+                                            window.location.href = '/services'; // Redirect after showing the message
+                                        }, 5000); // Redirect after 2 seconds
+                                    } else if (data.error) {
+                                        progressBar.classList.add('error');
+                                        // Show error message
+                                        $('#service-toast').find('.toast-body').text(data.error);
+                                        $('#service-toast').toast('show');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    $('#service-toast').find('.toast-body').text('An unexpected error occurred.');
+                                    $('#service-toast').toast('show');
+                                });
+                            });
+                        </script>
                     </t>
                     <t t-else="">
                         <script>

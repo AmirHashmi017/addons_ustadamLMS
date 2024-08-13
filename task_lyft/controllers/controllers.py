@@ -16,7 +16,7 @@ class TasklyftController(http.Controller):
         if service_count >= 3:
             # If the user has reached the limit, return JSON with an error message
             return request.make_response(
-                json.dumps({'error': 'You have reached the limit of 3 services. You cannot create more.'}),
+                json.dumps({'error': 'Service limit reached. Max 3 allowed.'}),
                 headers={'Content-Type': 'application/json'}
             )
 
@@ -41,7 +41,10 @@ class TasklyftController(http.Controller):
                 'user_id': user_id,
                 'status':'submitted'
             })
-            
+            return request.make_response(
+                    json.dumps({'success': 'Service Requested successfully!'}),
+                    headers={'Content-Type': 'application/json'}
+                )
         # Render the service creation page after service is created
         return request.redirect('services')
 
