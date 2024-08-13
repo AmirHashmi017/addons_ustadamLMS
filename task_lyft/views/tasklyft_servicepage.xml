@@ -10,60 +10,21 @@
             <t name="Services" t-name="services_page">
                 <t t-call="website.layout">
                     <div class="container">
-                        <link rel="stylesheet" type="text/css" href="/task_lyft/static/src/css/services.css"/>
-                        <!-- Search Form -->
-                        <form action="/services" method="GET" class="row mb-5 mt-5">
-                            <!-- Category Combo Box -->
-                            <div class="col-md-2">
-                                <select name="category" class="form-control">
-                                    <option value="">Select Category</option>
-                                    <t t-foreach="request.env['tasklyft.service']._fields['category'].selection" t-as="cat">
-                                        <option t-att-value="cat[0]"><t t-esc="cat[1]" /></option>
-                                    </t>
-                                </select>
-                            </div>
+                        <link rel="stylesheet" type="text/css"
+                            href="/task_lyft/static/src/css/services.css" />
 
-                            <!-- Title Text Input -->
-                            <div class="col-md-2">
-                                <input type="text" name="title" class="form-control" placeholder="Search by title..." />
-                            </div>
+                        <!-- jQuery inclusion -->
+                        <script type="text/javascript"
+                            src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script
+                            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-                            <!-- Experience Level Combo Box -->
-                            <div class="col-md-2">
-                                <select name="experience_level" class="form-control">
-                                    <option value="">Select Experience Level</option>
-                                    <t t-foreach="request.env['tasklyft.service']._fields['experience_level'].selection" t-as="exp">
-                                        <option t-att-value="exp[0]"><t t-esc="exp[1]" /></option>
-                                    </t>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <select name="Location" class="form-control">
-                                    <option value="">Select Location</option>
-                                    <t t-foreach="request.env['tasklyft.service']._fields['Location'].selection" t-as="loc">
-                                        <option t-att-value="loc[0]"><t t-esc="loc[1]" /></option>
-                                    </t>
-                                </select>
-                            </div>
 
-                            <!-- Price Range Dropdown -->
-                            <div class="col-md-2">
-                                <select name="price_range" class="form-control">
-                                    <option value="">Select Price Range</option>
-                                    <option value="0-1000">0 - 1000 PKR</option>
-                                    <option value="1000-5000">1000 - 5000 PKR</option>
-                                    <option value="5000-10000">5000 - 10,000 PKR</option>
-                                    <option value="10000-">10,000+ PKR</option>
-                                </select>
-                            </div>
+                        <!-- Your existing code -->
+                        <!-- ... -->
 
-                            <!-- Search Button -->
-                            <div class="col-md-2">
-                                <button type="submit" class="btn btn-primary">Search</button>
-                            </div>
-                        </form>
-                        
-                        <!-- Services Grid -->
+                        <!-- Services Grid and Modal -->
                         <div class="row d-flex align-items-stretch">
                             <h1 class="text-center" style="margin-bottom:15px;">Services</h1>
                             <t t-if="services">
@@ -73,35 +34,85 @@
                                             <div class="container">
                                                 <div class="style2">
                                                     <div class="" style="position: relative;">
-                                                        <ul class="image-box hotel listing-style1" style="transition-duration: 0.6s;">
-                                                            <li style="width: 270px; margin-bottom:10px; float: left; display: block;">
+                                                        <ul class="image-box hotel listing-style1"
+                                                            style="transition-duration: 0.6s;">
+                                                            <li
+                                                                style="width: 270px; margin-bottom:10px; float: left; display: block;">
                                                                 <article class="box">
                                                                     <figure>
-                                                                        <a href="#" class="hover-effect popup-gallery">
-                                                                            <img width="270" height="160" alt="" t-att-src="'data:image/png;base64,' + service.picture.decode('utf-8')" draggable="false"/>
+                                                                        <a href="#"
+                                                                            class="hover-effect popup-gallery">
+                                                                            <img width="270"
+                                                                                height="160" alt=""
+                                                                                t-att-src="'data:image/png;base64,' + service.picture.decode('utf-8')"
+                                                                                draggable="false" />
                                                                         </a>
                                                                     </figure>
                                                                     <div class="details">
                                                                         <span class="price">
-                                                                            <small>price per month</small>PKR <t t-esc="service.price_per_month" />
+                                                                            <small>price per month</small>
+                                                                            PKR <t
+                                                                                t-esc="service.price_per_month" />
                                                                         </span>
                                                                         <h4 class="box-title">
-                                                                            <span t-esc="service.title"></span><small><t t-esc="service.user_id.name" /></small>
+                                                                            <span
+                                                                                t-esc="service.title"></span>
+                                                                            <small>
+                                                                                <t
+                                                                                    t-esc="service.user_id.name" />
+                                                                            </small>
                                                                         </h4>
-                                                                        <div class="feedback" style="display:flex; flex-direction:row; justify-content:space-between;">
-                                                                            <div data-placement="bottom" data-toggle="tooltip" class="fa fa-star" title="" data-original-title="4 stars">
-                                                                                <span style="width: 80%;" class="five-stars"><t t-esc="service.category" /></span>
+                                                                        <div class="feedback"
+                                                                            style="display:flex; flex-direction:row; justify-content:space-between;">
+                                                                            <div
+                                                                                data-placement="bottom"
+                                                                                data-toggle="tooltip"
+                                                                                class="fa fa-star"
+                                                                                title=""
+                                                                                data-original-title="4 stars">
+                                                                                <span
+                                                                                    style="width: 80%;"
+                                                                                    class="five-stars">
+                                                                                    <t
+                                                                                        t-esc="service.category" />
+                                                                                </span>
                                                                             </div>
-                                                                            <div data-placement="bottom" data-toggle="tooltip" class="fa fa-map-marker" title="" data-original-title="Location">
-                                                                                <span style="width: 80%;" class="five-stars px-1"><t t-esc="service.Location" /></span>
+                                                                            <div
+                                                                                data-placement="bottom"
+                                                                                data-toggle="tooltip"
+                                                                                class="fa fa-map-marker"
+                                                                                title=""
+                                                                                data-original-title="Location">
+                                                                                <span
+                                                                                    style="width: 80%;"
+                                                                                    class="five-stars px-1">
+                                                                                    <t
+                                                                                        t-esc="service.Location" />
+                                                                                </span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="my-2">
-                                                                            <span class="review">Experience: <t t-esc="service.experience_level" /></span>
+                                                                            <span class="review">
+                                                                                Experience: <t
+                                                                                    t-esc="service.experience_level" /></span>
                                                                         </div>
                                                                         <div class="action">
-                                                                            <a class="button btn-small" href="#">CONTACT</a>
-                                                                            <a class="button btn-small yellow popup-map" href="#" data-box="37.089072, -8.247880">VIEW INFO</a>
+                                                                            <a href="#"
+                                                                                class="btn btn-secondary"
+                                                                                style="border-radius:0px;height:29px;font-size:14px;"
+                                                                                data-toggle="modal"
+                                                                                data-target="#contactModal"
+                                                                                t-att-data-name="service.user_id.name"
+                                                                                t-att-data-email="service.user_id.email"
+                                                                                t-att-data-phone="service.user_id.phone"
+                                                                                >
+                                                                                CONTACT
+                                                                            </a>
+                                                                            <a
+                                                                                class="button btn-small yellow popup-map"
+                                                                                href="#"
+                                                                                data-box="37.089072, -8.247880">VIEW
+                                                                                INFO</a>
                                                                         </div>
                                                                     </div>
                                                                 </article>
@@ -118,6 +129,59 @@
                                 <h1 class="text-center">No services available</h1>
                             </t>
                         </div>
+
+                        <!-- Contact Modal -->
+                        <div class="modal fade" id="contactModal" tabindex="-1" role="dialog"
+                            aria-labelledby="contactModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="contactModalLabel"><strong>Contact
+                                            Service Provider</strong></h5>
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close">
+                                            <span aria-hidden="true">x</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>
+                                            <strong>Name:</strong>
+                                            <span id="modalName">John Doe</span>
+                                        </p>
+                                        <p>
+                                            <strong>Email:</strong>
+                                            <span id="modalEmail">john.doe@example.com</span>
+                                        </p>
+                                        <p>
+                                            <strong>Phone:</strong>
+                                            <span id="modalPhone">123-456-7890</span>
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- JavaScript to handle modal data population -->
+                        <script type="text/javascript">
+                            $(document).ready(function() {
+                            $('.btn-secondary').on('click', function() {
+                            var name = $(this).data('name') || 'No name';
+                            var email = $(this).data('email') || 'No email';
+                            var phone = $(this).data('phone') || 'No phone';
+
+                            // Update modal content
+                            $('#modalName').text(name);
+                            $('#modalEmail').text(email);
+                            $('#modalPhone').text(phone);
+
+                            // Show the modal
+                            $('#contactModal').modal('show');
+                            });
+                            });
+                        </script>
                     </div>
                 </t>
             </t>
