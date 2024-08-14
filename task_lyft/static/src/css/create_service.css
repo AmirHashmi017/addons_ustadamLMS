@@ -6,7 +6,14 @@
     border: none;
     cursor: pointer;
 }
+body{
+    background: #47b2e4;
+    
+    background: -webkit-linear-gradient(to bottom right, #4668a2, rgba(135, 206, 250, 1));
 
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to bottom right,#4668a2, rgba(135, 206, 250, 1));
+}
 .dropbtn:hover, .dropbtn:focus {
     background-color: #3e8e41;
 }
@@ -62,3 +69,89 @@
 #progress-bar.error {
     background-color: red; 
 }
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #47b2e4;
+    
+    background: -webkit-linear-gradient(to bottom right, #4668a2, rgba(135, 206, 250, 1));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to bottom right,#4668a2, rgba(135, 206, 250, 1));
+    }
+    
+    .card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+    }
+    .card-registration .select-arrow {
+    top: 13px;
+    }
+    .form-outline {
+        position: relative;
+        margin-bottom: 20px;
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+    }
+    
+    .form-label {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+        background-color: white;
+        padding: 0 5px;
+        transition: 0.2s ease-in-out;
+        color: #999;
+    }
+    
+    .form-control:focus + .form-label,
+    .form-control:not(:placeholder-shown) + .form-label {
+        top: 0;
+        left: 10px;
+        font-size: 12px;
+        color: #333;
+    }
+    .dropdown-label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+    }
+    .form-control-lg {
+        height: calc(2.5rem + 2px); /* Adjust height as needed */
+    }
+    .button {
+        background-color: #47b2e4; /* Custom background color */
+        color: white; /* Text color */
+        border: 2px solid #47b2e4; /* Border color matching the background */
+        border-radius: 0.375rem; /* Optional: rounded corners */
+        transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+    }
+    
+    .button:hover {
+        background-color: #5cb3f0; /* Lighter shade of blue for hover background */
+        border-color: #5cb3f0; /* Lighter shade of blue for hover border */
+        box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3); /* Light blue shadow effect */
+    }
+    
+    .button:focus {
+        background-color: #3391d0; /* Same blue for focus state */
+        border-color: #3391d0; /* Same blue for border on focus */
+        box-shadow: 0 0 0 0.2rem rgba(51, 145, 208, 0.5); /* Add a blue shadow effect on focus */
+        outline: none; /* Remove default outline */
+    }
+    .modal-lg {
+        max-width: 90%;
+    }
+    .modal {
+        z-index: 9999999999999999999999999999999991050; /* Ensure the modal is on top */
+    }
+    .modal-backdrop{
+        display:none;
+    }
+    

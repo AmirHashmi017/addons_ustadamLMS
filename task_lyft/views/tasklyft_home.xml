@@ -47,7 +47,7 @@
                             </div>
                             <div class="col-lg-6 fade-up " data-animation="fade-up" data-animation-delay="200">
                                 <p>At TaskLyft, we're more than just an educational platform—we're a community dedicated to connecting passionate educators with opportunities that help them thrive. Founded with the mission to empower both educators and learners, TaskLyft provides a dynamic marketplace where knowledge meets opportunity. </p>
-                                <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+                                <a href="/Services" class="read-more"><span>View Services</span><i class="bi bi-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>

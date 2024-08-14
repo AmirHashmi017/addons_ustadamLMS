@@ -11,20 +11,299 @@
             <t name="CreateService" t-name="createservice_page">
                 <t t-call="website.layout">
                     <t t-if="request.session.uid">
-                        <div class="container">
-                            <link rel="stylesheet" type="text/css" href="/task_lyft/static/src/css/create_service.css"/>
-                            <form action="/create_service" id="create_service_form" method="post" enctype="multipart/form-data">
+                        <div class="container mt-5">
+                            <div class="row justify-content-center align-items-center h-100">
+                                <div class="col-12 col-lg-9 col-xl-7">
+                                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                                    <div class="card-body p-4 p-md-5">
+                                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Create Service</h3>
+                                        <form action="/create_service" id="create_service_form" method="post" enctype="multipart/form-data">
+                                <link rel="stylesheet" type="text/css" href="/task_lyft/static/src/css/create_service.css"/>
+                      
                                 <t t-set="csrf_token" t-value="request.csrf_token()"/>
                                 <input type="hidden" name="csrf_token" t-att-value="csrf_token"/>
                                 
+
+
+                          
+                                        <div class="row">
+                                          <div class="col-md-12 mb-4">
+                          
+                                            <div  class="form-outline">
+                                              <input type="text" name="title" id="title" class="form-control form-control-lg" required="true"/>
+                                              <label class="form-label" for="title">Title</label>
+                                            </div>
+                          
+                                          </div>                      
+                                        
+
+                                        </div>
+                                        <div class="row">             
+                                                   
+                                              <div class="form-row col-md-6 mb-4">
+                                                  <div class="form-floating">
+                                                      <select class="form-control" name="category" id="category" required="true">
+                                                          <option value="" disabled="true" selected="true"></option> <!-- Empty option for placeholder effect -->
+                                                          <option value="Matric">Matric</option>
+                                                          <option value="FSC(Pre Engineering)">FSC(Pre Engineering)</option>
+                                                          <option value="FSC(Pre Medical)">FSC(Pre Medical)</option>
+                                                          <option value="ICS">ICS</option>
+                                                          <option value="ICOM">ICOM</option>
+                                                          <option value="FA">FA</option>
+                                                          <option value="Python">Python</option>
+                                                          <option value="Web Development">Web Development</option>
+                                                          <option value="C++">C++</option>
+                                                          <option value="OOP and C#">OOP and C#</option>
+                                                          <option value="ODOO Development">ODOO Development</option>
+                                                          <option value="Graphic Designing">Graphic Designing</option>
+                                                          <option value="WordPress">WordPress</option>
+                                                      </select>
+                                                      <label for="category">Category</label>
+                                                  </div>
+                                              </div>
+  
+                                              <div class="form-row col-md-6 mb-4">
+                                                <div class="form-floating">
+                                                    <select class="form-control" name="experience_level" id="experience_level" required="true">
+                                                        <option value="" disabled="true" selected="true"></option> <!-- Empty option for placeholder effect -->
+                                                        <option value="Beginner">Beginner</option>
+                                                        <option value="Intermediate">Intermediate</option>
+                                                        <option value="Professional">Professional</option>
+                                                    </select>
+                                                    <label for="experience_level">Experience Level</label>
+                                                </div>
+                                            </div>
+                                     
+                                          </div>
+
+                          
+                                          <div  class="form-outline pb-2">
+                                              <label class="" for="picture">Service Image</label>
+                                              <input type="file" class="form-control form-control-lg" id="picture" name="picture" required="true"/>
+                                          </div>
+                                        <div class="row">
+                                          <div class="col-md-12 mb-4 pb-2">
+                          
+                                            <div  class="form-outline">
+                                                <input type="number" step="0.01" class="form-control form-control-lg" id="price_per_month" name="price_per_month" required="true"/>
+                                              <label class="form-label" for="price_per_month">Price Per Month(PKR)</label>
+                                            </div>
+                          
+                                          </div>
+                                        </div>
+
+                                        <div class="row px-3"  >
+
+                                            <div class="container row">
+                                                <div class="form-group col-6">
+                                                    <!-- <label for="dropdownMenu2" class="dropdown-label">Select Location</label> -->
+                                                    <div class="dropdown position-static dropup" >
+                                                        <button
+                                                            class="btn btn-primary button dropdown-toggle"
+                                                            type="button"
+                                                            id="Locations"
+                                                            name="Locations"
+                                                            data-bs-toggle="dropdown"
+                                                             required="true"
+                                                            aria-expanded="false">
+                                                            Select Location
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-end" style="max-height: 150px; overflow-y: auto;">
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Allama Iqbal Town">Allama Iqbal Town</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Anarkali">Anarkali</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Bharia Town">Bharia Town</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Bund Road">Bund Road</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Cantt Lahore">Cantt Lahore</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Davis Road">Davis Road</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="DHA Phase-1">DHA Phase-1</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="DHA Phase-2">DHA Phase-2</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="DHA Phase-3">DHA Phase-3</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="DHA Phase-4">DHA Phase-4</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="DHA Phase-5">DHA Phase-5</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="DHA Phase-6">DHA Phase-6</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="DHA Phase-7">DHA Phase-7</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="DHA Phase-8">DHA Phase-8</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="DHA Phase-">DHA Phase-9</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Etihad Town">Etihad Town</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Faisal Town">Faisal Town</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Fateh Garh">Fateh Garh</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Ferozpur Road">Ferozpur Road</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Gulberg">Gulberg</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Gardern Town">Gardern Town</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Ghaziabad">Ghaziabad</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Harbanspura">Harbanspura</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Iqbal Town">Iqbal Town</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Johar Town">Johar Town</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Jail Road">Jail Road</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Khan Colony">Khan Colony</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Lal Pul">Lal Pul</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Lawrence Road">Lawrence Road</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Model Town">Model Town</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Muslim Town">Muslim Town</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Mall Road">Mall Road</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Mughalpura">Mughalpura</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="NFC Society">NFC Society</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Nishat Colony">Nishat Colony</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Outfall Road">Outfall Road</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Peer Colony">Peer Colony</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Qaddafi Stadium">Qaddafi Stadium</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Ramgarh">Ramgarh</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Rajput Town">Rajput Town</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Revenue Society">Revenue Society</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Shalamar Garden">Shalamar Garden</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Town Ship">Town Ship</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="UET Lahore">UET Lahore</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Valencia">Valencia</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Wahdat Road">Wahdat Road</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Wapda House">Wapda House</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Yasrab Colony">Yasrab Colony</a></button></li>
+                                                            <li><button class="dropdown-item" type="button" onclick="setLocation(this)"><a href="#" data-value="Zaman Park">Zaman Park</a></button></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <input type="hidden" name="Location" id="Location"/>   
+                                                    <button type="button" class="btn btn-primary button bottom-0 col-12"  id="viewMapBtn" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#mapModal" >View Locations on Map</button>
+
+  
+                                                  </div>
+                                            </div>
+                                        </div>
+                          
+                                        <div class="mt-4 pt-2">
+                                            <input type="submit" value="Create Service" class="btn btn-primary button col-12"/>
+                                        </div>
+                                        
+                            
+            
+                                    </form>
+                                    </div>
+                                </div>
+                                </div>
+                              </div>
+
+
+                        </div>
+                        
+                        <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="min-height: 200px; margin-top:100px;">
+                            <div class="toast" id="service-toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000" style="position: absolute; top: 50px; right: 20px;">
+                                <div class="toast-header">
+                                    <div id="progress-bar" class="progress-bar"></div>
+                                </div>
+                                <div class="toast-body">
+                                    Service requested! Redirecting...
+                                </div>
+                            </div>
+                        </div>
+
+
+<!-- Modal Structure -->
+<div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mapModalLabel">Map Locations</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1EY4_MYSAhhRJNEEUTZUuWnEBP7xiDtc&amp;ehbc=2E312F" width="100%" height="600" frameborder="0"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+                         <!-- JavaScript for Search Filter Dropdown and map -->
+                        <script type="text/javascript" src="/task_lyft/static/src/js/search.js"></script>
+                        
+                        <script type="text/javascript">
+                            function setLocation(element) {
+                                var button = document.getElementById('Location');
+                                var buttons = document.getElementById('Locations');
+                                buttons.textContent = element.textContent;
+                                button.value = element.textContent;
+                            }
+                            document.getElementById('create_service_form').addEventListener('submit', function(event) {
+                                event.preventDefault(); // Prevent the form from submitting immediately
+                                
+                                var form = this;
+                                var progressBar = document.getElementById('progress-bar');
+                                var width = 100;
+                                var interval = 50; // Update every 50ms
+                                var duration = 5000; // Total duration of 5 seconds
+                                var step = interval / duration * 100;
+                        
+                                $('#service-toast').toast('show'); // Show the toast notification immediately
+                        
+                                // Start the progress bar animation
+                                var timer = setInterval(function() {
+                                    width -= step;
+                                    if (width == 0) {
+                                        width = 0;
+                                        clearInterval(timer);
+                                    }
+                                    progressBar.style.width = width + '%';
+                                }, interval);
+                        
+                                // Collect form data
+                                var formData = new FormData(form);
+                                console.log([...formData.entries()]);
+
+                                // Use Fetch API to submit the form
+                                fetch('/create_service', {
+                                    method: 'POST',
+                                    body: formData,
+                                    headers: {
+                                        'X-Requested-With': 'XMLHttpRequest'
+                                    }
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        progressBar.classList.add('success');
+                                        // Show success message
+                                        $('#service-toast').find('.toast-body').text(data.success);
+                                        $('#service-toast').toast('show');
+                                        setTimeout(() => {
+                                            window.location.href = '/services'; // Redirect after showing the message
+                                        }, 5000); // Redirect after 2 seconds
+                                    } else if (data.error) {
+                                        progressBar.classList.add('error');
+                                        // Show error message
+                                        $('#service-toast').find('.toast-body').text(data.error);
+                                        $('#service-toast').toast('show');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    $('#service-toast').find('.toast-body').text('An unexpected error occurred.');
+                                    $('#service-toast').toast('show');
+                                });
+                            });
+                        </script>
+                    </t>
+                    <t t-else="">
+                        <script>
+                            window.location.href = "/web/login";
+                        </script>
+                    </t>
+                </t>
+            </t>
+        </field>
+    </record>
+</odoo>
                                 <!-- Title Input -->
-                                <div class="form-row py-3">
+                                <!-- <div class="form-row py-3">
                                     <label for="title">Title</label>
                                     <input type="text" class="form-control" name="title" id="title" required="true"/>
-                                </div>
+                                </div> -->
                                 
                                 <!-- Category Selection -->
-                                <div class="form-row py-3">
+                                <!-- <div class="form-row py-3">
                                     <label for="category">Category</label>
                                     <select class="form-control" name="category" id="category" required="true">
                                         <option value="Matric">Matric</option>
@@ -42,20 +321,20 @@
                                         <option value="WordPress">WordPress</option>
                                     </select>
                                 </div>
-                                
+                                 -->
                                 <!-- Experience Level Selection -->
-                                <div class="form-row py-3">
+                                <!-- <div class="form-row py-3">
                                     <label for="experience_level">Experience Level</label>
                                     <select class="form-control" name="experience_level" id="experience_level" required="true">
                                         <option value="Beginner">Beginner</option>
                                         <option value="Intermediate">Intermediate</option>
                                         <option value="Professional">Professional</option>
                                     </select>
-                                </div>
+                                </div> -->
 
                                 <!-- Location Selection with Search -->
 
-                            <div class="form-row py-3">
+                            <!-- <div class="form-row py-3">
                                 <label for="locationSearch">Search Location</label>
                                 <div class="dropdown">
                                     <button type="button" onclick="toggleDropdown()" class="dropbtn">Select Location</button>
@@ -110,118 +389,33 @@
                                         <a href="#" data-value="Wapda House">Wapda House</a>
                                         <a href="#" data-value="Yasrab Colony">Yasrab Colony</a>
                                         <a href="#" data-value="Zaman Park">Zaman Park</a>
-                                    </div>
+                                    </div> -->
                                     <!-- Hidden input to store selected location -->
-                                </div>
-                                <input type="hidden" name="Location" id="Location"/>  <!-- Hidden input to store selected location -->
-                                <div id="selected_location_display">Selected Location: None</div>
-                            </div>
+                                <!-- </div>
+                                <input type="hidden" name="Location" id="Location"/>   Hidden input to store selected location -->
+                                <!-- <div id="selected_location_display">Selected Location: None</div>
+                            </div> -->
                                 
                             <!-- Button to View Locations on Map -->
-                            <button type="button" id="viewMapBtn" onclick="toggleMap()">View Locations on Map</button>
+                            <!-- <button type="button" id="viewMapBtn" onclick="toggleMap()">View Locations on Map</button> -->
 
                             <!-- Iframe for Google Maps, initially hidden -->
-                            <div id="mapContainer" style="display:none; margin-top: 20px;">
+                            <!-- <div id="mapContainer" style="display:none; margin-top: 20px;">
                                 <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1EY4_MYSAhhRJNEEUTZUuWnEBP7xiDtc&amp;ehbc=2E312F" width="640" height="480"></iframe>
                                 <button type="button" onclick="toggleMap()">Close Map</button>
-                            </div>
+                            </div> -->
     
                             <!-- Service Image Input -->
-                            <div class="form-row py-3">
+                            <!-- <div class="form-row py-3">
                                 <label for="picture">Service Image</label>
                                 <input type="file" class="form-control" id="picture" name="picture" required="true"/>
-                            </div>
+                            </div> -->
                                 
                             <!-- Price Input -->
-                            <div class="form-row py-3">
+                            <!-- <div class="form-row py-3">
                                 <label for="price_per_month">Price Per Month(PKR)</label>
                                 <input type="number" step="0.01" class="form-control" id="price_per_month" name="price_per_month" required="true"/>
-                            </div>
+                            </div> -->
                                 
                             <!-- Submit Button -->
-                            <input type="submit" value="Create Service" class="btn btn-primary"/>
-                            </form>
-                        </div>
-                        
-                        <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="min-height: 200px; margin-top:100px;">
-                            <div class="toast" id="service-toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000" style="position: absolute; top: 50px; right: 20px;">
-                                <div class="toast-header">
-                                    <div id="progress-bar" class="progress-bar"></div>
-                                </div>
-                                <div class="toast-body">
-                                    Service requested! Redirecting...
-                                </div>
-                            </div>
-                        </div>
-
-                         <!-- JavaScript for Search Filter Dropdown and map -->
-                        <script type="text/javascript" src="/task_lyft/static/src/js/search.js"></script>
-                        <script type="text/javascript">
-                            document.getElementById('create_service_form').addEventListener('submit', function(event) {
-                                event.preventDefault(); // Prevent the form from submitting immediately
-                                
-                                var form = this;
-                                var progressBar = document.getElementById('progress-bar');
-                                var width = 100;
-                                var interval = 50; // Update every 50ms
-                                var duration = 5000; // Total duration of 5 seconds
-                                var step = interval / duration * 100;
-                        
-                                $('#service-toast').toast('show'); // Show the toast notification immediately
-                        
-                                // Start the progress bar animation
-                                var timer = setInterval(function() {
-                                    width -= step;
-                                    if (width == 0) {
-                                        width = 0;
-                                        clearInterval(timer);
-                                    }
-                                    progressBar.style.width = width + '%';
-                                }, interval);
-                        
-                                // Collect form data
-                                var formData = new FormData(form);
-                        
-                                // Use Fetch API to submit the form
-                                fetch('/create_service', {
-                                    method: 'POST',
-                                    body: formData,
-                                    headers: {
-                                        'X-Requested-With': 'XMLHttpRequest'
-                                    }
-                                })
-                                .then(response => response.json())
-                                .then(data => {
-                                    if (data.success) {
-                                        progressBar.classList.add('success');
-                                        // Show success message
-                                        $('#service-toast').find('.toast-body').text(data.success);
-                                        $('#service-toast').toast('show');
-                                        setTimeout(() => {
-                                            window.location.href = '/services'; // Redirect after showing the message
-                                        }, 5000); // Redirect after 2 seconds
-                                    } else if (data.error) {
-                                        progressBar.classList.add('error');
-                                        // Show error message
-                                        $('#service-toast').find('.toast-body').text(data.error);
-                                        $('#service-toast').toast('show');
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                    $('#service-toast').find('.toast-body').text('An unexpected error occurred.');
-                                    $('#service-toast').toast('show');
-                                });
-                            });
-                        </script>
-                    </t>
-                    <t t-else="">
-                        <script>
-                            window.location.href = "/web/login";
-                        </script>
-                    </t>
-                </t>
-            </t>
-        </field>
-    </record>
-</odoo>
+                            <!-- <input type="submit" value="Create Service" class="btn btn-primary"/> -->

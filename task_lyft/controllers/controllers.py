@@ -29,7 +29,17 @@ class TasklyftController(http.Controller):
             
             picture_file = kwargs.get('picture')
             picture = base64.b64encode(picture_file.read()) if picture_file else None
-            
+            data = {
+                'title': title,
+                'category': category,
+                'experience_level': experience_level,
+                'Location': location,
+                'price_per_month': price_per_month,
+                'picture': str(picture),  # Convert binary to string for logging
+                'user_id': user_id,
+            }
+            print("Received data:", data)  # This will log the data to the server console
+
             # Create the service
             request.env['tasklyft.service_request'].sudo().create({
                 'title': title,

@@ -11,13 +11,25 @@
                         </div>
                         <div class="col-md-4">
                             <h5>Contact</h5>
-                            <p>Sheri Number CEO</p>
+                            <p>tasklyft@gmail.com</p>
                         </div>
                         <div class="col-md-4">
                             <h5>Follow Us</h5>
                             <p>
-                                <a style="text-decoration:none;color:white;" href="#">Facebook</a> | <a style="text-decoration:none;color:white;" href="#">Twitter</a> | <a style="text-decoration:none;color:white;" href="#">Instagram</a>
+                                <a style="text-decoration:none;color:white;"
+                                   href="#"
+                                   onmouseover="this.style.color='lightblue';"
+                                   onmouseout="this.style.color='white';">Facebook</a> | 
+                                <a style="text-decoration:none;color:white;"
+                                   href="#"
+                                   onmouseover="this.style.color='lightblue';"
+                                   onmouseout="this.style.color='white';">Twitter</a> | 
+                                <a style="text-decoration:none;color:white;"
+                                   href="#"
+                                   onmouseover="this.style.color='lightblue';"
+                                   onmouseout="this.style.color='white';">Instagram</a>
                             </p>
+                            
                         </div>
                     </div>
                 </div>
