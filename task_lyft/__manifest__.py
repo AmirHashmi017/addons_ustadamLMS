@@ -29,14 +29,17 @@
         'views/tasklyft_nav.xml',
         'views/tasklyft_footer.xml',
         'views/tasklyft_signup.xml',
+        'views/task_lyft_signin.xml',
         'views/tasklyft_servicerequest.xml',
-        # 'views/tasklyft_msg.xml',
+        'views/tasklyft_contactus.xml',
         'views/tasklyft_menuitems.xml',
+        'data/website_settings_data.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
     ],
+    
 
 }
 

@@ -91,9 +91,9 @@ class TaskLyft(http.Controller):
         if price_range:
             price_min, price_max = price_range.split('-')
             if price_min:
-                domain.append(('price_per_hour', '>=', float(price_min)))
+                domain.append(('price_per_month', '>=', float(price_min)))
             if price_max:
-                domain.append(('price_per_hour', '<=', float(price_max)))
+                domain.append(('price_per_month', '<=', float(price_max)))
 
         # Fetch filtered services
         services = request.env['tasklyft.service'].sudo().search(domain)

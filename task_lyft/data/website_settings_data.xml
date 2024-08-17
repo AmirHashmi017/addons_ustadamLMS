@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+<!-- add free signup option -->
+   <data noupdate="1">
+        <record id="website_settings_general" model="res.config.settings">
+            <field name="auth_signup_uninvited" eval="'b2c'"></field>
+        </record>
+    </data>
+
+</odoo>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+       
+        <!-- <xpath expr="//div[@class='mb-3 field-password pt-2']" position="replace">
+            <div class="mb-3 field-password pt-2">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-control form-control-sm"
+                    required="required" t-att-autofocus="'autofocus' if only_passwords else None" style="border: 2px solid #ccc; padding: 5px; border-radius: 5px; box-shadow: none;"
+                    onfocus="this.style.borderColor='#00bcd4'; this.style.boxShadow='0 0 5px rgba(0, 188, 212, 0.5)';"
+                    onblur="if (!this.value) {this.style.borderColor='#ccc'; this.style.boxShadow='none';} else {this.style.borderColor='#00bcd4'; this.style.boxShadow='0 0 5px rgba(0, 188, 212, 0.5)';}"/>
+            </div>
+        </xpath> -->
+
+    <template id="tasklyft_signin" inherit_id="web.login">
+        <xpath expr="//div[@class='mb-3 field-login']" position="replace">
+            <div class="mb-3 field-login">
+                <label for="login" class="form-label">Email</label>
+                <input type="text" placeholder="Email" name="login" t-att-value="login" id="login" t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required" autocomplete="username" autofocus="autofocus" autocapitalize="off"  style="border: 2px solid #ccc; padding: 5px; border-radius: 5px; box-shadow: none;"
+                onfocus="this.style.borderColor='#00bcd4'; this.style.boxShadow='0 0 5px rgba(0, 188, 212, 0.5)';"
+                onblur="if (!this.value) {this.style.borderColor='#ccc'; this.style.boxShadow='none';} else {this.style.borderColor='#00bcd4'; this.style.boxShadow='0 0 5px rgba(0, 188, 212, 0.5)';}"/>
+            </div>
+        </xpath>
+        <xpath expr="//input[@id='password']/.." position="replace">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" placeholder="Password" name="password" id="password" t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required" autocomplete="current-password" t-att-autofocus="'autofocus' if login else None" maxlength="4096" style="border: 2px solid #ccc; padding: 5px; border-radius: 5px; box-shadow: none;"
+            onfocus="this.style.borderColor='#00bcd4'; this.style.boxShadow='0 0 5px rgba(0, 188, 212, 0.5)';"
+            onblur="if (!this.value) {this.style.borderColor='#ccc'; this.style.boxShadow='none';} else {this.style.borderColor='#00bcd4'; this.style.boxShadow='0 0 5px rgba(0, 188, 212, 0.5)';}"/>
+        </xpath>
+
+
+        <xpath expr="//button[@class='btn btn-primary']" position="replace">
+            <button type="submit" class="btn btn-primary" style="background-color: #00bcd4; border: 2px solid #00bcd4; color: #fff; padding: 5px 20px; border-radius: 5px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); font-size: 16px; cursor: pointer;"
+            onmouseover="this.style.backgroundColor='#0097a7'; this.style.borderColor='#0097a7';"
+            onmouseout="this.style.backgroundColor='#00bcd4'; this.style.borderColor='#00bcd4';"> Sign In</button>
+        </xpath>
+        <xpath expr="//button[@class='btn btn-link btn-sm']" position="replace">
+      <p></p>
+        </xpath>
+    </template>
+</odoo>

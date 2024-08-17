@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="custom_contact_us_page" inherit_id="website.contactus">
+        <xpath expr="//div[@id='wrap']" position="replace">
+            <div class="container">
+                <h2>Contact Us - We're here to help!</h2>
+                <p>Please fill out the form below to get in touch with us.</p>
+            </div>
+        </xpath>
+    </template>
+</odoo>
