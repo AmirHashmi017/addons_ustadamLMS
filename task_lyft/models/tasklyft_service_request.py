@@ -12,7 +12,7 @@ class tasklyft_service_request(models.Model):
         ('ICS', 'ICS'), 
         ('ICOM', 'ICOM'), 
         ('FA', 'FA'), 
-        ('Pyhton', 'Pyhton'), 
+        ('Python', 'Python'), 
         ('Web Development', 'Web Development'),
         ('C++', 'C++'),
         ('OOP and C#', 'OOP and C#'),
