@@ -35,7 +35,9 @@
 
                             <!-- Title Text Input -->
                             <div class="col-md-2">
-                                <input type="text" name="title" class="form-control" placeholder="Search by title..." />
+                                <input type="text" name="title" class="form-control" style="border: 2px solid #ccc; padding: 5px; border-radius: 5px; box-shadow: none;"
+                onfocus="this.style.borderColor='#00bcd4'; this.style.boxShadow='0 0 5px rgba(0, 188, 212, 0.5)';"
+                onblur="if (!this.value) {this.style.borderColor='#ccc'; this.style.boxShadow='none';} else {this.style.borderColor='#00bcd4'; this.style.boxShadow='0 0 5px rgba(0, 188, 212, 0.5)';}" placeholder="Search by title..." />
                             </div>
 
                             <!-- Experience Level Combo Box -->
@@ -69,12 +71,14 @@
 
                             <!-- Search Button -->
                             <div class="col-md-2">
-                                <button type="submit" class="btn btn-primary">Search</button>
+                                <button type="submit" class="btn btn-primary" style="background-color: #00bcd4; border: 2px solid #00bcd4; color: #fff; padding: 5px 20px; border-radius: 5px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); font-size: 16px; cursor: pointer;"
+            onmouseover="this.style.backgroundColor='#0097a7'; this.style.borderColor='#0097a7';"
+            onmouseout="this.style.backgroundColor='#00bcd4'; this.style.borderColor='#00bcd4';">Search</button>
                             </div>
                         </form>
                         <!-- Services Grid and Modal -->
                         <div class="row d-flex align-items-stretch">
-                            <h1 class="text-center" style="margin-bottom:15px;">Services</h1>
+                            <h1 class="text-center" style="margin-bottom:25px;">Services</h1>
                             <t t-if="services">
                                 <t t-foreach="services" t-as="service">
                                     <div style="width: 340px;" class="s_col_no_bgcolor pb16">
@@ -146,21 +150,18 @@
                                                                         </div>
                                                                         <div class="action">
                                                                             <a href="#"
-                                                                                class="btn btn-secondary"
-                                                                                style="border-radius:0px;height:29px;font-size:14px;"
+                                                                                class="btn btn-primary"
+                                                                                style="background-color: #00bcd4; border: 2px solid #00bcd4; color: #fff; padding: 5px 20px; border-radius: 5px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); font-size: 16px; cursor: pointer;width:100%"
+                                                                                onmouseover="this.style.backgroundColor='#0097a7'; this.style.borderColor='#0097a7';"
+            onmouseout="this.style.backgroundColor='#00bcd4'; this.style.borderColor='#00bcd4';"
                                                                                 data-toggle="modal"
                                                                                 data-target="#contactModal"
                                                                                 t-att-data-name="service.user_id.name"
                                                                                 t-att-data-email="service.user_id.email"
                                                                                 t-att-data-phone="service.user_id.phone"
                                                                                 >
-                                                                                CONTACT
+                                                                                Contact
                                                                             </a>
-                                                                            <a
-                                                                                class="button btn-small yellow popup-map"
-                                                                                href="#"
-                                                                                data-box="37.089072, -8.247880">VIEW
-                                                                                INFO</a>
                                                                         </div>
                                                                     </div>
                                                                 </article>
@@ -206,7 +207,9 @@
                                         </p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                                        <button type="button" class="btn btn-primary" style="background-color: #00bcd4; border: 2px solid #00bcd4; color: #fff; padding: 5px 20px; border-radius: 5px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); font-size: 16px; cursor: pointer;"
+                                        onmouseover="this.style.backgroundColor='#0097a7'; this.style.borderColor='#0097a7';"
+onmouseout="this.style.backgroundColor='#00bcd4'; this.style.borderColor='#00bcd4';" data-bs-dismiss="modal" aria-label="Close">Close</button>
                                     </div>
                                 </div>
                             </div>
@@ -215,7 +218,7 @@
                         <!-- JavaScript to handle modal data population -->
                         <script type="text/javascript">
                             $(document).ready(function() {
-                            $('.btn-secondary').on('click', function() {
+                            $('.btn-primary').on('click', function() {
                             var name = $(this).data('name') || 'No name';
                             var email = $(this).data('email') || 'No email';
                             var phone = $(this).data('phone') || 'No phone';
