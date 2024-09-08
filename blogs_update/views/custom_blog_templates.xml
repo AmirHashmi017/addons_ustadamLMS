@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Custom template to replace the default navbar with the sidebar -->
+    <template id="custom_blog_sidebar" inherit_id="website_blog.blog_post_short">
+        <xpath expr="//section[@id='o_wblog_index_content']" position="replace">
+            <link rel="stylesheet" type="text/css" href="/blogs_update/static/src/css/blogs_sidebar.css"/>
+            <script type="text/javascript" src="/blogs_update/static/src/js/blogs_sidebar.js"></script>
+            <section id="o_wblog_index_content" t-att-class="opt_blog_cards_design and 'o_wblog_page_cards_bg'">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- Sidebar section -->
+                        <div class="col-lg-2 col-md-3 mt-3 mb-3" id="blog-sidebar" style="position:relative;left:-15px">
+                            <nav class="sidebar navbar-light">
+                                <div class="sidebar">
+                                    <ul t-if="len(blogs) > 1">
+                                        <li class="nav-item">
+                                            <span class="nav-link disabled">Blogs:</span>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/blog" class="nav-link fw-bold #{(not blog) and 'active'}">All</a>
+                                        </li>
+                                        <li class="nav-item" t-foreach="blogs" t-as="nav_blog">
+                                            <a t-attf-href="/blog/#{slug(nav_blog)}" 
+                                               t-attf-class="nav-link #{(blog and nav_blog.id == blog.id) and 'active' or ''}">
+                                                <b t-field="nav_blog.name"/>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- Close button for the sidebar -->
+                               <!-- Close button for the sidebar -->
+<button id="close-sidebar" class="close-btn" style="display:none;">×</button>
+
+                            </nav>
+                        </div>
+
+                        <!-- Hamburger menu (visible only on small screens) -->
+                        <!-- <div class="col-12 mt-3 mb-3 d-block d-md-none">
+                            <button id="open-sidebar" class="hamburger-menu">
+                                &#9776;
+                            </button>
+                        </div> -->
+
+                        <!-- Blog cards section -->
+                        <div class="cards col-lg-10 col-md-9">
+                            <!-- Header containing the search bar -->
+                            <div class="header py-3">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-8 col-md-6">
+                                        <!-- Search bar container with navy background -->
+                                        <div id="searchbox" class="container-fluid" style="background-color: rgb(4,43,76); width: 80vw; padding: 12px; border-radius: 5px;">
+                                            <t t-call="website.website_search_box_input">
+                                                <t t-set="_form_classes" t-valuef="ms-auto"/>
+                                                <t t-set="_classes" t-valuef=""/>
+                                                <t t-set="search_type" t-valuef="blogs"/>
+                                                <t t-set="action" t-value="blog_url(tag=tag,search=search)"/>
+                                                <t t-set="display_description" t-valuef="true"/>
+                                                <t t-set="display_detail" t-valuef="false"/>
+                                                <input type="hidden" name="tag" t-att-value="tag"/>
+                                                <input type="hidden" name="date_begin" t-att-value="date_begin"/>
+                                                <input type="hidden" name="date_end" t-att-value="date_end"/>
+                                            </t>
+                                        </div>
+                                        <button id="open-sidebar" class="hamburger-menu d-block d-md-none">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill="currentColor" d="M3 18h18v-2H3v2zm0-4h18v-2H3v2zm0-4h18V8H3v2z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Blog cards display -->
+                            <t t-if="original_search and posts" class="alert alert-warning mt-3">
+                                No results found for '<span t-esc="original_search"/>'. Showing results for '<span t-esc="search"/>'.
+                            </t>
+                            <div id="o_wblog_posts_loop_container" class="row justify-content-start">
+                                <t t-call="website_blog.posts_loop"/>
+                                <t t-call="website.pager"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </xpath>
+    </template>
+
+    <template id="custom_blogs_nav" inherit_id="website_blog.blogs_nav">
+        <xpath expr="." position="replace">
+            <!-- Empty template to remove content -->
+            <div>
+                <!-- Optionally add your own structure here -->
+            </div>
+        </xpath>
+    </template>
+</odoo>

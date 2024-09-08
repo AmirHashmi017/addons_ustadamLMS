@@ -1,0 +1,84 @@
+/* General sidebar styles */
+#blog-sidebar {
+    display: block;
+}
+
+.sidebar ul li {
+    list-style: none;
+}
+
+.sidebar {
+    border-radius: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+/* Hide sidebar and show hamburger menu on small screens */
+@media (max-width: 768px) {
+    .sidebar li {
+        padding: 5px 10px; /* Reduce padding */
+        line-height: 1;  /* Adjust line height */
+    }
+#searchbox
+{
+    width:70vw;
+    position: relative;
+    left:20px;
+}
+    #blog-sidebar {
+        display: none;
+        position: fixed;  /* Make sidebar fixed to overlay content */
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 250px;  /* Width of the sidebar */
+        /* background-color: rgba(0, 0, 0, 0.9);  Overlay with transparency */
+        z-index: 9999;  /* Ensure it is on top of other content */
+        overflow-y: auto;  /* Scrollable if content overflows */
+    }
+
+    /* Hamburger menu button */
+    .hamburger-menu {
+        font-size: 30px;
+        background-color: rgb(4,43,76);
+        color: white;
+        border: none;
+        padding: 10px;
+        height:9.3vh;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Close button inside the sidebar */
+    .close-btn {
+        font-size: 30px;
+        color: white;
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        cursor: pointer;
+        background: none;
+        border: none;
+    }
+
+    /* Full screen overlay for sidebar */
+    .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .sidebar li {
+        padding: 20px;
+    }
+
+    .sidebar li a {
+        color: white;
+        text-decoration: none;
+    }
+
+    /* Make sure the main content stays in place */
+    .cards, .header {
+        position: relative;
+        z-index: 1;  /* Ensure they stay behind the sidebar */
+    }
+}
