@@ -4,8 +4,15 @@
 }
 
 .sidebar ul li {
+    color:#ffffff;
+    opacity: 85.0%;
     list-style: none;
 }
+/* .sidebar ul li:hover
+{
+    color:#ffffff;
+    opacity: 85.0%;
+} */
 
 .sidebar {
     border-radius: 5px;
@@ -27,7 +34,7 @@
 }
     #blog-sidebar {
         display: none;
-        position: fixed;  /* Make sidebar fixed to overlay content */
+        position: absolute !important;  /* Make sidebar fixed to overlay content */
         left: 0;
         top: 0;
         height: 100%;
