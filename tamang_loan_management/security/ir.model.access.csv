@@ -1,0 +1,24 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_loan_type_base,access.loan.type.base,model_loan_type,base.group_portal,1,1,0,0
+access_loan_type_base_user,access.loan.type.base,model_loan_type,tamang_loan_management.loan_management_group_user,1,1,0,0
+access_loan_type_base_manager,access.loan.type.base,model_loan_type,tamang_loan_management.loan_management_group_manager,1,1,1,1
+access_loan_type_base_admin,access.loan.type.base,model_loan_type,tamang_loan_management.loan_management_group_admin,1,1,1,1
+access_loan_request_approver_manager,access.loan.request.approver.manager,model_loan_request,tamang_loan_management.loan_management_group_manager,1,1,0,1
+access_loan_request_approver_admin,access.loan.request.approver.admin,model_loan_request,tamang_loan_management.loan_management_group_admin,1,1,0,1
+access_loan_request_user_user,access.loan.request.user.user,model_loan_request,tamang_loan_management.loan_management_group_user,1,1,1,0
+access_loan_request_user_manager,access.loan.request.user.manager,model_loan_request,tamang_loan_management.loan_management_group_manager,1,1,0,1
+access_loan_request_user_admin,access.loan.request.user.admin,model_loan_request,tamang_loan_management.loan_management_group_admin,1,1,0,1
+access_loan_documents_user,access.loan.documents.user,model_loan_documents,tamang_loan_management.loan_management_group_user,1,0,0,0
+access_loan_documents_manager,access.loan.documents.manager,model_loan_documents,tamang_loan_management.loan_management_group_manager,1,0,0,0
+access_loan_documents_admin,access.loan.documents.admin,model_loan_documents,tamang_loan_management.loan_management_group_admin,1,1,1,1
+access_repayment_line_base,access.repayment.line.base,model_repayment_line,base.group_user,1,1,1,1
+access_account_move_line_manager,access.to.account.move.line.manager,account.model_account_move_line,tamang_loan_management.loan_management_group_manager,1,1,1,1
+access_account_move_line_admin,access.to.account.move.line.admin,account.model_account_move_line,tamang_loan_management.loan_management_group_admin,1,1,1,1
+access_reject_reason_wizard_base,access.reject.reason.base,model_reject_reason,base.group_user,1,1,1,1
+access_message_wizard_base,access.message.popup.base,model_message_popup,base.group_user,1,1,1,1
+access_res_company_user,access.to.res.company,base.model_res_company,base.group_user,1,1,0,0
+manager_request_admin,manager.request admin access,model_manager_request,tamang_loan_management.loan_management_group_admin,1,1,0,1
+manager_request_user,manager.request user access,model_manager_request,tamang_loan_management.loan_management_group_user,1,1,1,1
+manager_request_portal,manager.request portal access,model_manager_request,base.group_portal,1,1,1,1
+user_request_admin,user.request admin access,model_user_request,tamang_loan_management.loan_management_group_admin,1,1,1,1
+user_request_portal,user.request portal access,model_user_request,base.group_portal,1,1,1,0

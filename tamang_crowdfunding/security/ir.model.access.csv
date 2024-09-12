@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_addons_work/tamang_crowdfunding_addons_work/tamang_crowdfunding,addons_work/tamang_crowdfunding.addons_work/tamang_crowdfunding,model_addons_work/tamang_crowdfunding_addons_work/tamang_crowdfunding,base.group_user,1,1,1,1

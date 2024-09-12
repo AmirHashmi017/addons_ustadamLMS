@@ -1,0 +1,174 @@
+<odoo>
+    <template id="loan_types_list" name="Loan Types List">
+        <t t-call="website.layout">
+            <!-- Navbar Section -->
+            <nav class="navbar navbar-light border-top shadow-sm d-print-none w-100 o_colored_level"
+                 style="background-color: #042b4c;">
+                <div class="container">
+                    <div class="d-flex flex-column flex-md-row flex-md-wrap flex-lg-nowrap align-items-center justify-content-between w-100">
+                        <a class="navbar-brand text-white h5 my-0 me-sm-auto" href="#">Available Loans</a>
+                        <t t-if="not (request.env.user.has_group('tamang_loan_management.loan_management_group_manager') or request.env.user.has_group('tamang_loan_management.loan_management_group_admin'))">
+                            <ul class="nav py-2 py-md-0 ps-lg-3">
+                                <li class="nav-item">
+                                    <span class="nav-link text-white">Request to:</span>
+                                </li>
+                                <li class="nav-item">
+                                    <t t-if="not request.env.user.has_group('tamang_loan_management.loan_management_group_user')">
+                                        <button class="btn btn-secondary mx-2" type="button" data-bs-toggle="modal"
+                                                data-bs-target="#getLoanModal">Get Loan
+                                        </button>
+                                    </t>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="btn btn-secondary mx-2" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#becomeLoanManagerModal" id="becomeLoanManagerBtn">Become
+                                        Loan Manager
+                                    </button>
+                                </li>
+                            </ul>
+                        </t>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Loan Types List Section -->
+            <div class="container my-4">
+                <div class="row">
+                    <t t-foreach="loan_types" t-as="loan_type">
+                        <div class="col-md-4 mb-4">
+                            <div class="card" style="border: 1px solid #042b4c;">
+                                <div class="card-body">
+                                    <h3 class="card-title" style="color: #042b4c;">
+                                        <t t-esc="loan_type.name"/>
+                                    </h3>
+                                    <p class="card-text">
+                                        Amount:
+                                        <t t-esc="loan_type.loan_amount"/>
+                                        <br/>
+                                        Tenure:
+                                        <t t-esc="loan_type.tenure"/>
+                                        months
+                                        <br/>
+                                        Interest Rate:
+                                        <t t-esc="loan_type.interest_rate * 100"/>
+                                        %
+                                        <br/>
+                                        Applicants:
+                                        <t t-esc="loan_type.applicants_count"/>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+
+            <!-- Get Loan Modal -->
+            <div class="modal fade" id="getLoanModal" tabindex="-1" aria-labelledby="getLoanModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="getLoanModalLabel">Get Loan Confirmation</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <t t-set="latest_request_user"
+                               t-value="request.env['user.request'].sudo().search([('user_id', '=', request.env.user.id)], order='id desc', limit=1)"/>
+                            <t t-if="not latest_request_user">
+                                <t t-if="latest_request_user.state == 'rejected'">
+                                    <div class="alert alert-danger" role="alert">
+                                        <strong>Info!</strong>
+                                        Your previous request has been rejected. Please submit a new request.
+                                        <br/>
+                                        <strong>Reason:</strong>
+                                        <t t-esc="latest_request_user.reject_reason"/>
+                                    </div>
+                                </t>
+                                <p>Are you sure you want to proceed with this action?</p>
+                            </t>
+                            <t t-else="">
+                                <div class="alert alert-info" role="alert">
+                                    <strong>Info!</strong>
+                                    Your request is being processed. You will be notified once it is approved.
+                                </div>
+                            </t>
+                        </div>
+                        <div class="modal-footer">
+                            <t t-if="(not latest_request_user) or (latest_request_user.state == 'rejected')">
+                                <button type="button" class="btn btn-primary" id="confirmGetLoanBtn">Confirm</button>
+                            </t>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Become Loan Manager Modal -->
+            <div class="modal fade" id="becomeLoanManagerModal" tabindex="-1"
+                 aria-labelledby="becomeLoanManagerModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="becomeLoanManagerModalLabel">Become Loan Manager Confirmation
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <t t-set="latest_request_manager"
+                               t-value="request.env['manager.request'].sudo().search([('user_id', '=', request.env.user.id)], order='id desc', limit=1)"/>
+                            <t t-if="not latest_request_manager">
+                                <t t-if="latest_request_manager.state == 'rejected'">
+                                    <div class="alert alert-danger" role="alert">
+                                        <strong>Info!</strong>
+                                        Your previous request has been rejected. Please submit a new request.
+                                        <br/>
+                                        <strong>Reason:</strong>
+                                        <t t-esc="latest_request_manager.reject_reason"/>
+                                    </div>
+                                </t>
+                                <p>Are you sure you want to proceed with this action?</p>
+                            </t>
+                            <t t-else="">
+                                <div class="alert alert-info" role="alert">
+                                    <strong>Info!</strong>
+                                    Your request is being processed. You will be notified once it is approved.
+                                </div>
+                            </t>
+                        </div>
+                        <div class="modal-footer">
+                            <t t-if="(not latest_request_manager) or (latest_request_manager.state == 'rejected')">
+                                <button type="button" class="btn btn-primary" id="confirmBecomeManagerBtn">Confirm
+                                </button>
+                            </t>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JavaScript to handle button actions -->
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var confirmGetLoanBtn = document.getElementById('confirmGetLoanBtn');
+                    var confirmBecomeManagerBtn = document.getElementById('confirmBecomeManagerBtn');
+
+                    if (confirmGetLoanBtn) {
+                        confirmGetLoanBtn.addEventListener('click', function () {
+                            window.location.href = '/get_loan';
+                        });
+                    }
+
+                    if (confirmBecomeManagerBtn) {
+                        confirmBecomeManagerBtn.addEventListener('click', function () {
+                            window.location.href = '/become_loan_manager';
+                        });
+                    }
+                });
+            </script>
+        </t>
+    </template>
+</odoo>

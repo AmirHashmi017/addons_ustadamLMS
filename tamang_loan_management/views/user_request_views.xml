@@ -1,0 +1,46 @@
+<odoo>
+    <record id="view_user_request_tree" model="ir.ui.view">
+        <field name="name">user.request.tree</field>
+        <field name="model">user.request</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="user_id"/>
+                <field name="company_id"/>
+                <field name="request_date"/>
+                <field name="state" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_user_request_form" model="ir.ui.view">
+        <field name="name">user.request.form</field>
+        <field name="model">user.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Approve" type="object" name="action_approve_request" class="btn btn-primary"
+                            invisible="state != 'submitted'"/>
+                    <button string="Reject" type="object" name="action_reject_request" class="btn btn-primary"
+                            invisible="state != 'submitted'"/>
+                    <field name="state" widget="statusbar" readonly="1"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="user_id"/>
+                        <field name="company_id" readonly="1"/>
+                        <field name="request_date"/>
+                        <field name="message" readonly="1"/>
+                        <field name="reject_reason" readonly="state == 'rejected'"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+\
+    <record id="user_request_action" model="ir.actions.act_window">
+        <field name="name">User Requests</field>
+        <field name="res_model">user.request</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_user_request_tree"/>
+    </record>
+</odoo>

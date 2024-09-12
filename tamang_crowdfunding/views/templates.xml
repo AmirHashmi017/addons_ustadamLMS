@@ -1,0 +1,244 @@
+<odoo>
+    <template id="footer_crowdfunding_link" inherit_id="website.layout">
+        <xpath expr="//ul[@class='list-unstyled']" position="inside">
+            <li>
+                <t t-set="crowdfunding_forum"
+                   t-value="request.env['forum.forum'].sudo().search([('forum_category', '=', 'crowdfunding')], limit=1)"/>
+                <t t-if="crowdfunding_forum">
+                    <a t-attf-href="/forum/#{crowdfunding_forum.id}?view=crowdfunding">
+                        Crowdfunding
+                    </a>
+                </t>
+                <t t-else="">
+                    <a href="#">
+                        Crowdfunding
+                    </a>
+                </t>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="crowdfunding_user_sidebar_body_inherit" inherit_id="website_forum.user_sidebar_body">
+
+        <xpath expr="//a[contains(@t-attf-class, 'nav-link') and contains(., 'Posts')]" position="replace">
+            <t t-if="forum.forum_category == 'crowdfunding'">
+                <t t-set="crowdfunding_forum"
+                   t-value="request.env['forum.forum'].sudo().search([('forum_category','=','crowdfunding')], limit=1)"/>
+                <a t-attf-class="nav-link my-1 py-1 #{ 'rounded text-bg-light disabled' if request.httprequest.path ==  _forum_path and no_filters and not any([my, queue_type, tags]) and view not in ['followers', 'following', 'notification'] and forum and forum.id == request.env.user.sudo().influencer_forum_id.id else 'text-reset' }"
+                   t-att-href="'/forum/' + str(crowdfunding_forum.id) + '?view=crowdfunding'">
+                    <i t-attf-class="fa fa-calendar fa-fw #{ 'opacity-50' if request.httprequest.path != _forum_path or my or queue_type  or view in ['followers', 'following', 'notification'] else '' }"/>
+                    Campaigns
+                </a>
+            </t>
+            <t t-else="">
+                <a t-attf-class="nav-link my-1 py-1 #{ 'rounded text-bg-light disabled' if request.httprequest.path ==  _forum_path and no_filters and not any([my, queue_type, tags]) else 'text-reset' }"
+                   t-att-href="location">
+                    <i t-attf-class="fa fa-list fa-fw #{ 'opacity-50' if request.httprequest.path != _forum_path or my or queue_type else '' }"/>
+                    Posts
+                </a>
+            </t>
+        </xpath>
+
+        <xpath expr="//a[contains(@t-attf-class, 'nav-link') and contains(., 'People')]" position="replace">
+            <t t-if="forum.forum_category not in ['personal', 'crowdfunding']">
+                <a t-attf-class="nav-link my-1 py-1 text-reset"
+                   t-attf-href="/profile/users?forum_origin=#{request.httprequest.path}">
+                    <i class="fa fa-users fa-fw opacity-50"/>
+                    People
+                </a>
+            </t>
+
+        </xpath>
+
+        <xpath expr="//a[contains(@t-attf-class, 'nav-link') and contains(., 'Badges')]" position="replace">
+            <t t-if="forum.forum_category not in ['personal', 'crowdfunding']">
+                <a t-attf-class="nav-link my-1 py-1 text-reset"
+                   t-attf-href="/profile/ranks_badges?forum_origin=#{request.httprequest.path}">
+                    <i class="fa fa-shield fa-fw opacity-50"/>
+                    Badges
+                </a>
+            </t>
+        </xpath>
+
+        <xpath expr="//div[contains(@class, 'o_wforum_sidebar_section') and .//div[contains(text(), 'Moderation tools')]]"
+               position="replace">
+            <t t-if="forum.forum_category != 'crowdfunding'">
+                <div class="o_wforum_sidebar_section pt-3">
+                    <div class="px-3 pb-1 fw-bold">Moderation tools</div>
+                    <a t-attf-class="nav-link my-1 py-1 #{ 'rounded text-bg-light disabled' if queue_type == 'validation' else 'text-reset'}"
+                       t-attf-href="/forum/#{_forum_slug}/validation_queue">
+                        <i t-attf-class="fa fa-check-square-o fa-fw #{ 'opacity-50' if queue_type != 'validation' else ''}"/>
+                        To Validate
+                        <span id="count_posts_queue_validation"
+                              t-attf-class="badge #{ 'text-bg-warning' if forum.count_posts_waiting_validation > 0 else 'd-none'}"
+                              t-out="forum.count_posts_waiting_validation"/>
+                    </a>
+                    <a t-attf-class="nav-link my-1 py-1 #{'rounded text-bg-light disabled' if queue_type == 'offensive' or queue_type == 'flagged' else 'text-reset'}"
+                       t-attf-href="/forum/#{_forum_slug}/flagged_queue">
+                        <i t-attf-class="fa fa-flag fa-fw #{ 'opacity-50' if queue_type != 'flagged' else ''}"/>
+                        Flagged
+                        <span id="count_posts_queue_flagged"
+                              t-attf-class="badge #{ 'text-bg-danger' if forum.count_flagged_posts > 0 else 'd-none'}"
+                              t-out="forum.count_flagged_posts"/>
+                    </a>
+                    <a t-attf-class="nav-link my-1 py-1 #{ 'rounded text-bg-light disabled' if queue_type == 'close' else 'text-reset'}"
+                       t-attf-href="/forum/#{_forum_slug}/closed_posts">
+                        <i t-attf-class="fa fa-window-close fa-fw #{ 'opacity-50' if queue_type != 'close' else '' }"/>
+                        Closed
+                    </a>
+                </div>
+            </t>
+        </xpath>
+
+        <xpath expr="//div[contains(@class, 'o_wforum_sidebar_section') and .//div[contains(text(), 'My forums')]]"
+               position="replace">
+            <t t-if="forum.forum_category != 'crowdfunding'">
+                <div class="o_wforum_sidebar_section pt-3">
+                    <div class="px-3 pb-1 fw-bold">My forums</div>
+                    <t t-foreach="my_other_forums.sorted(lambda f: f.name.casefold())" t-as="my_forum">
+                        <a class="nav-link my-1 py-1 text-reset" t-attf-href="/forum/#{slug(my_forum)}">
+                            <i class="fa fa-file-o fa-fw opacity-50"/>
+                            <t t-out="my_forum.name"/>
+                        </a>
+                    </t>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="crowdfunding_model_nav" inherit_id="website_forum.forum_model_nav">
+        <!-- Removing Search Box -->
+        <xpath expr="//t[@t-if=&quot;question_count or tags&quot;]" position="replace">
+            <t t-if="forum.forum_category != 'crowdfunding' and question_count or tags"
+               t-call="website.website_search_box_input">
+                <t t-if="_page_name == 'tags'">
+                    <t t-set="search_type" t-value="'forum_tags_only'"/>
+                    <t t-set="action" t-value="'/forum/%s/tag' % (_forum_slug)"/>
+                </t>
+                <t t-else="">
+                    <t t-set="search_type" t-value="'forums'"/>
+                    <t t-set="action" t-value="'/forum/%s' % (_forum_slug)"/>
+                </t>
+                <t t-set="display_description" t-valuef="true"/>
+                <t t-set="display_detail" t-valuef="true"/>
+                <t t-set="_form_classes" t-valuef="flex-grow-1"/>
+                <t t-set="_input_classes" t-valuef="border-0 bg-light"/>
+                <t t-set="_submit_classes" t-valuef="btn-light"/>
+                <input t-if="filters" type="hidden" name="filters" t-att-value="filters"/>
+                <input t-if="my" type="hidden" name="my" t-att-value="my"/>
+                <input t-if="sorting" type="hidden" name="sorting" t-att-value="sorting"/>
+            </t>
+        </xpath>
+
+        <!-- Removing Follow and Fvt. -->
+        <xpath expr="//div[@class='col d-flex justify-content-end align-items-center']" position="replace">
+            <div class="col d-flex justify-content-end align-items-center">
+                <t t-if="question.forum_id.forum_category != 'crowdfunding'">
+                    <i t-if="question.state == 'close'" class="fa fa-lock ms-2 fs-4" title="Closed"
+                       data-bs-toggle="tooltip" data-bs-placement="top"/>
+                    <span t-elif="not question.active" class="badge bg-danger">
+                        <t t-if="question.state!='offensive'">Deleted</t>
+                        <t t-if="question.state=='offensive'">Offensive</t>
+                        <t t-if="question.state=='offensive' and question.closed_reason_id">
+                            <t t-out="question.closed_reason_id.name.capitalize()"/>
+                        </t>
+                    </span>
+
+                    <a t-if="uid" type="button" aria-label="Favorite"
+                       t-attf-data-href="/forum/#{slug(question.forum_id)}/question/#{slug(question)}/toggle_favourite"
+                       t-attf-class="o_wforum_favourite_toggle btn btn-lg #{ 'opacity-50' if not question.user_favourite else '' } opacity-hover-100 px-1">
+                        <i t-attf-class="position-relative fa #{'o_wforum_gold fa-star ' if question.user_favourite else 'fa-star-o '}"
+                           data-bs-toggle="tooltip"
+                           data-bs-placement="top"
+                           title="Favorite"/>
+                    </a>
+
+                    <t t-if="question.state == 'active'" t-call="website_forum.follow">
+                        <t t-set="object" t-value="question"/>
+                        <t t-set="icons_design" t-value="True"/>
+                        <t t-set="btn_classes" t-value="'btn-lg opacity-50 opacity-100-hover' "/>
+                    </t>
+                </t>
+            </div>
+        </xpath>
+
+    </template>
+
+    <template id="custom_vote" inherit_id="website_forum.vote">
+        <xpath expr="//div[@t-attf-class=&quot;vote d-inline-flex align-items-center ms-n2 #{classes} text-muted text-center&quot;]"
+               position="replace">
+            <div t-attf-class="vote d-inline-flex align-items-center ms-n2 #{classes} text-muted text-center">
+                <t t-if="post.forum_id.forum_category != 'crowdfunding'">
+                    <button type="button" t-attf-data-href="/forum/#{slug(forum)}/post/#{slug(post)}/upvote"
+                            t-attf-class="btn vote_up #{ 'text-success' if own_vote == 1 else '' } #{ 'karma_required text-reset opacity-25' if not can_upvote else ''}#{ ' text-300' if post.create_uid.id == uid else ''}"
+                            t-att-disabled="own_vote == 1 and 'disabled'"
+                            t-att-data-karma="forum.karma_upvote"
+                            t-att-data-can-upvote="can_upvote"
+                            aria-label="Upvote" title="Upvote">
+                        <i class="fa fa-caret-up" data-bs-toggle="tooltip" data-bs-placement="top" title="Upvote"/>
+                    </button>
+                    <small t-attf-class="vote_count #{ 'text-success' if own_vote == 1 else 'text-danger' if own_vote == -1 else ('text-muted opacity-75' if post.vote_count == 0 and not own_vote else '') }"
+                           t-out="post.vote_count"/>
+                    <button type="button" t-attf-data-href="/forum/#{slug(forum)}/post/#{slug(post)}/downvote"
+                            t-attf-class="btn vote_down #{ 'text-danger' if own_vote == -1 else ''} #{'karma_required text-reset opacity-25' if not can_downvote else '' }#{' text-300' if post.create_uid.id == uid else '' }"
+                            t-att-disabled="own_vote == -1 and 'disabled'"
+                            t-att-data-karma="forum.karma_downvote"
+                            t-att-data-can-downvote="can_downvote"
+                            aria-label="Downvote" title="Downvote">
+                        <i class="fa fa-caret-down" data-bs-toggle="tooltip" data-bs-placement="top" title="Downvote"/>
+                    </button>
+                    <t t-out="0"/>
+                </t>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="forum_index_inherit_crowdfunding" inherit_id="tamang_influencer.forum_index_inherit">
+        <xpath expr="//t[@t-elif=&quot;view == 'following'&quot;]" position="after">
+            <t t-elif="view == 'crowdfunding'">
+                <div class="container" style="overflow: auto; max-height: 500px;">
+                    <t t-foreach="posts" t-as="post">
+                        <div class="my-2" style="border: .5px solid silver; padding:15px; border-radius: 5px;">
+                            <t t-set="question" t-value="post"/>
+                            <t t-set="post_id" t-value="post"/>
+                            <t t-set="question" t-value="post"/>
+                            <t t-set="post_content" t-value="post.content"/>
+                            <div class="d-flex gap-2 align-items-baseline mb-3">
+                                <h3 t-attf-class="col-lg-10 my-0">
+                                    <a t-attf-href="/forum/#{slug(question.forum_id)}/#{slug(question)}"
+                                       t-attf-style="text-decoration: none;" t-out="question.name"/>
+                                </h3>
+                            </div>
+                            <div class="d-grid">
+                                <!-- Question Post -->
+                                <t t-call="website_forum.post_display">
+                                    <t t-set="post_id" t-value="question"/>
+                                    <t t-set="view" t-value="feed"/>
+                                    <t t-set="object" t-value="post"/>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="post_display_inherit" inherit_id="website_forum.post_display">
+        <xpath expr="//a[@class='oe_social_share btn opacity-50 opacity-100-hover']" position="attributes">
+            <attribute name="t-if">forum.forum_category != 'crowdfunding'</attribute>
+        </xpath>
+
+        <xpath expr="//a[contains(@t-attf-class, 'btn') and contains(@t-attf-class, 'd-none ')]" position="replace">
+            <t t-if="post_id.forum_id.forum_category != 'crowdfunding'">
+                <a t-attf-class="btn #{ 'd-none ' if not uid else '' }#{'karma_required opacity-25' if not post_id.can_comment else 'opacity-50 opacity-100-hover'}"
+                   t-att-data-karma="{post_id.karma_comment if not post_id.can_comment else 0}"
+                   t-att-data-bs-toggle="'collapse' if post_id.can_comment else None"
+                   t-attf-href="##{ _answer_comment_collapse_uid if post_id == answer else _question_comment_collapse_uid}">
+                    <i t-attf-class="fa fa-comment #{ 'karma_required' if not post_id.can_comment else ''}"
+                       title="Comment" data-bs-toggle="tooltip" data-bs-placement="top"/>
+                </a>
+            </t>
+        </xpath>
+    </template>
+</odoo>

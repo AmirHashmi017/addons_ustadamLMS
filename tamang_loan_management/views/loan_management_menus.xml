@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Loan Management Menu Items -->
+    <menuitem id="loan_management_menu_root" name="Loan Management"
+              web_icon="tamang_loan_management,static/description/icon.png"/>
+
+    <menuitem id="loan_management_loan" name="Loan" sequence="10"
+              parent="loan_management_menu_root"/>
+
+    <menuitem id="menu_loan_request_with_domain" name="Loan Requests"
+              parent="loan_management_loan" action="loan_request_action_with_domain"
+              groups="tamang_loan_management.loan_management_group_admin,tamang_loan_management.loan_management_group_manager"/>
+
+    <menuitem id="menu_loan_request_no_domain" name="Loan Requests"
+            parent="loan_management_loan" action="loan_request_action_no_domain"
+            groups="tamang_loan_management.loan_management_group_user"/>
+
+    <menuitem id="loan_management_type" name="Loan types"
+              parent="loan_management_loan" action="loan_type_action"/>
+
+    <menuitem id="loan_management_lines" name="Repayments"
+              parent="loan_management_loan" action="repayment_line_action"
+               groups="tamang_loan_management.loan_management_group_user"/>
+
+    <menuitem id="loan_management_certificates" name="Documents" sequence="15"
+              parent="loan_management_menu_root"
+              groups="tamang_loan_management.loan_management_group_manager,tamang_loan_management.loan_management_group_admin"/>
+
+    <menuitem id="loan_management_proofs" name="Loan Proofs"
+              parent="loan_management_certificates" action="loan_documents_action"/>
+
+    <menuitem id="loan_management_manager_request" name="Requests" sequence="20"
+              groups="tamang_loan_management.loan_management_group_admin" parent="loan_management_menu_root"/>
+
+    <menuitem id="menu_user_request" name="User Requests"
+              parent="loan_management_manager_request" action="user_request_action"/>
+
+    <menuitem id="menu_manager_request" name="Manager Requests"
+              parent="loan_management_manager_request" action="manager_request_action"/>
+
+    <menuitem id="loan_management_conf" name="Configuration" sequence="30"
+              parent="loan_management_menu_root"/>
+
+    <menuitem id="loan_management_settings" name="Settings"
+              parent="loan_management_conf" action="res_config_settings_action"/>
+</odoo>

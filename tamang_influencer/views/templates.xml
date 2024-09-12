@@ -1,0 +1,20 @@
+<odoo>
+    <template id="user_dropdown_extension" inherit_id="portal.user_dropdown">
+        <xpath expr="//div[@role='menu']//a[@groups='base.group_user']" position="before">
+            <!-- Button to become an influencer -->
+            <t t-if="not user_id.influencer_forum_id">
+                <a role="menuitem" class="dropdown-item ps-3" t-attf-href="/my/become_influencer">
+                    <i class="fa fa-fw fa-star me-1 small text-primary"/>
+                    Become an Influencer
+                </a>
+            </t>
+            <!-- Button to access the user's forum -->
+            <t t-if="user_id.influencer_forum_id">
+                <a role="menuitem" class="dropdown-item ps-3" t-attf-href="/my/my_forum">
+                    <i class="fa fa-fw fa-comments me-1 small text-primary"/>
+                    My Timeline
+                </a>
+            </t>
+        </xpath>
+    </template>
+</odoo>

@@ -1,4 +1,9 @@
 /* General sidebar styles */
+html, body {
+    overflow: auto !important;
+    position: relative !important;
+}
+
 #blog-sidebar {
     display: block;
 }
@@ -32,7 +37,7 @@
     position: relative;
     left:20px;
 }
-    #blog-sidebar {
+#blog-sidebar {
         display: none;
         position: absolute !important;  /* Make sidebar fixed to overlay content */
         left: 0;

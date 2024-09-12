@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="website_slides_forum_channel_inherit_view_form" model="ir.ui.view">
+            <field name="name">website.slides_forum.view.form.inherit.slide.channel</field>
+            <field name="model">slide.channel</field>
+            <field name="inherit_id" ref="website_slides.view_slide_channel_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='forum_id']" position="replace">
+                    <field string="Forum" name="forum_id"
+                           domain="[('forum_category', '=', 'elearning'), ('slide_channel_id', 'in', [id, False])]"
+                           options="{'no_open': True}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

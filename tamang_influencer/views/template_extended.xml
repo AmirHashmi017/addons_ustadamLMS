@@ -1,0 +1,847 @@
+<odoo>
+    <template id="remove_ans" inherit_id="website_forum.post_display">
+        <xpath expr="//div[@class='d-flex ms-auto me-2']" position="replace">
+            <div t-if="forum.forum_category == 'elearning' and not user_answer and uid and question.can_answer and question.state == 'active' and question.active != False"
+                 class="d-flex ms-auto me-2">
+                <a t-attf-class="btn btn-link collapsed #{ 'karma_required text-muted' if not question.can_answer else '' }#{ 'disabled' if forum.has_pending_post else '' } text-decoration-none"
+                   t-att-data-karma="question.forum_id.karma_answer"
+                   data-bs-toggle="collapse" data-bs-target=".answer_collapse"
+                   href="#">
+                    <i class="fa fa-reply me-1"/>Answer
+                </a>
+            </div>
+        </xpath>
+        <xpath expr="//t[@t-if=&quot;can_interact_with_post&quot;]" position="replace">
+            <t t-set="post" t-value="post or question"/>
+            <t t-if="can_interact_with_post and post.create_uid == request.env.user and post.forum_id.forum_category != 'crowdfunding'"
+               t-call="website_forum.post_dropdown"/>
+        </xpath>
+    </template>
+
+    <template id="remove_answer" inherit_id="website_forum.post_description_full">
+        <xpath expr="//section[@class='alert alert-info mt-3 mb-0']" position="replace">
+            <section
+                    t-if="forum.forum_category == 'elearning' and uid and question.state == 'active' and not forum.has_pending_post and question.can_answer"
+                    class="alert alert-info mt-3 mb-0">
+                <h5>There are no answers yet</h5>
+                <span>Be the first to answer this question</span>
+            </section>
+        </xpath>
+
+        <xpath expr="//div[@class='d-flex mt-3']" position="replace">
+            <div t-if="forum.forum_category == 'elearning' and uid and not question.uid_has_answered and question.can_answer and question.state == 'active' and question.active != False"
+                 class="d-flex mt-3">
+                <a t-attf-class="btn btn-link collapsed #{ 'karma_required text-muted' if not question.can_answer else '' }#{ 'disabled' if forum.has_pending_post else '' } text-decoration-none"
+                   t-att-data-karma="question.forum_id.karma_answer"
+                   data-bs-toggle="collapse"
+                   data-bs-target=".answer_collapse"
+                   href="#">
+                    <i class="fa fa-reply me-1"/>Answer
+                </a>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="forum_all_personal_entries_extended" inherit_id="website_forum.forum_all_all_entries">
+        <xpath expr="//t[@t-foreach]" position="attributes">
+            <attribute name="t-foreach">_forums.filtered(lambda f: f.forum_category != 'personal')</attribute>
+        </xpath>
+        <xpath expr="//t[@t-set='sorted_forums']" position="replace">
+            <t t-set="sorted_forums"
+               t-value="_forums.filtered(lambda f: f.forum_category != 'elearning').sorted(lambda f: (not f.description, f.sequence, f.id))"/>
+        </xpath>
+    </template>
+
+    <template id="edit_button_content" inherit_id="website_forum.new_question">
+        <xpath expr="/t[1]/t[3]/form[1]/div[4]/div[1]/button[1]" position="replace">
+            <button type="submit"
+                    t-attf-class="o_wforum_submit_post #{ 'oe_social_share_call' if forum.allow_share else '' } btn btn-primary #{ 'karma_required' if user.karma &lt; forum.karma_ask else ''}"
+                    t-att-data-karma="forum.karma_ask"
+                    data-hashtags="#question" data-social-target-type="question">Post
+            </button>
+        </xpath>
+    </template>
+
+    <template id="user_sidebar_body_inherit" inherit_id="website_forum.user_sidebar_body">
+        <xpath expr="//a[contains(@t-attf-class, 'nav-link') and contains(., 'Posts')]" position="replace">
+            <t t-if="forum.forum_category == 'personal'">
+                <a t-attf-class="nav-link my-1 py-1 #{ 'rounded text-bg-light disabled' if request.httprequest.path ==  _forum_path and no_filters and not any([my, queue_type, tags]) and view not in ['followers', 'following', 'notification'] and forum and forum.id == request.env.user.sudo().influencer_forum_id.id else 'text-reset' }"
+                   t-att-href="'/forum/' + str(request.env.user.sudo().influencer_forum_id.id) + '?view=feed'">
+                    <i t-attf-class="fa fa-list fa-fw #{ 'opacity-50' if request.httprequest.path != _forum_path or my or queue_type  or view in ['followers', 'following', 'notification'] else '' }"/>
+                    Timeline
+                </a>
+            </t>
+            <t t-else="">
+                <a t-attf-class="nav-link my-1 py-1 #{ 'rounded text-bg-light disabled' if request.httprequest.path ==  _forum_path and no_filters and not any([my, queue_type, tags]) else 'text-reset' }"
+                   t-att-href="location">
+                    <i t-attf-class="fa fa-list fa-fw #{ 'opacity-50' if request.httprequest.path != _forum_path or my or queue_type else '' }"/>
+                    Posts
+                </a>
+            </t>
+        </xpath>
+
+        <xpath expr="//t[@t-if=&#39;uid&#39;]//a[contains(., 'My Posts')]" position="replace">
+            <t t-if="forum.forum_category == 'personal'">
+                <a t-attf-class="nav-link my-1 py-1 #{ 'rounded text-bg-light disabled' if my == 'mine' else 'text-reset' }"
+                   t-att-href="'/forum/' + str(request.env.user.sudo().influencer_forum_id.id) + '?my=mine'">
+                    <i t-attf-class="fa fa-user-circle fa-fw #{ 'opacity-50' if my != 'mine' else ''}"/>
+                    My Posts
+                </a>
+            </t>
+            <t t-elif="forum.forum_category == 'crowdfunding'">
+                <a t-attf-class="nav-link my-1 py-1 #{ 'rounded text-bg-light disabled' if my == 'mine' else 'text-reset' }"
+                   t-att-href="location + keep_query('search', 'filters', 'sorting', my='mine')">
+                    <i t-attf-class="fa fa-user-circle fa-fw #{ 'opacity-50' if my != 'mine' else ''}"/>
+                    My Campaigns
+                </a>
+            </t>
+            <t t-else="">
+                <a t-attf-class="nav-link my-1 py-1 #{ 'rounded text-bg-light disabled' if my == 'mine' else 'text-reset' }"
+                   t-att-href="location + keep_query('search', 'filters', 'sorting', my='mine')">
+                    <i t-attf-class="fa fa-user-circle fa-fw #{ 'opacity-50' if my != 'mine' else ''}"/>
+                    My Posts
+                </a>
+            </t>
+        </xpath>
+
+        <xpath expr="//t[@t-if=&#39;uid&#39;]//a[contains(., 'Favourites')]" position="replace">
+            <t t-if="forum.forum_category == 'personal'">
+                <a t-attf-class="nav-link my-1 py-1 #{ 'rounded text-bg-light disabled' if my == 'favourites' else 'text-reset' }"
+                   t-att-href="'/forum/' + str(request.env.user.sudo().influencer_forum_id.id) + '?my=favourites'">
+                    <i t-attf-class="fa fa-star fa-fw #{ 'opacity-50' if my != 'favourites' else ''}"/>
+                    Favourites
+                </a>
+            </t>
+            <t t-elif="forum.forum_category != 'crowdfunding'">
+                <a t-attf-class="nav-link my-1 py-1 #{ 'rounded text-bg-light disabled' if my == 'favourites' else 'text-reset' }"
+                   t-att-href="location + keep_query( 'search', 'filters', 'sorting', my='favourites')">
+                    <i t-attf-class="fa fa-star fa-fw #{ 'opacity-50' if my != 'favourites' else ''}"/>
+                    Favourites
+                </a>
+            </t>
+        </xpath>
+
+        <xpath expr="//t[@t-if='uid']" position="inside">
+            <t t-if="forum.forum_category == 'personal'">
+                <a t-attf-class="nav-link my-1 py-1 text-reset"
+                   t-attf-href="/forum/{{ request.env.user.influencer_forum_id.id }}?view=followers">
+                    <i t-attf-class="fa fa-users fa-fw #{ 'opacity-50' if view != 'followers' else '' }"/>
+                    Followers
+                </a>
+                <a t-attf-class="nav-link my-1 py-1 text-reset"
+                   t-attf-href="/forum/{{ request.env.user.influencer_forum_id.id }}?view=following">
+                    <i t-attf-class="fa fa-users fa-fw #{ 'opacity-50' if view != 'following' else '' }"/>
+                    Following
+                </a>
+
+                <a t-attf-class="nav-link my-1 py-1 text-reset"
+                   t-attf-href="/forum/{{ request.env.user.influencer_forum_id.id }}?view=notification">
+                    <i t-attf-class="fa fa-bell fa-fw #{ 'opacity-50' if view != 'notification' else 'fw-bold' }"/>
+                    Notifications
+                    <t t-if="notification_count and notification_count > 0">
+                        <span class="badge bg-danger">
+                            <t t-esc="notification_count"/>
+                        </span>
+                    </t>
+                </a>
+            </t>
+        </xpath>
+
+        <xpath expr="//a[contains(@t-attf-class, 'nav-link') and contains(., 'People')]" position="replace">
+            <t t-if="forum.forum_category != 'personal'">
+                <a t-attf-class="nav-link my-1 py-1 text-reset"
+                   t-attf-href="/profile/users?forum_origin=#{request.httprequest.path}">
+                    <i class="fa fa-users fa-fw opacity-50"/>
+                    People
+                </a>
+            </t>
+
+        </xpath>
+
+        <xpath expr="//a[contains(@t-attf-class, 'nav-link') and contains(., 'Badges')]" position="replace">
+            <t t-if="forum.forum_category != 'personal'">
+                <a t-attf-class="nav-link my-1 py-1 text-reset"
+                   t-attf-href="/profile/ranks_badges?forum_origin=#{request.httprequest.path}">
+                    <i class="fa fa-shield fa-fw opacity-50"/>
+                    Badges
+                </a>
+            </t>
+        </xpath>
+
+        <xpath expr="//div[@t-if=&quot;forum and user.karma>=forum.karma_moderate&quot;]" position="replace">
+            <div t-if="(forum.forum_category != 'personal') and forum and user.karma>=forum.karma_moderate"
+                 class="o_wforum_sidebar_section pt-3">
+                <!-- Moderation Tools -->
+                <div class="px-3 pb-1 fw-bold">Moderation tools</div>
+                <a t-attf-class="nav-link my-1 py-1 #{ 'rounded text-bg-light disabled' if queue_type == 'validation' else 'text-reset'}"
+                   t-attf-href="/forum/#{_forum_slug}/validation_queue">
+                    <i t-attf-class="fa fa-check-square-o fa-fw #{ 'opacity-50' if queue_type != 'validation' else ''}"/>
+                    To Validate
+                    <span id="count_posts_queue_validation"
+                          t-attf-class="badge #{ 'text-bg-warning' if forum.count_posts_waiting_validation > 0 else 'd-none'}"
+                          t-out="forum.count_posts_waiting_validation"/>
+                </a>
+                <a t-attf-class="nav-link my-1 py-1 #{'rounded text-bg-light disabled' if queue_type == 'offensive' or queue_type == 'flagged' else 'text-reset'}"
+                   t-attf-href="/forum/#{_forum_slug}/flagged_queue">
+                    <i t-attf-class="fa fa-flag fa-fw #{ 'opacity-50' if queue_type != 'flagged' else ''}"/>
+                    Flagged
+                    <span id="count_posts_queue_flagged"
+                          t-attf-class="badge #{ 'text-bg-danger' if forum.count_flagged_posts > 0 else 'd-none'}"
+                          t-out="forum.count_flagged_posts"/>
+                </a>
+                <a t-attf-class="nav-link my-1 py-1 #{ 'rounded text-bg-light disabled' if queue_type == 'close' else 'text-reset'}"
+                   t-attf-href="/forum/#{_forum_slug}/closed_posts">
+                    <i t-attf-class="fa fa-window-close fa-fw #{ 'opacity-50' if queue_type != 'close' else '' }"/>
+                    Closed
+                </a>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="user_sidebar_extended" inherit_id="website_forum.user_sidebar">
+        <xpath expr="//div[@t-if=&quot;forum&quot;]" position="replace"/>
+        <!--            <div t-if="forum and forum.forum_category == 'elearning'" class="o_wforum_sidebar_footer mt-3 px-3 pb-2 text-center">-->
+        <!--            <a class="btn btn-sm btn-link" t-attf-href="/forum/#{slug(forum)}/faq">-->
+        <!--                <i class="fa fa-info-circle fa-fw"/> About this forum-->
+        <!--            </a>-->
+        <!--        </div>-->
+        <!--        </xpath>-->
+    </template>
+
+    <template id="custom_forum_nav" inherit_id="website_forum.forum_model_nav">
+        <xpath expr="//li[contains(@class, 'o_wforum_breadcrumb_root breadcrumb-item text-nowrap text-truncatet')]"
+               position="replace">
+            <t t-if="forum.forum_category == 'personal'">
+                <li class="o_wforum_breadcrumb_root breadcrumb-item text-nowrap text-truncatet">
+                    <a t-attf-href="/forum/#{ _forum_slug }?view=feed" t-out="_forum_name"/>
+                </li>
+            </t>
+            <t t-elif="forum.forum_category == 'crowdfunding'">
+                <li class="o_wforum_breadcrumb_root breadcrumb-item text-nowrap text-truncatet">
+                    <a t-attf-href="/forum/#{ _forum_slug }?view=crowdfunding" t-out="_forum_name"/>
+                </li>
+            </t>
+            <t t-else="">
+                <li class="o_wforum_breadcrumb_root breadcrumb-item text-nowrap text-truncatet">
+                    <a t-attf-href="/forum/#{ _forum_slug }" t-out="_forum_name"/>
+                </li>
+            </t>
+        </xpath>
+
+        <xpath expr="//a[contains(@class, 'btn btn-link px-0 pb-2 fs-5')]" position="replace">
+            <t t-if="forum.forum_category == 'personal'">
+                <a class="btn btn-link px-0 pb-2 fs-5" t-attf-href="/forum/#{ _forum_slug }?view=feed">
+                    <i class="d-inline-block fa fa-angle-left me-1 small"/>
+                    <t t-out="_forum_name"/>
+                </a>
+            </t>
+            <t t-elif="forum.forum_category == 'crowdfunding'">
+                <a class="btn btn-link px-0 pb-2 fs-5" t-attf-href="/forum/#{ _forum_slug }?view=crowdfunding">
+                    <i class="d-inline-block fa fa-angle-left me-1 small"/>
+                    <t t-out="_forum_name"/>
+                </a>
+            </t>
+        </xpath>
+
+        <xpath expr="//div[@t-if='question_count or tags']" position="replace">
+            <div t-if="forum.forum_category == 'elearning' and question_count or tags" class="dropdown ms-lg-auto">
+                <t t-if="_page_name == 'tags'" t-set="tag_filter"
+                   t-value="keep_query('filters').split('=')[1] if keep_query('filters') else ''"/>
+                <a href="#" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                    <!-- Foreach tag_filter/ Foreach filters -->
+                    <t t-if="filters == 'all' or tag_filter == 'all' or not tag_filter and not filters">All</t>
+                    <t t-if="_page_name == 'tags'">
+                        <t t-if="tag_filter == 'followed'">Followed Tags</t>
+                        <t t-elif="tag_filter == 'unused'">Unused Tags</t>
+                        <t t-elif="tag_filter == 'most_used'">Most used Tags</t>
+                    </t>
+                    <t t-else="">
+                        <t t-if="filters == 'solved'">Solved</t>
+                        <t t-elif="filters == 'unsolved'">Unsolved</t>
+                        <t t-elif="filters == 'unanswered'">Unanswered</t>
+                    </t>
+                </a>
+                <div class="dropdown-menu" role="menu">
+                    <a t-attf-href="?#{ keep_query('search', 'sorting', 'create_uid', filters='all') }"
+                       class="dropdown-item">
+                        All
+                    </a>
+                    <div class="dropdown-divider"/>
+                    <t t-if="_page_name == 'tags'">
+                        <a t-if="not request.env.user._is_public()"
+                           t-attf-href="?#{ keep_query('search', 'sorting', 'my', filters='followed') }"
+                           class="dropdown-item">Followed Tags
+                        </a>
+                        <t t-if="forum and forum.can_moderate">
+                            <a t-attf-href="?#{ keep_query('search', 'sorting', 'my', filters='unused') }"
+                               class="dropdown-item">Unused Tags
+                            </a>
+                        </t>
+                        <a t-attf-href="?#{ keep_query('search', 'sorting', 'my', filters='most_used') }"
+                           class="dropdown-item">Most Used Tags
+                        </a>
+                    </t>
+                    <t t-else="">
+                        <t t-if="not forum or (forum and forum.mode == 'questions')">
+                            <a t-attf-href="?#{ keep_query('search', 'sorting', 'my', filters='solved') }"
+                               class="dropdown-item">Solved
+                            </a>
+                            <a t-attf-href="?#{ keep_query('search', 'sorting', 'my', filters='unsolved') }"
+                               class="dropdown-item">Unsolved
+                            </a>
+                        </t>
+                        <a t-attf-href="?#{ keep_query('search', 'sorting', 'my', filters='unanswered') }"
+                           class="dropdown-item">Unanswered
+                        </a>
+                    </t>
+                </div>
+            </div>
+        </xpath>
+
+        <xpath expr="//t[@t-if=&quot;_page_name == &#39;list_questions&#39;&quot;]" position="replace">
+            <t t-if="view not in ['following', 'followers'] and _page_name == 'list_questions'">
+                <t t-set="popover_title">You already have a pending post</t>
+                <t t-set="popover_content">Please wait for a moderator to validate your previous post before
+                    continuing.
+                </t>
+                <div t-if="uid and forum and forum.has_pending_post"
+                     data-bs-toggle="popover"
+                     t-att-data-bs-title="popover_title"
+                     t-att-data-bs-content="popover_content">
+                    <a class="o_wforum_ask_btn disabled btn btn-primary w-100 w-md-auto mb-3 mb-md-0"
+                       t-attf-href="/forum/#{ slug(forum) }/ask">New Post
+                    </a>
+                </div>
+                <a t-elif="uid and forum" role="button" type="button"
+                   t-attf-class="o_wforum_ask_btn btn btn-primary w-100 w-md-auto #{ 'karma_required' if user.karma &lt; forum.karma_ask else '' }"
+                   t-att-data-karma="forum.karma_ask" t-attf-href="/forum/#{slug(forum)}/ask">New Post
+                </a>
+            </t>
+        </xpath>
+
+        <xpath expr="//t[@t-if=&quot;question_count or tags&quot;]" position="replace">
+            <t t-if="forum.forum_category == 'personal'">
+                <t t-call="website.website_search_box_input">
+                    <t t-if="_page_name == 'tags'">
+                        <t t-set="search_type" t-value="'forum_tags_only'"/>
+                        <t t-set="action" t-value="'/forum/%s/tag' % (_forum_slug)"/>
+                    </t>
+                    <t t-elif="_page_name in ['followers', 'following']">
+                        <t t-set="search_type" t-value="'followers'"/>
+                        <t t-set="action" t-value="'/forum/%s/followers' % (_forum_slug)"/>
+                    </t>
+                    <t t-else="">
+                        <t t-set="search_type" t-value="'forums'"/>
+                        <t t-set="action" t-value="'/forum/%s' % (_forum_slug)"/>
+                    </t>
+                    <t t-set="display_description" t-valuef="true"/>
+                    <t t-set="display_detail" t-valuef="true"/>
+                    <t t-set="_form_classes" t-valuef="flex-grow-1"/>
+                    <t t-set="_input_classes" t-valuef="border-0 bg-light"/>
+                    <t t-set="_submit_classes" t-valuef="btn-light"/>
+                    <input t-if="filters" type="hidden" name="filters" t-att-value="filters"/>
+                    <input t-if="my" type="hidden" name="my" t-att-value="my"/>
+                    <input t-if="sorting" type="hidden" name="sorting" t-att-value="sorting"/>
+                </t>
+            </t>
+            <t t-else="">
+                <t t-if="question_count or tags" t-call="website.website_search_box_input">
+                    <t t-if="_page_name == 'tags'">
+                        <t t-set="search_type" t-value="'forum_tags_only'"/>
+                        <t t-set="action" t-value="'/forum/%s/tag' % (_forum_slug)"/>
+                    </t>
+                    <t t-else="">
+                        <t t-set="search_type" t-value="'forums'"/>
+                        <t t-set="action" t-value="'/forum/%s' % (_forum_slug)"/>
+                    </t>
+                    <t t-set="display_description" t-valuef="true"/>
+                    <t t-set="display_detail" t-valuef="true"/>
+                    <t t-set="_form_classes" t-valuef="flex-grow-1"/>
+                    <t t-set="_input_classes" t-valuef="border-0 bg-light"/>
+                    <t t-set="_submit_classes" t-valuef="btn-light"/>
+                    <input t-if="filters" type="hidden" name="filters" t-att-value="filters"/>
+                    <input t-if="my" type="hidden" name="my" t-att-value="my"/>
+                    <input t-if="sorting" type="hidden" name="sorting" t-att-value="sorting"/>
+                </t>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="user_profile_content_inherit" inherit_id="website_profile.user_profile_content">
+        <xpath expr="//div[@id='o_wprofile_sidebar_collapse']" position="before">
+            <table class="table table-sm w-100" id="o_wprofile_sidebar_table">
+                <tbody>
+                    <tr>
+                        <th>
+                            <small class="fw-bold">Followers:</small>
+                        </th>
+                        <td>
+                            <span t-esc="followers_count"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <small class="fw-bold">Following:</small>
+                        </th>
+                        <td>
+                            <span t-esc="following_count"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </xpath>
+        <xpath expr="//div[@class='o_wprofile_editor_form mb32']" position="replace"/>
+        <xpath expr="//div[@id='profile_tab_content_about']" position="before">
+            <div t-if="user.partner_id.website_description" class="o_wprofile_editor_form mb32">
+                <t t-if="request.env.user == user and user.karma != 0 or request.env.user._is_admin()">
+                    <a href="#" class="o_forum_profile_bio_edit btn btn-link float-end">
+                        <i class="fa fa-pencil me-1"/>Edit
+                    </a>
+                    <a href="#" class="o_forum_profile_bio_cancel_edit btn btn-link float-end d-none">
+                        <i class="fa fa-close me-1"/>Cancel
+                    </a>
+                </t>
+                <h5 class="border-bottom pb-1">Biography</h5>
+                <span class="o_forum_profile_bio text-break" t-field="user.partner_id.website_description"/>
+                <t t-call="website_profile.user_biography_editor"/>
+            </div>
+        </xpath>
+        <xpath expr="//t[@t-if='forum']" position="replace">
+            <t t-if="forum">
+                <li t-if="uid == user.id" class="nav-item">
+                    <a role="tab" aria-controls="activity" href="#activity" class="nav-link o_wprofile_navlink"
+                       data-bs-toggle="tab">Activity
+                    </a>
+                </li>
+                <li t-if="uid == user.id" class="nav-item">
+                    <a role="tab" aria-controls="votes" href="#votes" class="nav-link o_wprofile_navlink"
+                       data-bs-toggle="tab">Votes
+                    </a>
+                </li>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="remove_comments" inherit_id="website_forum.post_comment">
+        <!-- Use XPath to locate and remove the div containing comments -->
+        <xpath expr="//div[@t-if='object.website_message_ids']" position="replace">
+            <t t-set="view" t-value="request.httprequest.args.get('view', '')"/>
+            <t t-if="view != 'feed'">
+                <div t-if="object.website_message_ids" t-foreach="object.website_message_ids" t-as="message"
+                     class="o_wforum_post_comments d-flex flex-column gap-2">
+                    <t t-set="_comment_author" t-value="message.create_uid.id"/>
+                    <div t-attf-class="o_wforum_post_comment d-flex rounded o_cc2 ps-3"
+                         t-att-data-last-activity="message.create_date">
+                        <t t-set="allow_post_comment" t-value="(object.parent_id and object.parent_id.state != 'close' and object.parent_id.active != False)
+                                                        or (not object.parent_id and object.state != 'close' and object.active != False)"/>
+                        <t t-set="unlink_comment_required_karma"
+                           t-value="message.author_id.id == user.partner_id.id and object.forum_id.karma_comment_unlink_own or object.forum_id.karma_comment_unlink_all"/>
+                        <t t-set="can_unlink_comment"
+                           t-value="user._is_admin() or user.karma >= unlink_comment_required_karma"/>
+                        <div class="flex-grow-1 py-2 opacity-75">
+                            <header>
+                                <span t-call="website_forum.author_box">
+                                    <t t-set="object" t-value="message"/>
+                                    <t t-set="compact" t-value="True"/>
+                                    <t t-set="show_name" t-value="True"/>
+                                </span>
+                                <span class="ms-2 mb-2 small text-muted">
+                                    <small class="o_wforum_relative_datetime"/>
+                                </span>
+                                <span t-if="_question_creator == _comment_author"
+                                      class="badge ms-2 border border-dark rounded-pill px-2 py-1 text-reset">
+                                    Author
+                                </span>
+                            </header>
+                            <div t-field="message.body" class="o_wforum_readable oe_no_empty small text-break"/>
+                        </div>
+                        <div t-if="can_interact_with_post" class="dropdown ms-auto">
+                            <a class="btn text-muted" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-ellipsis-h"/>
+                            </a>
+                            <div class="dropdown-menu">
+                                <t t-set="comment_url"
+                                   t-valuef="/forum/#{ slug(forum) }/post/#{ slug(object) }/comment/#{ slug(message) }"/>
+                                <t t-call="website_forum.link_button">
+                                    <t t-set="url" t-valuef="#{ comment_url }/delete"/>
+                                    <t t-set="label">Delete</t>
+                                    <t t-set="title">Delete</t>
+                                    <t t-set="inDropdown" t-value="True"/>
+                                    <t t-set="icon" t-value="'fa-trash-o text-muted'"/>
+                                    <t t-set="classes" t-value="'comment_delete'"/>
+                                    <t t-set="karma"
+                                       t-value="unlink_comment_required_karma if not can_unlink_comment and unlink_comment_required_karma else 0"/>
+                                </t>
+                                <t t-if="message.create_uid.id not in question.child_ids.create_uid.ids">
+                                    <t t-call="website_forum.link_button">
+                                        <t t-set="url" t-valuef="#{ comment_url }/convert_to_answer"/>
+                                        <t t-set="label">Convert to answer</t>
+                                        <t t-set="inDropdown" t-value="True"/>
+                                        <t t-set="icon" t-value="'fa-magic text-muted'"/>
+                                        <t t-set="karma"
+                                           t-value="object.karma_comment_convert if not object.can_comment_convert else 0"/>
+                                    </t>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+
+    </template>
+
+    <template id="forum_index_inherit" inherit_id="website_forum.forum_index">
+        <xpath expr="//t[@t-call='website_forum.no_results_message']" position="attributes">
+            <attribute name="t-if">'view' not in request.params and (question_count == 0 or original_search)</attribute>
+        </xpath>
+
+        <xpath expr="//table[@class='o_wforum_table table mb-5']" position="replace">
+            <t t-if="view == 'feed'">
+                <div class="container" style="overflow: auto; max-height: 500px; mt-2">
+                    <t t-foreach="posts" t-as="post">
+                        <div class="my-2" style="border: .5px solid silver; padding:15px; border-radius: 5px;">
+                            <t t-set="question" t-value="post"/>
+                            <t t-set="post_id" t-value="post"/>
+                            <t t-set="question" t-value="post"/>
+                            <t t-set="post_content" t-value="post.content"/>
+                            <div class="d-flex gap-2 align-items-baseline">
+                                <h3 t-attf-class="col-lg-10 my-0">
+                                    <a t-attf-href="/forum/#{slug(question.forum_id)}/#{slug(question)}"
+                                       t-attf-style="text-decoration: none;" t-out="question.name"/>
+                                </h3>
+                                <div class="col d-flex justify-content-end align-items-center">
+                                    <i t-if="question.state == 'close'" class="fa fa-lock ms-2 fs-4" title="Closed"
+                                       data-bs-toggle="tooltip" data-bs-placement="top"/>
+                                    <span t-elif="not question.active" class="badge bg-danger">
+                                        <t t-if="question.state!='offensive'">Deleted</t>
+                                        <t t-if="question.state=='offensive'">Offensive</t>
+                                        <t t-if="question.state=='offensive' and question.closed_reason_id">
+                                            <t t-out="question.closed_reason_id.name.capitalize()"/>
+                                        </t>
+                                    </span>
+                                    <a t-elif="uid" type="button" aria-label="Favorite"
+                                       t-attf-data-href="/forum/#{slug(question.forum_id)}/question/#{slug(question)}/toggle_favourite"
+                                       t-attf-class="o_wforum_favourite_toggle btn btn-lg #{ 'opacity-50' if not question.user_favourite else '' } opacity-hover-100 px-1">
+                                        <i t-attf-class="position-relative fa #{'o_wforum_gold fa-star ' if question.user_favourite else 'fa-star-o '}"
+                                           data-bs-toggle="tooltip"
+                                           data-bs-placement="top"
+                                           title="Favorite"/>
+                                    </a>
+                                    <t t-if="question.state == 'active'" t-call="website_forum.follow">
+                                        <t t-set="object" t-value="question.forum_id"/>
+                                        <t t-set="icons_design" t-value="True"/>
+                                        <t t-set="btn_classes" t-value="'btn-lg opacity-50 opacity-100-hover' "/>
+                                    </t>
+                                </div>
+                            </div>
+                            <div class="d-grid">
+                                <!-- Question Post -->
+                                <t t-call="website_forum.post_display">
+                                    <t t-set="post_id" t-value="question"/>
+                                    <t t-set="view" t-value="feed"/>
+                                    <t t-set="object" t-value="post"/>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </t>
+            <t t-elif="view == 'followers'">
+                <t t-set="_page_name" t-value="'followers'"/>
+                <t t-set="_page_name_label">Followers</t>
+                <table class="o_wforum_table table mb-5">
+                    <thead>
+                        <tr class="d-none d-lg-table-row">
+                            <th class="o_wforum_table_replies small fw-normal">
+                                <a class="text-muted">Name</a>
+                            </th>
+                            <th class="o_wforum_table_posters text-center">
+                                <a class="text-muted">Followers</a>
+                            </th>
+                            <th class="o_wforum_table_posters text-center">
+                                <a class="text-muted">Following</a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="followers" t-as="follower">
+                            <t t-set="follower_user"
+                               t-value="request.env['res.users'].sudo().search([('partner_id', '=', follower['partner'].id)])"/>
+                            <t t-set="follower_forum" t-value="follower_user.influencer_forum_id"/>
+                            <td class="o_wforum_table_replies">
+                                <a t-att-href="'/forum/%s' % slug(follower_forum)">
+                                    <t t-esc="follower['partner'].name"/>
+                                </a>
+                            </td>
+                            <td class="o_wforum_table_posters text-center">
+                                <t t-esc="follower['followers_count']"/>
+                            </td>
+                            <td class="o_wforum_table_posters text-center">
+                                <t t-esc="follower['following_count']"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </t>
+            <t t-elif="view == 'following'">
+                <t t-set="_page_name" t-value="'following'"/>
+                <t t-set="_page_name_label">Following</t>
+                <table class="o_wforum_table table mb-5">
+                    <thead>
+                        <tr class="d-none d-lg-table-row">
+                            <th class="o_wforum_table_replies small fw-normal">
+                                <a class="text-muted">Name</a>
+                            </th>
+                            <th class="o_wforum_table_posters text-center">
+                                <a class="text-muted">Followers</a>
+                            </th>
+                            <th class="o_wforum_table_posters text-center">
+                                <a class="text-muted">Following</a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="following" t-as="follow">
+                            <t t-set="follow_user"
+                               t-value="request.env['res.users'].sudo().search([('partner_id', '=', follow['partner'].id)])"/>
+                            <t t-set="follow_forum" t-value="follow_user.influencer_forum_id"/>
+                            <td class="o_wforum_table_replies">
+                                <a t-att-href="'/forum/%s' % slug(follow_forum)">
+                                    <t t-esc="follow['partner'].name"/>
+                                </a>
+                            </td>
+                            <td class="o_wforum_table_posters text-center">
+                                <t t-esc="follow['followers_count']"/>
+                            </td>
+                            <td class="o_wforum_table_posters text-center">
+                                <t t-esc="follow['following_count']"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </t>
+            <t t-elif="view == 'notification'">
+                <t t-set="_page_name" t-value="'notification'"/>
+                <t t-set="_page_name_label">Notification</t>
+                <table class="o_wforum_table table mb-5">
+                    <thead>
+                        <tr class="d-none d-lg-table-row">
+                            <th class="o_wforum_table_posters">
+                                <a class="text-muted">Message</a>
+                            </th>
+                            <th class="o_wforum_table_posters text-center">
+                                <a class="text-muted">Post</a>
+                            </th>
+                            <th class="o_wforum_table_posters text-center">
+                                <a class="text-muted">Time</a>
+                            </th>
+                            <th class="o_wforum_table_posters text-center">
+                                <a class="text-muted">Action</a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-if="not notification">
+                            <td class="text-center" colspan="4">No notifications found.</td>
+                        </tr>
+                        <tr t-foreach="notification" t-as="notif">
+                            <tr>
+                                <td class="o_wforum_table_replies"
+                                    t-att-style="not notif.is_read and 'font-weight: bold;' or ''">
+                                    <t t-esc="notif.message"/>
+                                </td>
+                                <td class="o_wforum_table_posters text-center">
+                                    <t t-if="notif.post_id">
+                                        <a t-att-href="'/forum/%s/%s' % (slug(notif.post_id.forum_id), slug(notif.post_id))">
+                                            View Post
+                                        </a>
+                                    </t>
+                                    <t t-else="">
+                                        No Post
+                                    </t>
+                                </td>
+                                <td class="o_wforum_table_posters text-center">
+                                    <t t-esc="notif.create_datetime"/>
+                                </td>
+                                <td class="o_wforum_table_posters text-center">
+                                    <t t-if="not notif.is_read">
+                                        <a t-att-href="'/forum/mark_notification_read/%d?redirect_url=%s' % (notif.id, request.httprequest.url)">
+                                            ✔
+                                        </a>
+                                    </t>
+                                    <t t-if="notif.is_read">
+                                        <a t-att-href="'/forum/delete_notification/%d?redirect_url=%s' % (notif.id, request.httprequest.url)">
+                                            ❌
+                                        </a>
+                                    </t>
+                                </td>
+                            </tr>
+                        </tr>
+                    </tbody>
+                </table>
+            </t>
+            <t t-else="">
+                <table class="o_wforum_table table mb-5" height="1">
+                    <thead>
+                        <tr class="d-none d-lg-table-row">
+                            <th class="o_wforum_table_title"></th>
+                            <th class="o_wforum_table_posters"></th>
+                            <t t-if="forum.forum_category != 'personal'">
+                                <th class="o_wforum_table_replies small fw-normal text-center">
+                                    <a class="text-muted"
+                                       t-attf-href="?#{ keep_query('search', 'filters', 'my', 'create_uid', sorting='child_count asc' if sorting == 'child_count desc' else 'child_count desc') }">
+                                        Replies
+                                        <i t-attf-class="fa fa-caret-#{ 'down' if sorting == 'child_count desc' else 'up' } #{ not sorting.startswith('child_count') and 'd-none ' }"></i>
+                                    </a>
+                                </th>
+                            </t>
+                            <th class="o_wforum_table_views small fw-normal text-center">
+                                <a class="text-muted"
+                                   t-attf-href="?#{ keep_query('search', 'filters', 'my', 'create_uid', sorting='views asc' if sorting == 'views desc' else 'views desc') }">
+                                    Views
+                                    <i t-attf-class="fa fa-caret-#{'down' if sorting == 'views desc' else 'up'}  #{ not sorting.startswith('views') and 'd-none ' }"></i>
+                                </a>
+                            </th>
+                            <th class="o_wforum_table_activity small fw-normal text-center">
+                                <a class="text-muted"
+                                   t-attf-href="?#{ keep_query('search', 'filters', 'my', 'create_uid', sorting='last_activity_date asc' if sorting == 'last_activity_date desc' else 'last_activity_date desc') }">
+                                    Activity
+                                    <i t-attf-class="fa fa-caret-#{ 'down' if sorting == 'last_activity_date desc' else 'up'}  #{ 'd-none ' if not sorting.startswith('last_activity') else '' }"></i>
+                                </a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <t t-foreach="question_ids" t-as="question" t-call="website_forum.display_post">
+                        <t t-set="show_author_avatar" t-value="true"/>
+                    </t>
+                </table>
+                <t t-call="website.pager"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="display_post_inherit" inherit_id="website_forum.display_post">
+        <xpath expr="//tr//td[3]" position="replace">
+            <t t-if="forum.forum_category != 'personal'">
+                <td class="o_wforum_reply_count order-3 d-flex d-lg-table-cell flex-column text-end text-lg-center">
+                    <a t-if="question.child_count" class="text-reset"
+                       t-attf-href="/forum/#{ slug(question.forum_id) }/#{ slug(question) }">
+                        <i class="fa fa-reply me-1 d-lg-none"/>
+                        <t t-out="question.child_count"/>
+                    </a>
+                    <span t-else="" class="opacity-50">
+                        <i class="fa fa-reply me-1 d-lg-none"/>
+                        0
+                    </span>
+                    <div class="d-lg-none flex-grow-1"/>
+                    <div t-field="question.write_date" t-options='{"format": "MMM yy "}'
+                         class="d-lg-none small text-muted text-nowrap"/>
+                </td>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="new_question" inherit_id="website_forum.new_question">
+        <xpath expr="//t[@t-set=&quot;_page_name_label&quot;]" position="replace">
+            <t t-if="forum.forum_category == 'elearning'">
+                <t t-set="_page_name_label">Ask your question</t>
+            </t>
+            <t t-else="">
+                <t t-set="_page_name_label">New Post</t>
+            </t>
+        </xpath>
+
+        <xpath expr="//form" position="attributes">
+            <attribute name="enctype">multipart/form-data</attribute>
+        </xpath>
+
+        <xpath expr="//form/div[@class='row mb-5']" position="before">
+            <div class="row mb-4">
+                <label class="form-label col-lg-2" for="media_upload">Upload Images</label>
+                <div class="col">
+                    <input type="file" name="media_upload" id="media_upload" multiple="multiple" class="form-control"
+                           accept="image/*"/>
+                    <span class="form-text d-inline small text-muted">
+                        <i class="fa fa-lightbulb-o"/>
+                        Tip: You can upload multiple images.
+                    </span>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="edit_post" inherit_id="website_forum.edit_post">
+        <xpath expr="//form" position="attributes">
+            <attribute name="enctype">multipart/form-data</attribute>
+        </xpath>
+
+        <xpath expr="//form/div[@class='row mb-5']" position="before">
+            <div class="row mb-4">
+                <label class="form-label col-lg-2" for="media_upload">Upload Images</label>
+                <div class="col">
+                    <input type="file" name="media_upload" id="media_upload" multiple="multiple" class="form-control"
+                           accept="image/*"/>
+                    <span class="form-text d-inline small text-muted">
+                        <i class="fa fa-lightbulb-o"/>
+                        Tip: You can upload multiple images only.
+                    </span>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="post_dropdown_extend" inherit_id="website_forum.post_dropdown">
+        <xpath expr="//t[@t-if=&quot;post_id.state != 'close'&quot;]" position="replace">
+            <t t-if="(post_id.forum_id.forum_category != 'personal') and (post_id.state != 'close')"
+               t-call="website_forum.link_button">
+                <t t-set="url" t-value="'/forum/' + slug(forum) +'/question/' + slug(post_id) + '/ask_for_close'"/>
+                <t t-set="label">Close</t>
+                <t t-set="inDropdown" t-value="True"/>
+                <t t-set="icon" t-value="'fa-times fa-fw'"/>
+                <t t-set="karma" t-value="post_id.karma_close if not post_id.can_close else 0"/>
+            </t>
+        </xpath>
+
+        <xpath expr="//t[@t-if=&quot;post_id.active and post_id.state != 'flagged'&quot;]" position="replace">
+            <t t-if="(post_id.forum_id.forum_category != 'personal') and (post_id.active and post_id.state != 'flagged')"
+               t-call="website_forum.link_button">
+                <t t-set="url" t-value="'/forum/' + slug(forum) +'/post/' + slug(post_id) + '/flag'"/>
+                <t t-set="label">Flag</t>
+                <t t-set="inDropdown" t-value="True"/>
+                <t t-set="icon" t-value="'fa-flag-o' if not post_id.can_flag else 'fa-flag'"/>
+                <t t-set="karma" t-value="post_id.forum_id.karma_flag if not post_id.can_flag else 0"/>
+                <t t-set="classes" t-valuef="o_wforum_flag "/>
+                <t t-set="object" t-value="post_id"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="user_profile_sub_nav_custom" inherit_id="website_profile.user_profile_sub_nav">
+        <xpath expr="//div[@t-if=&quot;request.params.get('forum_origin')&quot;]" position="replace">
+            <div t-if="request.params.get('forum_origin')"
+                 class="o_wprofile_all_users_nav_btn_container col pe-0 flex-grow-0">
+                <a t-att-href="'/forum/' + str(request.env.user.sudo().influencer_forum_id.id) + '?view=feed'"
+                   class="o_wprofile_all_users_nav_btn btn text-nowrap">
+                    <i class="oi oi-chevron-left small"/>
+                    Back
+                </a>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="user_profile_header_extension" inherit_id="website_profile.user_profile_header">
+        <xpath expr="//div[@class='d-flex justify-content-between align-items-start']" position="after">
+            <div class="d-flex align-items-center mt-3">
+                <t t-if="request.env.user != user">
+                    <t t-call="website_forum.follow">
+                        <t t-set="object" t-value="user.influencer_forum_id"/>
+                        <t t-set="btn_classes"
+                           t-value="'btn-sm py-2 btn-primary text-white opacity-90 opacity-100-hover mb-2'"/>
+                    </t>
+                </t>
+            </div>
+        </xpath>
+    </template>
+</odoo>
