@@ -12,6 +12,9 @@ html, body {
     color:#ffffff;
     opacity: 85.0%;
     list-style: none;
+    white-space: normal; /* Allow text to wrap */
+    word-wrap: break-word; /* Force long words to break and wrap */
+    overflow-wrap: break-word;
 }
 /* .sidebar ul li:hover
 {
@@ -24,18 +27,55 @@ html, body {
     padding-top: 15px;
     padding-bottom: 15px;
 }
-
+#searchbox
+{
+    position: absolute;
+    left: -50px;
+    top: -5px !important;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 30px;
+}
+#innersearchbox {
+     /* Align search box to the right */
+    width: 22%;                /* Adjust width of the search box */
+    min-width: 250px;           /* Minimum width to avoid becoming too small */
+    background-color: #fff;     /* Set a different background color if needed */
+    padding: 0px;               /* Padding inside the search box */
+    border-radius: 3px;         /* Slightly round the corners */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for a subtle effect */
+}
+#o_wblog_posts_loop_container
+{
+    margin-top: 60px !important;
+}
 /* Hide sidebar and show hamburger menu on small screens */
 @media (max-width: 768px) {
     .sidebar li {
         padding: 5px 10px; /* Reduce padding */
         line-height: 1;  /* Adjust line height */
     }
+    #o_wblog_posts_loop_container
+{
+    margin-top: 60px !important;
+}
 #searchbox
 {
-    width:70vw;
-    position: relative;
+    top:0px !important;
+    width: 70vw !important;
+    padding: 0px;
+    border-radius: 6px !important;
+    position: relative !important;
     left:20px;
+}
+#innersearchbox {
+    /* Align search box to the right */
+   width: 100%;                /* Adjust width of the search box */
+   min-width: 250px;           /* Minimum width to avoid becoming too small */
+   background-color: #fff;     /* Set a different background color if needed */
+   padding: 0px;               /* Padding inside the search box */
+   border-radius: 3px;         /* Slightly round the corners */
+   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for a subtle effect */
 }
 #blog-sidebar {
         display: none;

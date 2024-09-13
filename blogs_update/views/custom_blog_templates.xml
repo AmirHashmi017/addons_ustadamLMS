@@ -14,7 +14,7 @@
                                 <div class="sidebar">
                                     <ul t-if="len(blogs) > 1">
                                         <li class="nav-item">
-                                            <span class="nav-link disabled">Blogs:</span>
+                                            <span class="nav-link disabled" style="color:white">Blogs:</span>
                                         </li>
                                         <li class="nav-item">
                                             <a href="/blog" class="nav-link fw-bold #{(not blog) and 'active'}">All</a>
@@ -25,6 +25,7 @@
                                                 <b t-field="nav_blog.name"/>
                                             </a>
                                         </li>
+                                        
                                     </ul>
                                 </div>
                                 <!-- Close button for the sidebar -->
@@ -48,7 +49,8 @@
                                 <div class="row align-items-center">
                                     <div class="col-lg-8 col-md-6">
                                         <!-- Search bar container with navy background -->
-                                        <div id="searchbox" class="container-fluid" style="background-color: rgb(4,43,76); width: 80vw; padding: 12px; border-radius: 5px;">
+                                        <div id="searchbox" class="container-fluid" style="width:102.34vw;overflow-x: hidden; background-color: rgb(4,43,76); padding: 12px; border-radius: 0px;">
+                                            <div id="innersearchbox">
                                             <t t-call="website.website_search_box_input">
                                                 <t t-set="_form_classes" t-valuef="ms-auto"/>
                                                 <t t-set="_classes" t-valuef=""/>
@@ -60,6 +62,7 @@
                                                 <input type="hidden" name="date_begin" t-att-value="date_begin"/>
                                                 <input type="hidden" name="date_end" t-att-value="date_end"/>
                                             </t>
+                                        </div>
                                         </div>
                                         <button id="open-sidebar" class="hamburger-menu d-block d-md-none">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
