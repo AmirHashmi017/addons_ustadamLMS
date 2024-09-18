@@ -6,6 +6,7 @@
             <link rel="stylesheet" type="text/css" href="/blogs_update/static/src/css/blogs_sidebar.css"/>
             <script type="text/javascript" src="/blogs_update/static/src/js/blogs_sidebar.js"></script>
             <section id="o_wblog_index_content" t-att-class="opt_blog_cards_design and 'o_wblog_page_cards_bg'">
+                <t t-if="not (is_Fund or is_News)">
                 <div class="container-fluid">
                     <div class="row">
                         <!-- Sidebar section -->
@@ -84,16 +85,20 @@
                         </div>
                     </div>
                 </div>
+            </t>
             </section>
         </xpath>
-    </template>
-
-    <template id="custom_blogs_nav" inherit_id="website_blog.blogs_nav">
-        <xpath expr="." position="replace">
-            <!-- Empty template to remove content -->
-            <div>
-                <!-- Optionally add your own structure here -->
-            </div>
+        <xpath expr="//t[@t-call=&quot;website_blog.blogs_nav&quot;]" position="replace">
+            <t t-if="is_Fund or is_News">
+                <t t-call="website_blog.blogs_nav">
+                    <t t-set="additional_classes" t-value="'mt-3'"/>
+                </t>
+                <div id="o_wblog_posts_loop_container" class="row justify-content-start" style="margin-left:30px;">
+                                <t t-call="website_blog.posts_loop"/>
+                                <t t-call="website.pager"/>
+                            </div>
+            </t>
+            <t t-else=""/>
         </xpath>
     </template>
 </odoo>
